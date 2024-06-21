@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Systems Development Method (DSDM)</title>
+  <style>
+    .section-title {
+  background-color: #b3c5d9; /* Blue background */
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: 1.5em;
+  text-align: center;
+}
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #f4f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #b3c5d9;
+  color: #fff;
+  padding-top: 30px;
+  min-height: 70px;
+  border-bottom: 3px solid #0779e4;
+  text-align: center;
+    }
+
+    header h1 {
+      text-align: center;
+      text-transform: uppercase;
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h2.section-title,
+    .card h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .card ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .card ul li {
+      padding: 10px;
+      background-color: #eef2f7;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card ul li strong {
+      margin-right: 10px;
+    }
+
+    .card ul li::before {
+      content: "✔";
+      color: #007bff;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      /* Centre l'image horizontalement */
+      align-items: center;
+      /* Centre l'image verticalement */
+      height: 100vh;
+      /* Ajustez la hauteur selon vos besoins */
+      width: 100%;
+      /* Ou ajustez la largeur selon vos besoins */
+    }
+
+    .responsive-img {
+      height: 99%;
+      /* Ajuste selon votre besoin */
+      width: 80%;
+      /* Ajuste selon votre besoin */
+      max-width: 100%;
+      /* Assurez-vous que l'image ne dépasse pas la largeur de son conteneur */
+      max-height: 100%;
+      /* Assurez-vous que l'image ne dépasse pas la hauteur de son conteneur */
+    }
+
+    .step-label {
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1>DSDM Methodology Tutorial</h1>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <img src="assets/images/intro.jpg" alt="Illustration DSDM" />
+    </div>
+
+    <!-- intro -->
+    <div class="card">
+      <h2 class="section-title">Introduction</h2>
+      <p>
+        <strong>(Dynamic Systems Development Method)</strong> is an agile
+        framework that provides a structured approach to
+        <strong>IT project management</strong>. It emphasizes delivering
+        projects on time and within budget, ensuring that business needs are
+        clearly defined and met throughout the project. DSDM is based on
+        <strong>principles</strong> such as collaboration, quality, and
+        iterative development, providing flexibility while maintaining the
+        necessary rigor for the success of complex projects.
+      </p>
+    </div>
+    <!-- / intro -->
+
+    <!-- avt disavt -->
+    <div class="row">
+      <div class="container">
+        <nb-card-header class="h4 card">
+          Advantages and Limitations
+        </nb-card-header>
+      </div>
+      <div class="col-md-6 col-xxxl-6">
+        <nb-card size="large">
+          <nb-card-body>
+            <div class="colors">
+              <div class="item text-success">
+                <div>
+                  <h5 class="text-success">Advantages:</h5>
+                  <ul class="mb-5 text-heading">
+                    <li>
+                      Structured Framework: DSDM provides a well-defined
+                      structure that helps organize projects, particularly
+                      beneficial in complex or regulated environments.
+                    </li>
+                    <li>
+                      Clear Governance: Roles,responsibilities, and processes
+                      are clearly defined, facilitating effective project
+                      management and oversight.
+                    </li>
+                    <li>
+                      Timely and Budget-Conscious Delivery: By focusing on
+                      rapid delivery and controlled costs, DSDM helps prevent
+                      budget and schedule overruns.
+                    </li>
+                    <li>
+                      Flexibility and Adaptability: Its iterative approach and
+                      agile principles allow DSDM to adapt to changing needs
+                      and priorities.
+                    </li>
+                    <li>
+                      Collaboration: Encourages open and continuous
+                      communication among stakeholders, improving
+                      decision-making and end-user satisfaction.
+                    </li>
+                  </ul>
+                  <!-- <img style="height: 90%; width: 70%;" src="../../../assets/images/avn.jpg" alt="Illustration DSDM" class="responsive-img"> -->
+                </div>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+      <div class="col-md-6 col-xxxl-6">
+        <nb-card size="large">
+          <nb-card-body>
+            <div class="colors">
+              <div class="item text-danger">
+                <div>
+                  <h5 class="text-danger">Limitations:</h5>
+                  <ul class="mb-5 text-heading">
+                    <li>
+                      Can Seem Overly Heavy: For some agile projects,
+                      especially smaller or less complex ones, DSDM's rigid
+                      structure and rigor can be perceived as excessive and
+                      cumbersome.
+                    </li>
+                    <li>
+                      Requires Strong Stakeholder Commitment: The intense and
+                      ongoing collaboration needed can be challenging to
+                      achieve, particularly in organizations where
+                      stakeholders have conflicting priorities or limited
+                      availability.
+                    </li>
+                    <li>
+                      Training and Adoption: Implementing DSDM may require
+                      substantial training and cultural change, which can be a
+                      barrier for some teams or organizations.
+                    </li>
+                    <li>
+                      Risk of Bureaucracy: The rigor and formalization of
+                      processes can sometimes lead to excessive bureaucracy,
+                      reducing the project's speed and agility.
+                    </li>
+                  </ul>
+                  <!-- <img style="height: 90%; width: 70%;" src="../../../assets/images/limitations.jpg" alt="Illustration DSDM" class="responsive-img"> -->
+                </div>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+    <!-- /avt disavt -->
+  </div>
+  <!-- space  -->
+  <div style="height: 20px; background-color: #edf1f7"></div>
+
+  <!-- why -->
+  <div class="card">
+    <h2 class="section-title">
+      Why: The Importance of Rigor and Governance in IT Projects
+    </h2>
+    <h3>Importance of Rigor and Governance</h3>
+    <p>
+      In IT projects, rigor and governance are crucial for several reasons:
+    </p>
+    <ul>
+      <li>
+        <strong>Risk Management:</strong> Ensuring that risks are identified,
+        assessed, and managed effectively.
+      </li>
+      <li>
+        <strong>On-Time and On-Budget Delivery:</strong> Guaranteeing that
+        projects are completed within the specified time and budget.
+      </li>
+      <li>
+        <strong>Product Quality:</strong> Maintaining high standards for
+        deliverables, ensuring stakeholder satisfaction.
+      </li>
+      <li>
+        <strong>Transparency and Traceability:</strong> Facilitating progress
+        tracking and informed decision-making through clear documentation and
+        governance.
+      </li>
+    </ul>
+  </div>
+  <!-- / why -->
+
+  <!-- space  -->
+  <div style="height: 20px; background-color: #edf1f7"></div>
+  <!-- what -->
+  <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header class="h4">
+      What: Framework and Key Principles of DSDM
+    </nb-card-header>
+    <nb-card-header class="h5">
+      DSDM is based on eight core principles:
+    </nb-card-header>
+    <nb-card-body>
+      <nb-stepper orientation="horizontal">
+        <nb-step [label]="labelOne">
+          <ng-template #labelOne>
+            <div class="step-label">Focus on<br />the Business Need</div>
+          </ng-template>
+
+          <h3>Focus on the Business Need</h3>
+          <h6 style="text-align: left">
+            DSDM has a strong business-driven approach. A business case must
+            be established for the project and the team must understand
+            project priorities. Every decision the team make during the
+            project should help achieve the project goal and the team must
+            ensure the project is delivered on time.
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step1.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton disabled nbStepperNext>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelTwo">
+          <ng-template #labelTwo>Deliver on Time</ng-template>
+          <h3>Deliver on Time</h3>
+          <h6 style="text-align: left">
+            DSDM is an agile framework that works plans work in fixed time
+            periods (timeboxes), rather like sprints in Agile Scrum. The aim
+            is to deliver a useable software product at the end of each
+            timebox (iteration). DSDM is thus an incremental approach, as well
+            as an iterative development approach to delivering software. DSDM
+            places a strong emphasis on prompt delivery, proposing that even
+            projects without any need for a fixed deadline still benefit from
+            one. This is because having deadlines is the best way to control
+            changing requirements. To stick to this principle, DSDM teams
+            should focus on priorities, hit deadlines and manage their time by
+            using the MoSCoW and timeboxing techniques.
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step2.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="Thirdstep">
+          <ng-template #Thirdstep>Collaborate</ng-template>
+          <h3>Collaborate</h3>
+          <h6 style="text-align: left">
+            Team spirit and collaboration is highly important for DSDM teams. This is based on a rejection of having
+            multiple departments that rarely interact. Teams should instead work as one unit and collaborate to
+            encourage understanding, higher performance and shared ownership.
+
+
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step3.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelFour">
+          <ng-template #labelFour>
+            <div class="step-label">Quality and <br />Non-Compromise</div>
+          </ng-template>
+          <h3>Quality and Non-Compromise</h3>
+          <h6 style="text-align: left">
+            Quality is always fixed on DSDM projects and must be decided at the start. The final product shouldn’t be
+            any more or any less than the quality decided upon.
+            <br>
+            <li class="h6">Continuous testing :</li>
+            To adhere to this principle, DSDM teams must ensure quality doesn’t become a variable by testing
+            continuously and reviewing constantly. This testing and reviewing occurs during the ‘exploration’ and
+            ‘engineering’ iterative development phases. Testing should happen early in the project. Again, MoSCoW and
+            timeboxing can be used to ensure testing is appropriate and organized.
+
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step4.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelFive">
+          <ng-template #labelFive>
+            <div class="step-label">
+              Iterative <br />
+              Development
+            </div>
+          </ng-template>
+          <h3>Iterative Development</h3>
+          <h6 style="text-align: left">
+            DSDM differs from other agile methods as it requires the foundations of the project to be agreed early. The
+            foundations don’t need to be in too much detail – just agree on what the problem is and how to solve it.
+            Once foundations are established, the solution must be delivered incrementally.
+
+            <li class="h6"> Just enough design up front:</li>
+            To adhere to this principle, DSDM teams must ensure they perform analysis and ‘enough design up front’
+            (EDUF) at the start of the project. During each increment, the team must re-assess priorities and project
+            viability, ensuring they have taken stakeholder feedback into consideration. Both the feasibility and
+            foundation phases allow for establishing a foundation; the exploration and engineering phases allow for
+            incremental delivery.<br>
+
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step5.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelSix">
+          <ng-template #labelSix>
+            <div class="step-label">
+              Continuous <br />
+              Elaboration
+            </div>
+          </ng-template>
+          <h3>Continuous Elaboration</h3>
+          <h6 style="text-align: left">
+            DSDM proposes that nothing is created perfectly first time and projects operate in a constantly changing
+            world. Incremental delivery allows for such change to be embraced and leads to higher stakeholder
+            satisfaction. Each iteration is combined with testing, demonstrations and feedback. This ensures that each
+            iteration improves upon the last and leads to a decent final product.
+
+            <li class="h6"> Feedback loop </li>
+            DSDM teams can adhere to this principle by building feedback into each iteration. They must also be in the
+            mindset that details should emerge later, not sooner, and they must embrace change. During each iteration,
+            they should encourage creativity and experimentation, which will lead to learning and improvement. Constant
+            review and feedback allow for change and progress to occur.
+
+            To deliver an incremental working release of software at the end of each iteration DSDM recommends the
+            MoSCoW prioritisation technique to prioritise requirements to be worked on by the team during a timebox.
+            Requirements are typically capture in the form of user stories.
+
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step6.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelSeven">
+          <ng-template #labelSeven>
+            <div class="step-label">Demonstrable <br />Control</div>
+          </ng-template>
+          <h3>Demonstrable Control</h3>
+          <h6 style="text-align: left">
+            Bad communication often leads to project failure and traditional non-agile approaches fail to address this.
+            DSDM aims to improve communication by using frequent face-to-face meetings, visual communication
+            (modelling), advance releases of prototypes and workshop sessions.
+
+            <li class="h6"> Daily stand-ups</li>
+            DSDM teams can fulfil this principle with several methods. One way is to encourage team interaction through
+            daily stand-up meetings. These informal meetings allow the team to meet and discuss issues or ideas
+            together. Facilitated workshops are also an effective way for stakeholders to improve their understanding
+            and discuss requirements.
+
+            DSDM teams commonly use modelling and prototyping to further improve communication. These practical methods
+            help replace the need for heavy, useless documentation.
+            <li class="h6">Modelling</li>
+            Modelling is a visual form of communication utilizing diagrams. This allows for complex systems, designs and
+            products to be better understood.
+
+            DSDM makes use of prototyping by creating prototypes of the product early in development, to allow
+            stakeholders to ‘test-drive’ early versions of the solution. The idea is to build something fast, get
+            feedback quickly, and to break it sooner, rather than later. The underlying DSDM philosophy is that if
+            something isn’t going to work, it is better to find that out as soon as possible, and change course sooner,
+            rather than later.
+
+            <li class="h6">Prototyping</li>
+            Prototyping means creating prototypes of the product early in development, to allow stakeholders to
+            ‘test-drive’ early versions of the solution.
+          </h6>
+          <br>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step7.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelEight">
+          <ng-template #labelEight>
+            <div class="step-label">
+              Clear and <br />Continuous <br />Communication
+            </div>
+          </ng-template>
+          <h3>Clear and Continuous Communication</h3>
+          <h6 style="text-align: left">
+            It is vital to keep control of the project. DSDM proposes that it is only possible to do this by using a
+            plan aligned to the project aims, with both being accessible to the entire team.
+
+            <li class="h6">Ensure progress is visible</li>
+            DSDM teams, especially the project manager and team leader, can fulfil this principle by ensuring plans and
+            progress are visible to everyone. Managing must be proactive with an emphasis on reporting and tracking.
+
+            <li class="h6">Measure progress by delivery</li>
+            Also, progress must be measured by looking at what has been delivered, rather than activities completed.
+            Timeboxing helps to control who is doing what and when. DSDM can also be combined with methods such as
+            Kanban, which help teams to visualize project progress and see who is doing what, when and how long it will
+            take them.
+
+
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step8.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton disabled nbStepperNext>next</button>
+        </nb-step>
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>
+  <!-- / what -->
+
+  <!-- space  -->
+  <div style="height: 20px; background-color: #edf1f7"></div>
+
+
+
+  <!-- how + what if-->
+<div class="row">
+    <div class="accordion-container col-md-12 col-lg-6 col-xxxl-6">
+      <div class="section-title">
+        <h2>How: Practical Application of DSDM</h2>
+      </div>
+      <nb-accordion multi>
+        <nb-accordion-item>
+          <nb-accordion-item-header>
+            Project Preparation
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="content-section">
+              <h4>Stakeholder Identification</h4>
+              <p>Identify all the stakeholders involved in the project, including project sponsors, team members, end users, and other relevant parties. Clearly define their roles and responsibilities to ensure everyone understands their contributions and obligations to the project.</p>
+            </div>
+
+            <div class="content-section">
+              <h4>Objective Definition</h4>
+              <p>Establish clear, specific, and measurable goals for the project. These objectives should align with the business needs and provide a roadmap for what the project aims to achieve. Setting clear objectives helps in guiding the project and measuring its success.</p>
+            </div> </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item>
+          <nb-accordion-item-header>
+            Feasibility Study
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="content-section">
+              <h4>Risk Analysis</h4>
+              <p>Conduct a thorough analysis to identify potential risks that could impact the project's success. Assess the likelihood and potential impact of these risks, and develop strategies for mitigating them. This proactive approach helps in minimizing disruptions during the project lifecycle.</p>
+            </div>
+
+            <div class="content-section">
+              <h4>Preliminary Planning</h4>
+              <p>Outline an initial project plan that includes a high-level schedule, key milestones, and the resources required. This plan provides a framework for the project's execution and helps in setting realistic expectations for timelines and resource allocation.</p>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item>
+          <nb-accordion-item-header>
+            Business Study
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="content-section">
+              <h4>Understanding Needs</h4>
+              <p>Engage with stakeholders to gather detailed information about the business needs and requirements. This involves understanding the problems the project aims to solve, the desired outcomes, and the criteria for success. This step ensures that the project delivers value to the business.</p>
+            </div>
+
+            <div class="content-section">
+              <h4>Deliverable Planning</h4>
+              <p>Define the specific deliverables that will be produced during the project. Set clear success criteria for each deliverable to ensure they meet the required standards and stakeholder expectations. This planning phase is crucial for aligning the team's efforts with business objectives.</p>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item>
+          <nb-accordion-item-header>
+            Iterative Development Cycle
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="content-section">
+              <h4>Sprint Planning</h4>
+              <p>Organize the project into short iterations or sprints, each focused on delivering a specific set of features or functionality. Plan the work for each sprint, defining the tasks to be completed, the resources required, and the expected outcomes. Sprint planning helps in managing work in manageable segments and allows for regular feedback.</p>
+            </div>
+
+            <div class="content-section">
+              <h4>Development and Review</h4>
+              <p>During each sprint, the development team works on creating the deliverables. At the end of the sprint, review the progress with stakeholders to gather feedback. Use this feedback to make necessary adjustments and improve the deliverables. This iterative process ensures continuous improvement and adaptation to changing requirements.</p>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item>
+          <nb-accordion-item-header>
+            Implementation
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="content-section">
+              <h4>Deployment</h4>
+              <p>Prepare the deliverables for deployment, ensuring they are production-ready. This involves testing, documentation, and final reviews to confirm that the deliverables meet the required standards. Deploy the deliverables to the production environment where they will be used by end users.</p>
+            </div>
+
+            <div class="content-section">
+              <h4>Training and Support</h4>
+              <p>Provide training for end users to ensure they understand how to use the new systems or products effectively. Offer ongoing support to address any issues that arise post-deployment. This support is essential for ensuring that users can fully utilize the project’s outcomes and that the project delivers its intended value.</p>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+
+      </nb-accordion>
+    </div>
+
+
+
+    <div class="accordion-container col-md-12 col-lg-6 col-xxxl-6 ">
+      <div class="section-title">
+        <h2>What if: Adaptations of DSDM for Different Types of Projects and Environments</h2>
+      </div>
+      <nb-accordion multi>
+        <nb-accordion-item>
+          <nb-accordion-item-header>
+            Exploring DSDM Flexibility
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="content-section">
+              <h4>1. Small-Scale Projects</h4>
+              <p>Scenario: What if a project team is working on a small-scale project?</p>
+              <p>Adaptation: For small projects, DSDM can be scaled down by simplifying processes and reducing formal governance requirements. Focus on the essentials: deliverables, business needs, and stakeholder involvement, allowing for a more nimble and responsive project environment.</p>
+            </div>
+
+            <div class="content-section">
+              <h4>2. Non-IT Contexts</h4>
+              <p>Scenario: What if DSDM is applied outside of traditional IT projects?</p>
+              <p>Adaptation: DSDM principles can be adapted to non-IT projects such as marketing, product development, or organizational change initiatives. By adjusting deliverables and iterative cycles to suit the project's nature, DSDM can provide a flexible framework for managing these projects with similar agility as in IT projects.</p>
+            </div>
+
+            <div class="content-section">
+              <h4>            3. Complex Projects:              </h4>
+              <p>Scenario: What if the project is highly complex?              </p>
+              <p>Adaptation: In complex projects, DSDM can be modified to incorporate more detailed planning and rigorous risk management. This might involve additional phases for requirements gathering, increased emphasis on stakeholder collaboration, and more frequent review cycles to manage the intricacies of the project effectively.
+              </p>
+            </div>
+
+           </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item>
+          <nb-accordion-item-header>
+            Practical Examples of Adaptation
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="content-section">
+              <h4>Web Development Project</h4>
+              <p>Application: In a web development scenario, DSDM can be adapted to focus on iterative development of web features. Each sprint or cycle can deliver a segment of the website, allowing for continuous feedback and adaptation based on user testing and client input, ensuring the final product aligns closely with user needs.</p>
+            </div>
+
+            <div class="content-section">
+              <h4>Digital Transformation Project</h4>
+              <p>Application: In a digital transformation initiative, DSDM's iterative and incremental approach can help manage the transition across departments by breaking down the transformation into smaller, manageable segments. This allows the organization to adapt and iterate on its digital strategies based on feedback and evolving business requirements.</p>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+
+      </nb-accordion>
+    </div>
+  </div>
+  <!-- /how + what if -->
+  <!-- space  -->
+  <div style="height: 20px; background-color: #edf1f7"></div>
+  <!-- photo -->
+  <nb-card size="giant">
+    <nb-card-header class="h4">
+      Dynamic Systems Development Method (DSDM)
+      <button class="single-view-button" nbButton size="small" [appearance]="isSingleView ? 'filled' : 'outline'"
+        (click)="isSingleView = true">
+        <i class="nb-square"></i>
+      </button>
+      <button class="grid-view-button" nbButton size="small" [appearance]="isSingleView ? 'outline' : 'filled'"
+        (click)="isSingleView = false">
+        <nb-icon icon="grid" pack="eva"></nb-icon>
+      </button>
+    </nb-card-header>
+
+    <div class="grid-container">
+      <div class="single-view" *ngIf="isSingleView">
+        <div class="camera" [style.background-image]="'url(' + selectedCamera.source + ')'">
+          <span class="camera-name">{{ selectedCamera.title }}</span>
+        </div>
+      </div>
+
+      <div class="grid-view" *ngIf="!isSingleView">
+        <div class="camera" *ngFor="let camera of cameras" [style.background-image]="'url(' + camera.source + ')'"
+          (click)="selectCamera(camera)">
+          <span class="camera-name">{{ camera.title }}</span>
+        </div>
+      </div>
+    </div>
+  </nb-card>
+  <!-- / photo -->
+</body>
+
+</html>
