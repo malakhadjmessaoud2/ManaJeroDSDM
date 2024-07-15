@@ -10,6 +10,128 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpVhQiwAllg1RAFaxMWSpQruuGARy0Y1k&libraries=places"></script>
+  <style>
+    .section-title {
+  background-color: #b3c5d9; /* Blue background */
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: 1.5em;
+  text-align: center;
+}
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #f4f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #b3c5d9;
+  color: #fff;
+  padding-top: 30px;
+  min-height: 70px;
+  border-bottom: 3px solid #0779e4;
+  text-align: center;
+    }
+
+    header h1 {
+      text-align: center;
+      text-transform: uppercase;
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h2.section-title,
+    .card h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .card ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .card ul li {
+      padding: 10px;
+      background-color: #eef2f7;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card ul li strong {
+      margin-right: 10px;
+    }
+
+    .card ul li::before {
+      content: "✔";
+      color: #007bff;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      /* Centre l'image horizontalement */
+      align-items: center;
+      /* Centre l'image verticalement */
+      height: 100vh;
+      /* Ajustez la hauteur selon vos besoins */
+      width: 100%;
+      /* Ou ajustez la largeur selon vos besoins */
+    }
+
+    .responsive-img {
+      height: 99%;
+      /* Ajuste selon votre besoin */
+      width: 80%;
+      /* Ajuste selon votre besoin */
+      max-width: 100%;
+      /* Assurez-vous que l'image ne dépasse pas la largeur de son conteneur */
+      max-height: 100%;
+      /* Assurez-vous que l'image ne dépasse pas la hauteur de son conteneur */
+    }
+
+    .step-label {
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
   <ngx-app>Loading...</ngx-app>

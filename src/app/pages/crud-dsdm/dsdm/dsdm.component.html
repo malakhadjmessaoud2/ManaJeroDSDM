@@ -1,0 +1,273 @@
+<header>
+  <div class="container">
+    <h1>DSDM Methodology Tutorial</h1>
+  </div>
+</header>
+
+<div class="container">
+  <button nbButton shape="semi-round" status="primary" size="large" [routerLink]="['/pages/crudDsdm/add']">
+    <nb-icon icon="plus-circle-outline"></nb-icon> Add Component
+  </button>
+</div>
+
+<!-- space -->
+<div style="height: 20px; background-color: #edf1f7"></div>
+
+<!-- Dynamic component display -->
+<ng-container>
+  <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-body>
+      <nb-stepper orientation="horizontal">
+        <nb-step *ngFor="let composant of composants; let i = index" [label]="composant.nomComposant">
+          <button nbButton shape="semi-round" status="info" size="medium" [routerLink]="['/pages/crudDsdm/update']" [queryParams]="{ id: composant.id, name: composant.nomComposant, title: composant.titre, desc: composant.desc }">
+            <nb-icon icon="edit-outline"></nb-icon>
+          </button>
+          <button nbButton shape="semi-round" status="danger" size="medium" (click)="deleteComposant(composant.id)">
+            <nb-icon icon="trash-2-outline"></nb-icon>
+          </button>
+          <ng-template #label>
+
+            <div class="step-label">{{ composant.nomComposant }}</div>
+          </ng-template>
+
+          <h3>{{ composant.titre }}</h3>
+          <h6 style="text-align: left">
+            <p>{{ composant.desc }}</p>
+          </h6>
+          <img *ngIf="getImageByIndex(i)" [src]="'data:image/jpeg;base64,' + images[i]" alt="Selected Image" style="height: 35%; width: 35%" class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+
+        </nb-step>
+      </nb-stepper>
+
+
+
+
+  <!-- what -->
+  <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header class="h4">
+      What: Framework and Key Principles of DSDM
+    </nb-card-header>
+    <nb-card-header class="h5">
+      DSDM is based on eight core principles:
+    </nb-card-header>
+    <nb-card-body>
+      <nb-stepper orientation="horizontal">
+        <nb-step [label]="labelOne">
+          <ng-template #labelOne>
+            <div class="step-label">Focus on<br />the Business Need</div>
+          </ng-template>
+
+          <h3>Focus on the Business Need</h3>
+          <h6 style="text-align: left">
+            DSDM has a strong business-driven approach. A business case must
+            be established for the project and the team must understand
+            project priorities. Every decision the team make during the
+            project should help achieve the project goal and the team must
+            ensure the project is delivered on time.
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step1.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton disabled nbStepperNext>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelTwo">
+          <ng-template #labelTwo>Deliver on Time</ng-template>
+          <h3>Deliver on Time</h3>
+          <h6 style="text-align: left">
+            DSDM is an agile framework that works plans work in fixed time
+            periods (timeboxes), rather like sprints in Agile Scrum. The aim
+            is to deliver a useable software product at the end of each
+            timebox (iteration). DSDM is thus an incremental approach, as well
+            as an iterative development approach to delivering software. DSDM
+            places a strong emphasis on prompt delivery, proposing that even
+            projects without any need for a fixed deadline still benefit from
+            one. This is because having deadlines is the best way to control
+            changing requirements. To stick to this principle, DSDM teams
+            should focus on priorities, hit deadlines and manage their time by
+            using the MoSCoW and timeboxing techniques.
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step2.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="Thirdstep">
+          <ng-template #Thirdstep>Collaborate</ng-template>
+          <h3>Collaborate</h3>
+          <h6 style="text-align: left">
+            Team spirit and collaboration is highly important for DSDM teams. This is based on a rejection of having
+            multiple departments that rarely interact. Teams should instead work as one unit and collaborate to
+            encourage understanding, higher performance and shared ownership.
+
+
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step3.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelFour">
+          <ng-template #labelFour>
+            <div class="step-label">Quality and <br />Non-Compromise</div>
+          </ng-template>
+          <h3>Quality and Non-Compromise</h3>
+          <h6 style="text-align: left">
+            Quality is always fixed on DSDM projects and must be decided at the start. The final product shouldn’t be
+            any more or any less than the quality decided upon.
+            <br>
+            <li class="h6">Continuous testing :</li>
+            To adhere to this principle, DSDM teams must ensure quality doesn’t become a variable by testing
+            continuously and reviewing constantly. This testing and reviewing occurs during the ‘exploration’ and
+            ‘engineering’ iterative development phases. Testing should happen early in the project. Again, MoSCoW and
+            timeboxing can be used to ensure testing is appropriate and organized.
+
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step4.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelFive">
+          <ng-template #labelFive>
+            <div class="step-label">
+              Iterative <br />
+              Development
+            </div>
+          </ng-template>
+          <h3>Iterative Development</h3>
+          <h6 style="text-align: left">
+            DSDM differs from other agile methods as it requires the foundations of the project to be agreed early. The
+            foundations don’t need to be in too much detail – just agree on what the problem is and how to solve it.
+            Once foundations are established, the solution must be delivered incrementally.
+
+            <li class="h6"> Just enough design up front:</li>
+            To adhere to this principle, DSDM teams must ensure they perform analysis and ‘enough design up front’
+            (EDUF) at the start of the project. During each increment, the team must re-assess priorities and project
+            viability, ensuring they have taken stakeholder feedback into consideration. Both the feasibility and
+            foundation phases allow for establishing a foundation; the exploration and engineering phases allow for
+            incremental delivery.<br>
+
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step5.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelSix">
+          <ng-template #labelSix>
+            <div class="step-label">
+              Continuous <br />
+              Elaboration
+            </div>
+          </ng-template>
+          <h3>Continuous Elaboration</h3>
+          <h6 style="text-align: left">
+            DSDM proposes that nothing is created perfectly first time and projects operate in a constantly changing
+            world. Incremental delivery allows for such change to be embraced and leads to higher stakeholder
+            satisfaction. Each iteration is combined with testing, demonstrations and feedback. This ensures that each
+            iteration improves upon the last and leads to a decent final product.
+
+            <li class="h6"> Feedback loop </li>
+            DSDM teams can adhere to this principle by building feedback into each iteration. They must also be in the
+            mindset that details should emerge later, not sooner, and they must embrace change. During each iteration,
+            they should encourage creativity and experimentation, which will lead to learning and improvement. Constant
+            review and feedback allow for change and progress to occur.
+
+            To deliver an incremental working release of software at the end of each iteration DSDM recommends the
+            MoSCoW prioritisation technique to prioritise requirements to be worked on by the team during a timebox.
+            Requirements are typically capture in the form of user stories.
+
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step6.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelSeven">
+          <ng-template #labelSeven>
+            <div class="step-label">Demonstrable <br />Control</div>
+          </ng-template>
+          <h3>Demonstrable Control</h3>
+          <h6 style="text-align: left">
+            Bad communication often leads to project failure and traditional non-agile approaches fail to address this.
+            DSDM aims to improve communication by using frequent face-to-face meetings, visual communication
+            (modelling), advance releases of prototypes and workshop sessions.
+
+            <li class="h6"> Daily stand-ups</li>
+            DSDM teams can fulfil this principle with several methods. One way is to encourage team interaction through
+            daily stand-up meetings. These informal meetings allow the team to meet and discuss issues or ideas
+            together. Facilitated workshops are also an effective way for stakeholders to improve their understanding
+            and discuss requirements.
+
+            DSDM teams commonly use modelling and prototyping to further improve communication. These practical methods
+            help replace the need for heavy, useless documentation.
+            <li class="h6">Modelling</li>
+            Modelling is a visual form of communication utilizing diagrams. This allows for complex systems, designs and
+            products to be better understood.
+
+            DSDM makes use of prototyping by creating prototypes of the product early in development, to allow
+            stakeholders to ‘test-drive’ early versions of the solution. The idea is to build something fast, get
+            feedback quickly, and to break it sooner, rather than later. The underlying DSDM philosophy is that if
+            something isn’t going to work, it is better to find that out as soon as possible, and change course sooner,
+            rather than later.
+
+            <li class="h6">Prototyping</li>
+            Prototyping means creating prototypes of the product early in development, to allow stakeholders to
+            ‘test-drive’ early versions of the solution.
+          </h6>
+          <br>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step7.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step [label]="labelEight">
+          <ng-template #labelEight>
+            <div class="step-label">
+              Clear and <br />Continuous <br />Communication
+            </div>
+          </ng-template>
+          <h3>Clear and Continuous Communication</h3>
+          <h6 style="text-align: left">
+            It is vital to keep control of the project. DSDM proposes that it is only possible to do this by using a
+            plan aligned to the project aims, with both being accessible to the entire team.
+
+            <li class="h6">Ensure progress is visible</li>
+            DSDM teams, especially the project manager and team leader, can fulfil this principle by ensuring plans and
+            progress are visible to everyone. Managing must be proactive with an emphasis on reporting and tracking.
+
+            <li class="h6">Measure progress by delivery</li>
+            Also, progress must be measured by looking at what has been delivered, rather than activities completed.
+            Timeboxing helps to control who is doing what and when. DSDM can also be combined with methods such as
+            Kanban, which help teams to visualize project progress and see who is doing what, when and how long it will
+            take them.
+
+
+          </h6>
+          <img style="height: 50%; width: 50%" src="../../../assets/images/step8.png" alt="Illustration DSDM"
+            class="responsive-img" />
+          <br />
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton disabled nbStepperNext>next</button>
+        </nb-step>
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>
+  <!-- / what -->
+
+
+
+
+    </nb-card-body>
+  </nb-card>
+</ng-container>

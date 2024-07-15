@@ -1,0 +1,53 @@
+<div class="col-lg-12">
+  <nb-card>
+    <nb-card-header class="header-section">
+      <button nbButton ghost status="primary" [routerLink]="['/pages/crudDsdm']" class="back-button">
+        <nb-icon icon="arrow-back-outline"></nb-icon>
+      </button>
+      <span>Add component</span>
+    </nb-card-header>
+    <nb-card-body>
+      <form #componentForm="ngForm">
+        <input type="text" nbInput fullWidth placeholder="Type component name (into, summary ...)"
+       [(ngModel)]="composant.nomComposant" name="nomComposant" required #nomComposant="ngModel">
+<div *ngIf="nomComposant.invalid && (nomComposant.dirty || nomComposant.touched)" class="error-message">
+  <span *ngIf="nomComposant.errors?.required"style="color: red;">*Le nom du composant est requis.</span>
+</div>
+
+<input type="text" nbInput fullWidth placeholder="Type component title"
+       [(ngModel)]="composant.titre" name="titre" required #titre="ngModel">
+<div *ngIf="titre.invalid && (titre.dirty || titre.touched)" class="error-message">
+  <span *ngIf="titre.errors?.required" style="color: red;">*Le titre du composant est requis.</span>
+</div>
+
+        <div style="height: 20px"></div>
+
+        <ngx-tiny-mce (editorKeyup)="onEditorKeyup($event)"></ngx-tiny-mce>
+
+        <!-- Bouton pour télécharger une image -->
+        <div class="upload-section">
+          <button nbButton shape="semi-round" status="primary" size="large" (click)="fileInput.click()">
+            <nb-icon icon="cloud-upload-outline"></nb-icon> Upload Image
+          </button>
+          <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+        </div>
+
+        <div *ngIf="selectedImage" class="image-preview">
+          <div class="image-container">
+            <img [src]="selectedImageURL" alt="Selected Image"style="height: 35%; width: 35%">
+            <button nbButton ghost status="danger" class="delete-button" (click)="removeImage()">
+              <nb-icon icon="close-outline"></nb-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <div class="submit-section">
+          <button nbButton type="button" shape="semi-round" status="success" size="large" [disabled]="!componentForm.valid" (click)="onSubmit()" [routerLink]="['/pages/crudDsdm']">
+            <nb-icon icon="checkmark-outline"></nb-icon> Submit
+          </button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>

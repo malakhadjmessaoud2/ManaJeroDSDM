@@ -7,16 +7,21 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
-import { DSDMComponent } from './dsdm/dsdm.component';
 import { FormsModule } from '@angular/forms';
 
 import { LayoutModule } from './layout/layout.module';
+import { CrudDsdmModule } from './crud-dsdm/crud-dsdm.module';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
+    CommonModule,
+    PagesRoutingModule,
+    RouterModule,
+
     LayoutModule,
     FormsModule,
-    PagesRoutingModule,
     ThemeModule,
     NbMenuModule,
     DashboardModule,
@@ -30,12 +35,10 @@ import { LayoutModule } from './layout/layout.module';
     NbListModule,
     NbAccordionModule,
     NbUserModule,
-    MiscellaneousModule,
+    MiscellaneousModule
   ],
   declarations: [
-    PagesComponent,
-    DSDMComponent,
-    
+PagesComponent
   ],
 
 })
