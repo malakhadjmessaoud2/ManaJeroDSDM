@@ -5,15 +5,16 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-import { DSDMComponent } from './dsdm/dsdm.component';
+import { DSDMComponent } from './crud-dsdm/dsdm/dsdm.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
     {
-      path: 'DSDM',
-      component: DSDMComponent,
+       path: 'crudDsdm',
+       loadChildren: () => import('./crud-dsdm/crud-dsdm.module').then(m => m.CrudDsdmModule) ,
+
     },
     {
       path: 'dashboard',

@@ -5,3 +5,6 @@
   cursor: pointer;
   margin: 0.5rem;
 }/*# sourceMappingURL=dsdm.component.css.map */
+body {
+  font-family: var(--font-family);
+}
