@@ -1,0 +1,55 @@
+<div class="col-lg-12">
+  <nb-card>
+    <nb-card-header class="header-section">
+      <button nbButton ghost status="primary" [routerLink]="['/pages/crudDsdm']" class="back-button">
+        <nb-icon icon="arrow-back-outline"></nb-icon>
+      </button>
+      <span>Update component</span>
+    </nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+        <input nbInput fullWidth placeholder="Type component name (Introduction, Summary ...)"
+               formControlName="nomComposant" />
+        <div *ngIf="updateForm.get('nomComposant').invalid && updateForm.get('nomComposant').touched" class="error-message">
+          Le nom du composant est requis.
+        </div>
+
+        <input nbInput fullWidth placeholder="Type component title" formControlName="titre" />
+        <div *ngIf="updateForm.get('titre').invalid && updateForm.get('titre').touched" class="error-message">
+          Le titre du composant est requis.
+        </div>
+
+        <div class="form-group">
+          <label for="desc">Description</label>
+          <textarea id="desc" formControlName="desc" class="form-control"></textarea>
+        </div>
+
+        <div class="upload-section">
+          <button nbButton shape="semi-round" status="primary" size="large" (click)="fileInput.click()">
+            <nb-icon icon="cloud-upload-outline"></nb-icon> Upload Image
+          </button>
+          <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" />
+        </div>
+
+        <div *ngIf="selectedImageURL" class="image-preview">
+          <div class="image-container">
+            <img [src]="selectedImageURL" alt="Selected Image" style="height: 35%; width: 35%" />
+            <button nbButton ghost status="danger" class="delete-button" (click)="removeImage()">
+              <nb-icon icon="close-outline"></nb-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="submit-section">
+          <button nbButton type="submit" shape="semi-round" status="success" size="large" [disabled]="!updateForm.valid"
+            (click)="validateForm()">
+            <nb-icon icon="checkmark-outline"></nb-icon> Update
+          </button>
+          <div *ngIf="showMessage" class="error-message">
+            Veuillez remplir tous les champs obligatoires.
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>

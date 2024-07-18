@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <nb-card>
       <nb-card-header>
-        Tiny MCE
+Description
       </nb-card-header>
       <nb-card-body>
         <ngx-tiny-mce></ngx-tiny-mce>
