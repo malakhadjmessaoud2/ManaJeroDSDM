@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IntroService } from '../service/intro.service';
 
 @Component({
-  selector: 'app-intro-dsdm',
+  selector: 'ngx-intro-dsdm',
   templateUrl: './intro-dsdm.component.html',
   styleUrls: ['./intro-dsdm.component.scss']
 })

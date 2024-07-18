@@ -6,7 +6,7 @@ import { Limitation } from '../model/limitation.model';
 import { LimitationService } from '../service/limitation.service';
 
 @Component({
-  selector: 'app-lim-dsdm',
+  selector: 'ngx-lim-dsdm',
   templateUrl: './lim-dsdm.component.html',
   styleUrls: ['./lim-dsdm.component.scss']
 })

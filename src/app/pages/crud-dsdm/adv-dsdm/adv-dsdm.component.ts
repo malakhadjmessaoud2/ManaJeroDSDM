@@ -6,7 +6,7 @@ import { AdvantageService } from '../service/advantage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-adv-dsdm',
+  selector: 'ngx-adv-dsdm',
   templateUrl: './adv-dsdm.component.html',
   styleUrls: ['./adv-dsdm.component.scss']
 })

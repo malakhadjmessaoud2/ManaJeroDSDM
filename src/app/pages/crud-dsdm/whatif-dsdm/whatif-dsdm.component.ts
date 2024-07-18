@@ -6,7 +6,7 @@ import { Whatif } from '../model/whatif.model';
 import { WhatifService } from '../service/whatif.service';
 
 @Component({
-  selector: 'app-whatif-dsdm',
+  selector: 'ngx-whatif-dsdm',
   templateUrl: './whatif-dsdm.component.html',
   styleUrls: ['./whatif-dsdm.component.scss']
 })

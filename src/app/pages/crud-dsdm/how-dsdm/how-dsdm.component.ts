@@ -6,7 +6,7 @@ import { How } from '../model/how.model';
 import { HowService } from '../service/how.service';
 
 @Component({
-  selector: 'app-how-dsdm',
+  selector: 'ngx-how-dsdm',
   templateUrl: './how-dsdm.component.html',
   styleUrls: ['./how-dsdm.component.scss']
 })

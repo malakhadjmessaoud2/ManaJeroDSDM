@@ -6,7 +6,7 @@ import { Why } from '../model/why.model';
 import { WhyService } from '../service/why.service';
 
 @Component({
-  selector: 'app-why-dsdm',
+  selector: 'ngx-why-dsdm',
   templateUrl: './why-dsdm.component.html',
   styleUrls: ['./why-dsdm.component.scss']
 })
