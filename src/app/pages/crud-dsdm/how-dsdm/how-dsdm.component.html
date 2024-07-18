@@ -1,0 +1,63 @@
+<div *ngIf="hasHow && isSubmitted; else showForm" class="how-section">
+  <div class="how-card">
+    <h2>{{ how.titre }}</h2>
+    <p>{{ how.desc }}</p>
+    <div class="image-container" *ngIf="imageUrl">
+      <img [src]="imageUrl" alt="How Image" class="how-image" />
+    </div>
+    <button nbButton ghost (click)="onEdit()">
+      <nb-icon icon="edit-outline"></nb-icon>
+    </button>
+  </div>
+</div>
+
+<ng-template #showForm>
+  <div *ngIf="hasHow; else addForm" class="form-section">
+    <div class="how-card">
+      <h2>Edit How</h2>
+      <form [formGroup]="howForm" class="how-form">
+        <div class="form-group">
+          <label for="titre">Title</label>
+          <input type="text" nbInput fullWidth placeholder="Title" formControlName="titre" required>
+          <div *ngIf="howForm.get('titre')?.invalid && (howForm.get('titre')?.dirty || howForm.get('titre')?.touched)" class="error-message">
+            <span *ngIf="howForm.get('titre')?.errors?.required" class="error-text">*Le titre est requis.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="desc">Description</label>
+          <textarea nbInput fullWidth shape="round" placeholder="Description" formControlName="desc" required></textarea>
+          <div *ngIf="howForm.get('desc')?.invalid && (howForm.get('desc')?.dirty || howForm.get('desc')?.touched)" class="error-message">
+            <span *ngIf="howForm.get('desc')?.errors?.required" class="error-text">*La description est requise.</span>
+          </div>
+        </div>
+
+        <div class="upload-section">
+          <button nbButton ghost status="primary" size="large" (click)="fileInput.click()">
+            <nb-icon icon="cloud-upload-outline"></nb-icon>
+          </button>
+          <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+        </div>
+
+        <div *ngIf="selectedImageURL" class="image-preview">
+          <div class="preview-container">
+            <img [src]="selectedImageURL | safeUrl:'image'" alt="Image sélectionnée" class="preview-image">
+            <button nbButton ghost status="danger" class="delete-button" (click)="removeImage()">
+              <nb-icon icon="close-outline"></nb-icon>
+            </button>
+          </div>
+        </div>
+
+        <button nbButton ghost status="success" size="large" [disabled]="!howForm.valid" (click)="onSubmit()">
+          <nb-icon icon="checkmark-outline"></nb-icon>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <ng-template #addForm>
+    <button nbButton ghost status="primary" (click)="onAddHow()">
+      <nb-icon icon="plus-outline"></nb-icon>
+    </button>
+  </ng-template>
+</ng-template>

@@ -12,7 +12,7 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-       path: 'crudDsdm',
+       path: 'dsdm',
        loadChildren: () => import('./crud-dsdm/crud-dsdm.module').then(m => m.CrudDsdmModule) ,
 
     },
