@@ -7,7 +7,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Dynamic Systems Development Method (DSDM) ',
-        link: '/pages/crudDsdm',
+        link: '/pages/dsdm',
       },
       {
         title: 'Scaled Agile Framework (SAFe)',

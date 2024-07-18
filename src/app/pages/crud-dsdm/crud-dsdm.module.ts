@@ -15,12 +15,20 @@ import { EditorsRoutingModule } from '../editors/editors-routing.module';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { EditorsModule } from '../editors/editors.module';
 import { UpdateDsdmComponent } from './update-dsdm/update-dsdm.component';
-import { DeleteDsdmComponent } from './delete-dsdm/delete-dsdm.component';
+import { IntroDsdmComponent } from './intro-dsdm/intro-dsdm.component';
+import { AppComponent } from '../../app.component';
+import { AdvDsdmComponent } from './adv-dsdm/adv-dsdm.component';
+import { LimDsdmComponent } from './lim-dsdm/lim-dsdm.component';
+import { WhyDsdmComponent } from './why-dsdm/why-dsdm.component';
+import { HowDsdmComponent } from './how-dsdm/how-dsdm.component';
+import { WhatifDsdmComponent } from './whatif-dsdm/whatif-dsdm.component';
 
 
 @NgModule({
-  declarations: [DSDMComponent, AddDsdmComponent, UpdateDsdmComponent, DeleteDsdmComponent],
+  declarations: [DSDMComponent, AddDsdmComponent, UpdateDsdmComponent, IntroDsdmComponent, AdvDsdmComponent, LimDsdmComponent, WhyDsdmComponent, HowDsdmComponent, WhatifDsdmComponent],
+
   imports: [
+    
     CommonModule,
     CrudDsdmRoutingModule,
     ReactiveFormsModule,

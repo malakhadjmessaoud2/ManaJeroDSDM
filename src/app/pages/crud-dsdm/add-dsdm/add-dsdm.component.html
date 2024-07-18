@@ -21,8 +21,9 @@
 </div>
 
         <div style="height: 20px"></div>
+        <textarea rows="5" nbInput fullWidth shape="round"  placeholder="Type your text" [(ngModel)]="composant.desc" name="desc" required #desc="ngModel"></textarea>
 
-        <ngx-tiny-mce (editorKeyup)="onEditorKeyup($event)"></ngx-tiny-mce>
+
 
         <!-- Bouton pour télécharger une image -->
         <div class="upload-section">
