@@ -1,9 +1,9 @@
-.intro-section {
+.limitation-section {
   text-align: center;
   margin: 20px;
 }
 
-.intro-image {
+.limitation-image {
   max-height: 150px;
   width: auto;
   margin: 10px 0;
@@ -17,7 +17,7 @@
   margin: 20px;
 }
 
-.intro-form {
+.limitation-form {
   width: 100%;
   max-width: 600px;
 }
@@ -70,4 +70,33 @@ button[nbButton] {
 
 button[nbButton] nb-icon {
   margin: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .limitation-form {
+    width: 90%;
+  }
+  .limitation-image {
+    max-height: 100px;
+  }
+  .delete-button {
+    top: 5px;
+    right: 5px;
+  }
+  .submit-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  button[nbButton] {
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .limitation-card, .form-section {
+    margin: 10px;
+  }
+  .limitation-image {
+    max-height: 80px;
+  }
 }/*# sourceMappingURL=lim-dsdm.component.css.map */

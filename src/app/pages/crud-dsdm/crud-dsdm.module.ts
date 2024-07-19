@@ -4,7 +4,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesRoutingModule } from '../pages-routing.module';
 import { ThemeModule } from '../../@theme/theme.module';
-import { NbAccordionModule, NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbListModule, NbMenuModule, NbPopoverModule, NbRadioModule, NbRouteTabsetModule, NbSelectModule, NbStepperModule, NbTabsetModule, NbTooltipModule, NbUserModule, NbWindowModule } from '@nebular/theme';
+import { NbAccordionModule, NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbMenuModule, NbPopoverModule, NbRadioModule, NbRouteTabsetModule, NbSelectModule, NbStepperModule, NbTabsetModule, NbTooltipModule, NbUserModule, NbWindowModule } from '@nebular/theme';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { ECommerceModule } from '../e-commerce/e-commerce.module';
 import { MiscellaneousModule } from '../miscellaneous/miscellaneous.module';
@@ -28,7 +28,7 @@ import { WhatifDsdmComponent } from './whatif-dsdm/whatif-dsdm.component';
   declarations: [DSDMComponent, AddDsdmComponent, UpdateDsdmComponent, IntroDsdmComponent, AdvDsdmComponent, LimDsdmComponent, WhyDsdmComponent, HowDsdmComponent, WhatifDsdmComponent],
 
   imports: [
-    
+
     CommonModule,
     CrudDsdmRoutingModule,
     ReactiveFormsModule,
@@ -37,8 +37,7 @@ import { WhatifDsdmComponent } from './whatif-dsdm/whatif-dsdm.component';
     NbPopoverModule,
     NbTooltipModule,
     NbWindowModule,
-
-
+    NbLayoutModule,
     LayoutModule,
     FormsModule,
     ThemeModule,
