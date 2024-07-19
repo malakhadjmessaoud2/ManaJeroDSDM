@@ -16,6 +16,8 @@ const routes: Routes = [{
        loadChildren: () => import('./crud-dsdm/crud-dsdm.module').then(m => m.CrudDsdmModule) ,
 
     },
+    { path: 'phases', loadChildren: () => import('./phases/phases.module').then(m => m.PhasesModule) },
+
     {
       path: 'dashboard',
       component: ECommerceComponent,

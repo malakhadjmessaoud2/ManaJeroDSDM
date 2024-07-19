@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.invite-button {
+  margin-bottom: 20px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .phase-card {
+    width: 30%;
+    margin: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-container .phase-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-container .phase-card {
+    width: 90%;
+  }
+}

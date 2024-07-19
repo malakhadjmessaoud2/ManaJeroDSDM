@@ -1,6 +1,6 @@
 <!-- start tuto -->
 <div class="container my-3">
-  <button nbButton shape="semi-round" status="primary" size="large">
+  <button nbButton shape="semi-round" status="primary" size="large" [routerLink]="['/pages/phases/home']">
     <nb-icon icon="flip-outline"></nb-icon> Use Methode
   </button>
 </div>
@@ -185,7 +185,7 @@
     shape="semi-round"
     status="primary"
     size="large"
-    [routerLink]="['/pages/crudDsdm/add']"
+    [routerLink]="['/pages/dsdm/add']"
   >
     <nb-icon icon="plus-circle-outline"></nb-icon> Add Component
   </button>
@@ -219,7 +219,7 @@
               shape="semi-round"
               status="info"
               size="medium"
-              [routerLink]="['/pages/crudDsdm/update']"
+              [routerLink]="['/pages/dsdm/update']"
               [queryParams]="{
                 id: composant.id,
                 name: composant.nomComposant,

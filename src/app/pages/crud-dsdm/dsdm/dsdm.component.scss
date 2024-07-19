@@ -22,7 +22,7 @@
   }
 }
 
-:host ::ng-deep nb-stepper .step-content {
+:host ::ng-deep nb-stepper  {
   text-align: center;
   max-height: calc(100vh - 200px); /* Adjust based on your needs */
   overflow-y: auto;
