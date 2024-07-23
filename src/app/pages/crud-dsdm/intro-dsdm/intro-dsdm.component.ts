@@ -81,48 +81,50 @@ export class IntroDsdmComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.introForm.valid) {
-      const formData = new FormData();
-      formData.append('id', this.intro.id); // Assuming this.intro.id is a string
-      formData.append('titre', this.introForm.get('titre')!.value);
-      formData.append('desc', this.introForm.get('desc')!.value);
-      if (this.selectedImage) {
-        formData.append('imageUrl', this.selectedImage);
-      }
+    if (window.confirm('Voulez-vous vraiment soumettre ce formulaire ?')) {
+      if (this.introForm.valid) {
+        const formData = new FormData();
+        formData.append('id', this.intro.id); // Assuming this.intro.id is a string
+        formData.append('titre', this.introForm.get('titre')!.value);
+        formData.append('desc', this.introForm.get('desc')!.value);
+        if (this.selectedImage) {
+          formData.append('imageUrl', this.selectedImage);
+        }
 
-      if (this.editMode) {
-        this.introService.updateIntro(formData).subscribe({
-          next: (data: any) => {
-            this.intro = data;
-            if (this.intro.imageUrl) {
-              this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.intro.imageUrl}`);
+        if (this.editMode) {
+          this.introService.updateIntro(formData).subscribe({
+            next: (data: any) => {
+              this.intro = data;
+              if (this.intro.imageUrl) {
+                this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.intro.imageUrl}`);
+              }
+              this.router.navigate([], { queryParams: { edit: false } });
+              this.isSubmitted = true;
+            },
+            error: (error) => {
+              console.error('Error:', error);
+              alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
             }
-            this.router.navigate([], { queryParams: { edit: false } });
-            this.isSubmitted = true;
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
-          }
-        });
+          });
+        } else {
+          this.introService.addIntro(formData).subscribe({
+            next: (data: any) => {
+              this.intro = data;
+              if (this.intro.imageUrl) {
+                this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.intro.imageUrl}`);
+              }
+              this.router.navigate([], { queryParams: { edit: false } });
+              this.isSubmitted = true;
+            },
+            error: (error) => {
+              console.error('Error:', error);
+              alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
+            }
+          });
+        }
       } else {
-        this.introService.addIntro(formData).subscribe({
-          next: (data: any) => {
-            this.intro = data;
-            if (this.intro.imageUrl) {
-              this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.intro.imageUrl}`);
-            }
-            this.router.navigate([], { queryParams: { edit: false } });
-            this.isSubmitted = true;
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
-          }
-        });
+        alert('Veuillez remplir tous les champs requis.');
       }
-    } else {
-      alert('Veuillez remplir tous les champs requis.');
     }
   }
 

@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="invite-button">
+    <button nbButton status="primary" (click)="openInviteModal()">
+      Invite User
+    </button>
+  </div>
+  <div class="card-container">
+    <nb-card *ngFor="let phase of phases" class="phase-card">
+      <nb-card-header>{{ phase }}</nb-card-header>
+    </nb-card>
+  </div>
+</div>

@@ -2,6 +2,17 @@
   text-align: center;
   margin: 20px;
 }
+.limitation-card{
+  width: 100%;
+}
+::ng-deep .step-content{
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
+}
+.container-fluid{
+height: 120%;
+}
 
 .limitation-image {
   max-height: 150px;
