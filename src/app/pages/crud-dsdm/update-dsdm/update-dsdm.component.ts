@@ -67,29 +67,56 @@ export class UpdateDsdmComponent implements OnInit {
     this.selectedImageURL = null;
   }
 
-  onSubmit() {
-    const formData = new FormData();
-    formData.append('id', this.updateForm.get('id')!.value);
-    formData.append('nomComposant', this.updateForm.get('nomComposant')!.value);
-    formData.append('titre', this.updateForm.get('titre')!.value);
-    formData.append('desc', this.updateForm.get('desc')!.value);
-    if (this.updateForm.get('imageUrl')!.value) {
-      formData.append('imageUrl', this.updateForm.get('imageUrl')!.value);
-    }
-    formData.append('typeAff', "");
+  // onSubmit() {
+  //   const formData = new FormData();
+  //   formData.append('id', this.updateForm.get('id')!.value);
+  //   formData.append('nomComposant', this.updateForm.get('nomComposant')!.value);
+  //   formData.append('titre', this.updateForm.get('titre')!.value);
+  //   formData.append('desc', this.updateForm.get('desc')!.value);
+  //   if (this.updateForm.get('imageUrl')!.value) {
+  //     formData.append('imageUrl', this.updateForm.get('imageUrl')!.value);
+  //   }
+  //   formData.append('typeAff', "");
 
-    console.log([...(<any>formData).entries()]); // Debugging line with type assertion
+  //   console.log([...(<any>formData).entries()]); // Debugging line with type assertion
 
-    this.composantService.updateComposant(this.composantId, formData).subscribe(
-      response => {
-        console.log('Composant updated successfully', response);
-        this.router.navigate(['/pages/crudDsdm']);
-      },
-      error => {
-        console.error('Error updating composant', error);
+  //   this.composantService.updateComposant(this.composantId, formData).subscribe(
+  //     response => {
+  //       console.log('Composant updated successfully', response);
+  //       this.router.navigate(['/pages/dsdm']);
+  //     },
+  //     error => {
+  //       console.error('Error updating composant', error);
+  //     }
+  //   );
+  // }
+  onSubmit(): void {
+    if (window.confirm('Voulez-vous vraiment soumettre ce formulaire ?')) {
+      const formData = new FormData();
+      formData.append('id', this.updateForm.get('id')!.value);
+      formData.append('nomComposant', this.updateForm.get('nomComposant')!.value);
+      formData.append('titre', this.updateForm.get('titre')!.value);
+      formData.append('desc', this.updateForm.get('desc')!.value);
+      if (this.updateForm.get('imageUrl')!.value) {
+        formData.append('imageUrl', this.updateForm.get('imageUrl')!.value);
       }
-    );
+      formData.append('typeAff', "");
+
+      console.log([...(<any>formData).entries()]); // Debugging line with type assertion
+
+      this.composantService.updateComposant(this.composantId, formData).subscribe(
+        response => {
+          console.log('Composant updated successfully', response);
+          this.router.navigate(['/pages/dsdm']);
+        },
+        error => {
+          console.error('Error updating composant', error);
+        }
+      );
+    }
   }
+
+
   validateForm(): void {
     this.showMessage = true;
     setTimeout(() => {
