@@ -12,9 +12,9 @@
 </div>
 
 <ng-template #showForm>
-  <div *ngIf="hasWhatif; else addForm" class="form-section">
+  <div *ngIf="hasWhatif || isAdding; else addForm" class="form-section">
     <div class="whatif-card">
-      <h2>Edit Whatif</h2>
+      <h2>{{ editMode ? 'Edit Whatif' : 'Add Whatif' }}</h2>
       <form [formGroup]="whatifForm" class="whatif-form">
         <div class="form-group">
           <label for="titre">Title</label>

@@ -1,4 +1,4 @@
-<div *ngIf="hasAdvantage && isSubmitted; else showForm" class="advantage-section">
+<div *ngIf="hasAdvantage && !isAdding && isSubmitted; else showForm" class="advantage-section">
   <div class="advantage-card">
     <h2>{{ advantage.titre }}</h2>
     <p>{{ advantage.desc }}</p>
@@ -12,9 +12,9 @@
 </div>
 
 <ng-template #showForm>
-  <div *ngIf="hasAdvantage; else addForm" class="form-section">
+  <div *ngIf="hasAdvantage || isAdding; else addForm" class="form-section">
     <div class="advantage-card">
-      <h2>Edit Advantage</h2>
+      <h2>{{ editMode ? 'Edit Advantage' : 'Add Advantage' }}</h2>
       <form [formGroup]="advantageForm" class="advantage-form">
         <div class="form-group">
           <label for="titre">Title</label>

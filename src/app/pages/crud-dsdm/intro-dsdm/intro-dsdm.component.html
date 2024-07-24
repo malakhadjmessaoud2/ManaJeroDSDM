@@ -1,4 +1,4 @@
-<div *ngIf="hasIntro && isSubmitted; else showForm" class="intro-section">
+<div *ngIf="hasIntro && !isAdding && isSubmitted; else showForm" class="intro-section">
   <div class="intro-card">
     <h2>{{ intro.titre }}</h2>
     <p>{{ intro.desc }}</p>
@@ -12,9 +12,9 @@
 </div>
 
 <ng-template #showForm>
-  <div *ngIf="hasIntro; else addForm" class="form-section">
+  <div *ngIf="hasIntro || isAdding; else addForm" class="form-section">
     <div class="intro-card">
-      <h2>Edit Introduction</h2>
+      <h2>{{ editMode ? 'Edit Introduction' : 'Add Introduction' }}</h2>
       <form [formGroup]="introForm" class="intro-form">
         <div class="form-group">
           <label for="titre">Title</label>

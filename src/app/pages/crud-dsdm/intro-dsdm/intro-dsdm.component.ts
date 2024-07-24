@@ -15,6 +15,7 @@ export class IntroDsdmComponent implements OnInit {
   imageUrl: SafeUrl | undefined;
   isSubmitted = true;
   hasIntro = false;
+  isAdding = false;
   editMode = false;
   selectedImageURL: string;
   selectedImage: File | null = null;
@@ -100,6 +101,7 @@ export class IntroDsdmComponent implements OnInit {
               }
               this.router.navigate([], { queryParams: { edit: false } });
               this.isSubmitted = true;
+              this.isAdding = false;
             },
             error: (error) => {
               console.error('Error:', error);
@@ -115,6 +117,7 @@ export class IntroDsdmComponent implements OnInit {
               }
               this.router.navigate([], { queryParams: { edit: false } });
               this.isSubmitted = true;
+              this.isAdding = false;
             },
             error: (error) => {
               console.error('Error:', error);
@@ -133,6 +136,9 @@ export class IntroDsdmComponent implements OnInit {
   }
 
   onAddIntro(): void {
-    this.router.navigate([], { queryParams: { edit: true } });
+    this.isAdding = true;
+    this.editMode = false;
+    this.introForm.reset();
+    this.selectedImageURL = '';
   }
 }
