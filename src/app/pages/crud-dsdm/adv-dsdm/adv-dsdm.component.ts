@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Advantage } from '../model/advantage.model';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { AdvantageService } from '../service/advantage.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdvantageService } from '../service/advantage.service';
 
 @Component({
   selector: 'ngx-adv-dsdm',
@@ -12,10 +11,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AdvDsdmComponent implements OnInit {
   advantageForm!: FormGroup;
-  advantage: Advantage = new Advantage();
+  advantage: any = {};
   imageUrl: SafeUrl | undefined;
   isSubmitted = true;
   hasAdvantage = false;
+  isAdding = false;
   editMode = false;
   selectedImageURL: string;
   selectedImage: File | null = null;
@@ -42,7 +42,7 @@ export class AdvDsdmComponent implements OnInit {
 
   loadAdvantage(): void {
     this.advantageService.retrieveAdvantages().subscribe({
-      next: (data: Advantage[]) => {
+      next: (data: any[]) => {
         if (data.length) {
           this.advantage = data[0];
           this.hasAdvantage = true;
@@ -82,48 +82,52 @@ export class AdvDsdmComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.advantageForm.valid) {
-      const formData = new FormData();
-      formData.append('id', this.advantage.id); // Assuming this.advantage.id is a string
-      formData.append('titre', this.advantageForm.get('titre')!.value);
-      formData.append('desc', this.advantageForm.get('desc')!.value);
-      if (this.selectedImage) {
-        formData.append('imageUrl', this.selectedImage);
-      }
+    if (window.confirm('Voulez-vous vraiment soumettre ce formulaire ?')) {
+      if (this.advantageForm.valid) {
+        const formData = new FormData();
+        formData.append('id', this.advantage.id); // Assuming this.advantage.id is a string
+        formData.append('titre', this.advantageForm.get('titre')!.value);
+        formData.append('desc', this.advantageForm.get('desc')!.value);
+        if (this.selectedImage) {
+          formData.append('imageUrl', this.selectedImage);
+        }
 
-      if (this.editMode) {
-        this.advantageService.updateAdvantage(this.advantage.id, formData).subscribe({
-          next: (data: any) => {
-            this.advantage = data;
-            if (this.advantage.imageUrl) {
-              this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.advantage.imageUrl}`);
+        if (this.editMode) {
+          this.advantageService.updateAdvantage(this.advantage.id, formData).subscribe({
+            next: (data: any) => {
+              this.advantage = data;
+              if (this.advantage.imageUrl) {
+                this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.advantage.imageUrl}`);
+              }
+              this.router.navigate([], { queryParams: { edit: false } });
+              this.isSubmitted = true;
+              this.isAdding = false;
+            },
+            error: (error) => {
+              console.error('Error:', error);
+              alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
             }
-            this.router.navigate([], { queryParams: { edit: false } });
-            this.isSubmitted = true;
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
-          }
-        });
+          });
+        } else {
+          this.advantageService.addAdvantage(formData).subscribe({
+            next: (data: any) => {
+              this.advantage = data;
+              if (this.advantage.imageUrl) {
+                this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.advantage.imageUrl}`);
+              }
+              this.router.navigate([], { queryParams: { edit: false } });
+              this.isSubmitted = true;
+              this.isAdding = false;
+            },
+            error: (error) => {
+              console.error('Error:', error);
+              alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
+            }
+          });
+        }
       } else {
-        this.advantageService.addAdvantage(formData).subscribe({
-          next: (data: any) => {
-            this.advantage = data;
-            if (this.advantage.imageUrl) {
-              this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.advantage.imageUrl}`);
-            }
-            this.router.navigate([], { queryParams: { edit: false } });
-            this.isSubmitted = true;
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
-          }
-        });
+        alert('Veuillez remplir tous les champs requis.');
       }
-    } else {
-      alert('Veuillez remplir tous les champs requis.');
     }
   }
 
@@ -132,6 +136,9 @@ export class AdvDsdmComponent implements OnInit {
   }
 
   onAddAdvantage(): void {
-    this.router.navigate([], { queryParams: { edit: true } });
+    this.isAdding = true;
+    this.editMode = false;
+    this.advantageForm.reset();
+    this.selectedImageURL = '';
   }
 }

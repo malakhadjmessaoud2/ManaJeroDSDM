@@ -16,8 +16,9 @@ export class HowDsdmComponent implements OnInit {
   imageUrl: SafeUrl | undefined;
   isSubmitted = true;
   hasHow = false;
+  isAdding = false; // Nouveau état pour l'ajout
   editMode = false;
-  selectedImageURL: string;
+  selectedImageURL: string | undefined;
   selectedImage: File | null = null;
 
   constructor(
@@ -35,31 +36,36 @@ export class HowDsdmComponent implements OnInit {
       image: [null]
     });
     this.route.queryParams.subscribe(params => {
+      this.isAdding = params['add'] === 'true'; // Nouvelle condition pour l'ajout
       this.editMode = params['edit'] === 'true';
       this.loadHow();
     });
   }
 
   loadHow(): void {
-    this.howService.retrieveHows().subscribe({
-      next: (data: How[]) => {
-        if (data.length) {
-          this.how = data[0];
-          this.hasHow = true;
-          this.isSubmitted = !this.editMode;
-          this.howForm.patchValue({
-            titre: this.how.titre,
-            desc: this.how.desc
-          });
-          if (this.how.imageUrl) {
-            this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.how.imageUrl}`);
+    if (!this.isAdding) {
+      this.howService.retrieveHows().subscribe({
+        next: (data: How[]) => {
+          if (data.length) {
+            this.how = data[0];
+            this.hasHow = true;
+            this.isSubmitted = !this.editMode;
+            this.howForm.patchValue({
+              titre: this.how.titre,
+              desc: this.how.desc
+            });
+            if (this.how.imageUrl) {
+              this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.how.imageUrl}`);
+            }
+          } else {
+            this.hasHow = false;
           }
-        } else {
-          this.hasHow = false;
-        }
-      },
-      error: (error) => console.error('Error:', error)
-    });
+        },
+        error: (error) => console.error('Error:', error)
+      });
+    } else {
+      this.hasHow = false; // Pas de données à charger pour l'ajout
+    }
   }
 
   onFileSelected(event: Event): void {
@@ -78,13 +84,15 @@ export class HowDsdmComponent implements OnInit {
 
   removeImage(): void {
     this.selectedImage = null;
-    this.selectedImageURL = '';
+    this.selectedImageURL = undefined;
   }
 
   onSubmit(): void {
     if (this.howForm.valid) {
       const formData = new FormData();
-      formData.append('id', this.how.id); // Assuming this.how.id is a string
+      if (this.how.id) {
+        formData.append('id', this.how.id); // Assurez-vous que `this.how.id` est défini pour la mise à jour
+      }
       formData.append('titre', this.howForm.get('titre')!.value);
       formData.append('desc', this.howForm.get('desc')!.value);
       if (this.selectedImage) {
@@ -113,7 +121,7 @@ export class HowDsdmComponent implements OnInit {
             if (this.how.imageUrl) {
               this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.how.imageUrl}`);
             }
-            this.router.navigate([], { queryParams: { edit: false } });
+            this.router.navigate([], { queryParams: { add: false } });
             this.isSubmitted = true;
           },
           error: (error) => {
@@ -129,9 +137,11 @@ export class HowDsdmComponent implements OnInit {
 
   onEdit(): void {
     this.router.navigate([], { queryParams: { edit: true } });
+    this.isAdding = false;
   }
 
   onAddHow(): void {
-    this.router.navigate([], { queryParams: { edit: true } });
+    this.router.navigate([], { queryParams: { add: true } });
+    this.editMode = false;
   }
 }

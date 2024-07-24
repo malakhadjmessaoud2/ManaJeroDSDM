@@ -16,6 +16,7 @@ export class WhyDsdmComponent implements OnInit {
   imageUrl: SafeUrl | undefined;
   isSubmitted = true;
   hasWhy = false;
+  isAdding = false;
   editMode = false;
   selectedImageURL: string;
   selectedImage: File | null = null;
@@ -82,48 +83,52 @@ export class WhyDsdmComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.whyForm.valid) {
-      const formData = new FormData();
-      formData.append('id', this.why.id); // Assuming this.why.id is a string
-      formData.append('titre', this.whyForm.get('titre')!.value);
-      formData.append('desc', this.whyForm.get('desc')!.value);
-      if (this.selectedImage) {
-        formData.append('imageUrl', this.selectedImage);
-      }
+    if (window.confirm('Voulez-vous vraiment soumettre ce formulaire ?')) {
+      if (this.whyForm.valid) {
+        const formData = new FormData();
+        formData.append('id', this.why.id); // Assuming this.why.id is a string
+        formData.append('titre', this.whyForm.get('titre')!.value);
+        formData.append('desc', this.whyForm.get('desc')!.value);
+        if (this.selectedImage) {
+          formData.append('imageUrl', this.selectedImage);
+        }
 
-      if (this.editMode) {
-        this.whyService.updateWhy(this.why.id, formData).subscribe({
-          next: (data: any) => {
-            this.why = data;
-            if (this.why.imageUrl) {
-              this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.why.imageUrl}`);
+        if (this.editMode) {
+          this.whyService.updateWhy(this.why.id, formData).subscribe({
+            next: (data: any) => {
+              this.why = data;
+              if (this.why.imageUrl) {
+                this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.why.imageUrl}`);
+              }
+              this.router.navigate([], { queryParams: { edit: false } });
+              this.isSubmitted = true;
+              this.isAdding = false;
+            },
+            error: (error) => {
+              console.error('Error:', error);
+              alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
             }
-            this.router.navigate([], { queryParams: { edit: false } });
-            this.isSubmitted = true;
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
-          }
-        });
+          });
+        } else {
+          this.whyService.addWhy(formData).subscribe({
+            next: (data: any) => {
+              this.why = data;
+              if (this.why.imageUrl) {
+                this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.why.imageUrl}`);
+              }
+              this.router.navigate([], { queryParams: { edit: false } });
+              this.isSubmitted = true;
+              this.isAdding = false;
+            },
+            error: (error) => {
+              console.error('Error:', error);
+              alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
+            }
+          });
+        }
       } else {
-        this.whyService.addWhy(formData).subscribe({
-          next: (data: any) => {
-            this.why = data;
-            if (this.why.imageUrl) {
-              this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.why.imageUrl}`);
-            }
-            this.router.navigate([], { queryParams: { edit: false } });
-            this.isSubmitted = true;
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
-          }
-        });
+        alert('Veuillez remplir tous les champs requis.');
       }
-    } else {
-      alert('Veuillez remplir tous les champs requis.');
     }
   }
 
@@ -132,6 +137,9 @@ export class WhyDsdmComponent implements OnInit {
   }
 
   onAddWhy(): void {
-    this.router.navigate([], { queryParams: { edit: true } });
+    this.isAdding = true;
+    this.editMode = false;
+    this.whyForm.reset();
+    this.selectedImageURL = '';
   }
 }

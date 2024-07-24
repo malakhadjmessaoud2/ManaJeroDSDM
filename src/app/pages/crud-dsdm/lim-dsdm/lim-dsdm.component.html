@@ -1,4 +1,4 @@
-<div *ngIf="hasLimitation && isSubmitted; else showForm" class="limitation-section">
+<div *ngIf="hasLimitation && !isAdding && isSubmitted; else showForm" class="limitation-section">
   <div class="limitation-card">
     <h2>{{ limitation.titre }}</h2>
     <p>{{ limitation.desc }}</p>
@@ -12,9 +12,9 @@
 </div>
 
 <ng-template #showForm>
-  <div *ngIf="hasLimitation; else addForm" class="form-section">
+  <div *ngIf="hasLimitation || isAdding; else addForm" class="form-section">
     <div class="limitation-card">
-      <h2>Edit Limitation</h2>
+      <h2>{{ editMode ? 'Edit Limitation' : 'Add Limitation' }}</h2>
       <form [formGroup]="limitationForm" class="limitation-form">
         <div class="form-group">
           <label for="titre">Title</label>
@@ -41,7 +41,7 @@
 
         <div *ngIf="selectedImageURL" class="image-preview">
           <div class="preview-container">
-            <img [src]="selectedImageURL | safeUrl:'image'" alt="Image sélectionnée" class="preview-image">
+            <img [src]="selectedImageURL" alt="Image sélectionnée" class="preview-image">
             <button nbButton ghost status="danger" class="delete-button" (click)="removeImage()">
               <nb-icon icon="close-outline"></nb-icon>
             </button>

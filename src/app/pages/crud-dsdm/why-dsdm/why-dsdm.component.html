@@ -1,4 +1,4 @@
-<div *ngIf="hasWhy && isSubmitted; else showForm" class="why-section">
+<div *ngIf="hasWhy && !isAdding && isSubmitted; else showForm" class="why-section">
   <div class="why-card">
     <h2>{{ why.titre }}</h2>
     <p>{{ why.desc }}</p>
@@ -12,9 +12,9 @@
 </div>
 
 <ng-template #showForm>
-  <div *ngIf="hasWhy; else addForm" class="form-section">
+  <div *ngIf="hasWhy || isAdding; else addForm" class="form-section">
     <div class="why-card">
-      <h2>Edit Why</h2>
+      <h2>{{ editMode ? 'Edit Why' : 'Add Why' }}</h2>
       <form [formGroup]="whyForm" class="why-form">
         <div class="form-group">
           <label for="titre">Title</label>
@@ -40,8 +40,8 @@
         </div>
 
         <div *ngIf="selectedImageURL" class="image-preview">
-          <div class="preview-container">
-            <img [src]="selectedImageURL | safeUrl:'image'" alt="Image sélectionnée" class="preview-image">
+          <div class="image-container">
+            <img [src]="selectedImageURL" alt="Image sélectionnée" class="preview-image">
             <button nbButton ghost status="danger" class="delete-button" (click)="removeImage()">
               <nb-icon icon="close-outline"></nb-icon>
             </button>

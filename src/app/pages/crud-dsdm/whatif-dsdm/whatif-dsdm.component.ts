@@ -17,7 +17,8 @@ export class WhatifDsdmComponent implements OnInit {
   isSubmitted = true;
   hasWhatif = false;
   editMode = false;
-  selectedImageURL: string;
+  isAdding = false; // New state
+  selectedImageURL: string | undefined;
   selectedImage: File | null = null;
 
   constructor(
@@ -34,13 +35,20 @@ export class WhatifDsdmComponent implements OnInit {
       desc: ['', Validators.required],
       image: [null]
     });
+
     this.route.queryParams.subscribe(params => {
       this.editMode = params['edit'] === 'true';
+      this.isAdding = params['add'] === 'true'; // Set isAdding based on query params
       this.loadWhatif();
     });
   }
 
   loadWhatif(): void {
+    if (this.editMode || this.isAdding) {
+      // Do nothing, as we're in edit or add mode
+      return;
+    }
+
     this.whatifService.retrieveWhatifs().subscribe({
       next: (data: Whatif[]) => {
         if (data.length) {
@@ -78,7 +86,7 @@ export class WhatifDsdmComponent implements OnInit {
 
   removeImage(): void {
     this.selectedImage = null;
-    this.selectedImageURL = '';
+    this.selectedImageURL = undefined;
   }
 
   onSubmit(): void {
@@ -98,7 +106,7 @@ export class WhatifDsdmComponent implements OnInit {
             if (this.whatif.imageUrl) {
               this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.whatif.imageUrl}`);
             }
-            this.router.navigate([], { queryParams: { edit: false } });
+            this.router.navigate([], { queryParams: { edit: false, add: false } });
             this.isSubmitted = true;
           },
           error: (error) => {
@@ -106,14 +114,14 @@ export class WhatifDsdmComponent implements OnInit {
             alert('Une erreur s\'est produite lors de la soumission du formulaire. Veuillez réessayer.');
           }
         });
-      } else {
+      } else if (this.isAdding) {
         this.whatifService.addWhatif(formData).subscribe({
           next: (data: any) => {
             this.whatif = data;
             if (this.whatif.imageUrl) {
               this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.whatif.imageUrl}`);
             }
-            this.router.navigate([], { queryParams: { edit: false } });
+            this.router.navigate([], { queryParams: { edit: false, add: false } });
             this.isSubmitted = true;
           },
           error: (error) => {
@@ -128,10 +136,10 @@ export class WhatifDsdmComponent implements OnInit {
   }
 
   onEdit(): void {
-    this.router.navigate([], { queryParams: { edit: true } });
+    this.router.navigate([], { queryParams: { edit: true, add: false } });
   }
 
   onAddWhatif(): void {
-    this.router.navigate([], { queryParams: { edit: true } });
+    this.router.navigate([], { queryParams: { edit: false, add: true } });
   }
 }

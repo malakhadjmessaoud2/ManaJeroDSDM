@@ -1,4 +1,4 @@
-<div *ngIf="hasHow && isSubmitted; else showForm" class="how-section">
+<div *ngIf="!isAdding && hasHow && isSubmitted; else showForm" class="how-section">
   <div class="how-card">
     <h2>{{ how.titre }}</h2>
     <p>{{ how.desc }}</p>
@@ -12,7 +12,7 @@
 </div>
 
 <ng-template #showForm>
-  <div *ngIf="hasHow; else addForm" class="form-section">
+  <div *ngIf="!isAdding && hasHow; else addForm" class="form-section">
     <div class="how-card">
       <h2>Edit How</h2>
       <form [formGroup]="howForm" class="how-form">

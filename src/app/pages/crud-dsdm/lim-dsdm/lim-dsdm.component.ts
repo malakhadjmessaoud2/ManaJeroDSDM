@@ -16,8 +16,9 @@ export class LimDsdmComponent implements OnInit {
   imageUrl: SafeUrl | undefined;
   isSubmitted = true;
   hasLimitation = false;
+  isAdding = false;
   editMode = false;
-  selectedImageURL: string;
+  selectedImageURL: string | undefined;
   selectedImage: File | null = null;
 
   constructor(
@@ -93,13 +94,14 @@ export class LimDsdmComponent implements OnInit {
 
       if (this.editMode) {
         this.limitationService.updateLimitation(this.limitation.id, formData).subscribe({
-          next: (data: any) => {
+          next: (data: Limitation) => {
             this.limitation = data;
             if (this.limitation.imageUrl) {
               this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.limitation.imageUrl}`);
             }
             this.router.navigate([], { queryParams: { edit: false } });
             this.isSubmitted = true;
+            this.isAdding = false;
           },
           error: (error) => {
             console.error('Error:', error);
@@ -108,13 +110,14 @@ export class LimDsdmComponent implements OnInit {
         });
       } else {
         this.limitationService.addLimitation(formData).subscribe({
-          next: (data: any) => {
+          next: (data: Limitation) => {
             this.limitation = data;
             if (this.limitation.imageUrl) {
               this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${this.limitation.imageUrl}`);
             }
             this.router.navigate([], { queryParams: { edit: false } });
             this.isSubmitted = true;
+            this.isAdding = false;
           },
           error: (error) => {
             console.error('Error:', error);
@@ -132,6 +135,9 @@ export class LimDsdmComponent implements OnInit {
   }
 
   onAddLimitation(): void {
-    this.router.navigate([], { queryParams: { edit: true } });
+    this.isAdding = true;
+    this.editMode = false;
+    this.limitationForm.reset();
+    this.selectedImageURL = '';
   }
 }
