@@ -1,7 +1,12 @@
 <nb-card>
   <nb-card-header>Invite User</nb-card-header>
   <nb-card-body>
-    <input nbInput placeholder="Email" >
+    <input nbInput placeholder="Search for user" [(ngModel)]="searchTerm" (input)="searchUsers()" />
+    <ul *ngIf="filteredUsers.length > 0" class="user-list">
+      <li *ngFor="let user of filteredUsers" (click)="selectUser(user)" [class.selected]="user === selectedUser" class="user-list-item">
+        {{ user.username }}
+      </li>
+    </ul>
   </nb-card-body>
   <nb-card-footer>
     <button nbButton status="danger" (click)="cancel()">Cancel</button>

@@ -7,18 +7,36 @@ import { NbDialogRef } from '@nebular/theme';
   styleUrls: ['./invite-user-modal.component.scss']
 })
 export class InviteUserModalComponent {
-  email: string;
+  searchTerm: string = '';
+  users: { username: string }[] = [
+    { username: 'Carla Espinosa' },
+    { username: 'Bob Kelso' },
+    { username: 'Janitor' },
+    { username: 'Perry Cox' },
+    { username: 'Ben Sullivan' },
+  ];
+  filteredUsers: { username: string }[] = [];
+  selectedUser: { username: string } | null = null;
 
   constructor(protected ref: NbDialogRef<InviteUserModalComponent>) {}
+
+  searchUsers() {
+    this.filteredUsers = this.users.filter(user =>
+      user.username.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  selectUser(user: { username: string }) {
+    this.selectedUser = user;
+  }
 
   cancel() {
     this.ref.close();
   }
 
   submit() {
-    if (this.email) {
-      // Logique pour inviter l'utilisateur
-      this.ref.close();
+    if (this.selectedUser) {
+      this.ref.close(this.selectedUser);
     }
   }
 }

@@ -1,0 +1,106 @@
+/* Base styles */
+.intro-section, .form-section {
+  text-align: center;
+  margin: 20px;
+}
+
+.intro-image, .preview-image {
+  max-height: 150px;
+  width: auto;
+  margin: 10px 0;
+}
+
+.form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.error-message {
+  margin-top: 5px;
+}
+
+.error-text {
+  color: red;
+}
+
+.upload-section {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.image-preview {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.intro-card {
+  width: 100%;
+}
+
+::ng-deep .step-content {
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.container-fluid {
+  height: 120%;
+}
+
+.image-container {
+  display: inline-block;
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.submit-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button[nbButton] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button[nbButton] nb-icon {
+  margin: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .intro-form {
+    width: 90%;
+  }
+  .intro-image, .preview-image {
+    max-height: 100px;
+  }
+  .delete-button {
+    top: 5px;
+    right: 5px;
+  }
+  .submit-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  button[nbButton] {
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .intro-card, .form-section {
+    margin: 10px;
+  }
+  .intro-image, .preview-image {
+    max-height: 80px;
+  }
+}/*# sourceMappingURL=intro-dsdm.component.css.map */
