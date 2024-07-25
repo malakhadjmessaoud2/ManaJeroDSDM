@@ -1,0 +1,99 @@
+<nb-card>
+  <nb-card-header>
+    <nb-tabset fullWidth>
+      <nb-tab tabTitle="PHASE 1 : PRE-PROJECT">
+        <div class="form-container" *ngIf="!dsdm">
+          <form (ngSubmit)="addDsdm()" #dsdmForm="ngForm" class="dsdm-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input nbInput fullWidth id="name" class="form-control" [(ngModel)]="newDsdm.name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="desc">Description</label>
+              <textarea nbInput fullWidth id="desc" name="desc" class="form-control" [(ngModel)]="newDsdm.desc" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="status">Statut</label>
+              <select nbInput fullWidth id="status" class="form-control" [(ngModel)]="newDsdm.status" name="status" required>
+                <option value="Approved">Approved: Approved to move to the feasibility phase.</option>
+                <option value="Planned">Planned: Planned but has not yet started.</option>
+                <option value="On Hold">On Hold: On hold due to constraints.</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="startDate">Start Date</label>
+              <input nbInput type="date" fullWidth id="startDate" [(ngModel)]="newDsdm.startDate" name="startDate" required />
+            </div>
+            <div class="form-group">
+              <label for="endDate">End Date</label>
+              <input nbInput type="date" fullWidth id="endDate" [(ngModel)]="newDsdm.endDate" name="endDate" />
+            </div>
+            <button nbButton status="primary" type="submit" [disabled]="!dsdmForm.valid">Submit</button>
+          </form>
+        </div>
+
+        <div class="form-container" *ngIf="dsdm">
+          <nb-card-header>
+            <h2>The first pre-project phase is well recorded!</h2>
+          </nb-card-header>
+          <nb-card-body>
+            <nb-list>
+              <nb-list-item>
+                <div class="dsdm-item">
+                  <h4>Nom:</h4>
+                  <p>{{ dsdm.name }}</p>
+                </div>
+              </nb-list-item>
+              <nb-list-item>
+                <div class="dsdm-item">
+                  <h4>Description:</h4>
+                  <p>{{ dsdm.desc }}</p>
+                </div>
+              </nb-list-item>
+              <nb-list-item>
+                <div class="dsdm-item">
+                  <h4>Statut:</h4>
+                  <p [ngClass]="{
+                    'status-approved': dsdm.status === 'Approved',
+                    'status-planned': dsdm.status === 'Planned',
+                    'status-on-hold': dsdm.status === 'On Hold'
+                  }">{{ dsdm.status }}</p>
+                </div>
+              </nb-list-item>
+              <nb-list-item>
+                <div class="dsdm-item">
+                  <h4>Date de début:</h4>
+                  <p>{{ dsdm.startDate | date }}</p>
+                </div>
+              </nb-list-item>
+              <nb-list-item>
+                <div class="dsdm-item">
+                  <h4>Date de fin:</h4>
+                  <p>{{ dsdm.endDate | date }}</p>
+                </div>
+              </nb-list-item>
+            </nb-list>
+            <div class="edit-button-container">
+              <button nbButton status="info" (click)="editDsdm()"> <nb-icon icon="edit-outline"></nb-icon> Éditer</button>
+            </div>
+          </nb-card-body>
+        </div>
+      </nb-tab>
+      <nb-tab tabTitle="PHASE 2 : FAISABILITY">
+        <!-- Content for Phase 2 -->
+      </nb-tab>
+      <nb-tab tabTitle="PHASE 3 : FONDATION">
+        <!-- Content for Phase 3 -->
+      </nb-tab>
+      <nb-tab tabTitle="PHASE 4 : TASKS">
+        <!-- Content for Phase 4 -->
+      </nb-tab>
+      <nb-tab tabTitle="PHASE 5 : DEPLOIEMENT">
+        <!-- Content for Phase 5 -->
+      </nb-tab>
+      <nb-tab tabTitle="PHASE 6 : POST-PROJECT">
+        <!-- Content for Phase 6 -->
+      </nb-tab>
+    </nb-tabset>
+  </nb-card-header>
+</nb-card>

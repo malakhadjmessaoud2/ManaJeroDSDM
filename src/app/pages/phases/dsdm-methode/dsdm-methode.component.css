@@ -1,0 +1,76 @@
+.form-container {
+  padding: 20px;
+  background-color: #f7f9fc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.dsdm-form {
+  max-width: 600px;
+  margin: auto;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+nb-card-header h2 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #5a5c69;
+}
+
+nb-list-item {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+  display: block;
+}
+
+.dsdm-item h4 {
+  margin: 0;
+  color: #333;
+  font-weight: 600;
+}
+
+.dsdm-item p {
+  margin: 0;
+  color: #555;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.edit-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.edit-button-container button {
+  margin-left: auto;
+  font-size: 16px;
+}
+
+nb-list {
+  padding: 0 20px;
+}
+
+.status-approved {
+  color: green;
+  font-weight: bold;
+}
+
+.status-planned {
+  color: blue;
+  font-weight: bold;
+}
+
+.status-on-hold {
+  color: red;
+  font-weight: bold;
+}/*# sourceMappingURL=dsdm-methode.component.css.map */

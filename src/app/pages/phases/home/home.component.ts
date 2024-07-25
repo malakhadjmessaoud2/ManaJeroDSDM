@@ -13,9 +13,20 @@ export class HomeComponent {
     'Engineering', 'Deployment', 'Post-Project'
   ];
 
-  constructor(private dialogService: NbDialogService) {}
-  openInviteModal() {
-    this.dialogService.open(InviteUserModalComponent);
+  invitedUsers: { username: string }[] = [];
 
+  constructor(private dialogService: NbDialogService) {}
+
+  openInviteModal() {
+    this.dialogService.open(InviteUserModalComponent)
+      .onClose.subscribe((user: { username: string }) => {
+        if (user) {
+          this.invitedUsers.push(user);
+        }
+      });
+  }
+
+  removeUser(user: { username: string }) {
+    this.invitedUsers = this.invitedUsers.filter(u => u !== user);
   }
 }
