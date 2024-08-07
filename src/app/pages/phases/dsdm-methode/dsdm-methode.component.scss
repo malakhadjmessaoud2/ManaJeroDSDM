@@ -1,11 +1,15 @@
-
+/* Styles communs */
 .form-container {
   padding: 20px;
   background-color: #f7f9fc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .field-description {
@@ -15,35 +19,25 @@
   margin-bottom: 5px;
 }
 
-.status-approved {
-  color: green;
-}
-
-.status-planned {
-  color: orange;
-}
-
-.status-on-hold {
-  color: red;
+button[nbButton] {
+  margin-right: 10px;
 }
 
 .edit-button-container {
+  text-align: right;
   margin-top: 20px;
 }
 
-.dsdm-item {
-  margin-bottom: 15px;
+/* Titres et Labels */
+h2 {
+  color: #1a73e8;
 }
 
-//phase4
-.form-container {
-  padding: 20px;
+h3, h4, label {
+  color: #333;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
+/* Styles des cartes */
 .nb-card-header {
   background-color: #2a2a2a;
   color: white;
@@ -56,7 +50,26 @@
   background-color: #f7f7f7;
 }
 
-.iteration-item {
+/* Tableaux */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.table th, .table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #e3e3e3;
+}
+
+.table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+/* Éléments spécifiques */
+.plan-details, .release-item, .iteration-item, .kpi-item, .report-item, .feedback-item, .improvement-plan-item {
   background-color: #ffffff;
   padding: 15px;
   border-radius: 5px;
@@ -64,50 +77,79 @@
   border: 1px solid #e3e3e3;
 }
 
+/* Status */
+.status-approved {
+  color: #28a745;
+}
+
+.status-planned {
+  color: #ffc107;
+}
+
+.status-on-hold {
+  color: #dc3545;
+}
+
+/* Boutons */
 button {
   margin-top: 10px;
 }
-//phase 5
-.form-container {
-  padding: 20px;
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.form-group {
-  margin-bottom: 15px;
+/* Éditeur CK */
+.ck.ck-editor__editable[contenteditable="false"] {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+/* Cards spécifiques */
+.sprint-card {
+  margin-bottom: 20px;
+}
+
+.iteration-form {
+  margin-top: 10px;
 }
 
 .nb-card-header {
-  background-color: #2a2a2a;
-  color: white;
-  padding: 10px;
-  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.nb-card-body {
-  padding: 20px;
-  background-color: #f7f7f7;
-}
+/* Réactivité */
+@media (max-width: 768px) {
+  .nb-tabset {
+    flex-direction: column;
+  }
 
-.plan-details, .release-item {
-  background-color: #ffffff;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #e3e3e3;
+  .nb-tab {
+    width: 100%;
+    text-align: center;
+  }
 }
+/* Réactivité */
+@media (max-width: 768px) {
+  nb-tabset {
+    display: flex;
+    flex-direction: column;
+  }
 
-button {
-  margin-top: 10px;
-}
-//phase 6
-.form-group {
-  margin-bottom: 1rem;
-}
+  nb-tab {
+    width: 100%;
+    text-align: center;
+  }
 
-.kpi-item, .report-item, .feedback-item, .improvement-plan-item {
-  margin-bottom: 1rem;
-}
-
-button {
-  margin-top: 1rem;
+  nb-card-header {
+    display: block;
+  }
 }

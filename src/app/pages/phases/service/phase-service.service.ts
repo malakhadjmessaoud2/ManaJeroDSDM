@@ -23,7 +23,12 @@ export class PhaseServiceService {
   private projects: Project[] = [
     { id: "1", title: 'Projet 1', status: 'En cours' },
     { id: "2", title: 'Projet 2', status: 'Terminé' },
-    { id: "3", title: 'Projet 3', status: 'En attente' }
+    { id: "3", title: 'Projet 3', status: 'En attente' },
+    { id: "4", title: 'projet 4', status: 'En cours' },
+    { id: "5", title: 'EventMaster', status: 'En cours' },
+    { id: "6", title: 'cap', status: 'En cours' }
+
+
   ];
 
   getProjets(): Observable<Project[]> {
@@ -74,9 +79,34 @@ export class PhaseServiceService {
 
     return this.http.post(url, params);
   }
+  updateDsdm(projectId: string, dsdmId: string, context: string, priorisation: string, status: string, startDate: string, endDate: string, id_user: string): Observable<Dsdm> {
+    const url = `${this.apiUrlDsdm}/update/${projectId}/${dsdmId}`;
+    let params = new HttpParams()
+      .set('context', context)
+      .set('priorisation', priorisation)
+      .set('status', status)
+      .set('startDate', startDate)
+      .set('endDate', endDate)
+      .set('id_user', id_user);
 
+    return this.http.put<Dsdm>(url, {}, { params });
+  }
 
   // Phase 2
+  updateFeasibility(projectId: string, feasibilityId: string, technicalFeasibility: string, commercialFeasibility: string, mvp: string, releaseBoard: string, viability: string, id_user: string): Observable<Feasibility> {
+    const url = `${this.apiUrlFeasibility}/updatefeasibility/${projectId}/${feasibilityId}`;
+    let params = new HttpParams()
+      .set('technicalFeasibility', technicalFeasibility)
+      .set('commercialFeasibility', commercialFeasibility)
+      .set('mvp', mvp)
+      .set('releaseBoard', releaseBoard)
+      .set('viability', viability)
+      .set('id_user', id_user);
+
+    return this.http.put<Feasibility>(url, {}, { params });
+  }
+
+
   addFeasibility(
     idProject: string,
     technicalFeasibility: string,
@@ -125,7 +155,19 @@ export class PhaseServiceService {
   getFoundationByProjectId(projectId: string): Observable<Foundation | null> {
     return this.http.get<Foundation | null>(`${this.apiUrlFoundation}/showfoundation/${projectId}`);
   }
+// Phase 3
 
+updateFoundations(projectId: string, foundationId: string, projectVision: string, userNeeds: string, projectCharter: string, requirements: string, id_user: string): Observable<Foundation> {
+  const url = `${this.apiUrlFoundation}/updatefoundation/${projectId}/${foundationId}`;
+  let params = new HttpParams()
+    .set('projectVision', projectVision)
+    .set('userNeeds', userNeeds)
+    .set('projectCharter', projectCharter)
+    .set('requirements', requirements)
+    .set('id_user', id_user);
+
+  return this.http.put<Foundation>(url, {}, { params });
+}
   // Phase 4
   // Sprint
   getSprintsByProjectId(projectId: string): Observable<Sprint[]> {

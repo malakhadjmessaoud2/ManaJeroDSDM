@@ -4,6 +4,7 @@ export class Sprint {
   id!: string;
   name!: string;
   projectId!: string;
+  showIterationForm?: boolean;
 
   iterations!: Iteration[];
 }
