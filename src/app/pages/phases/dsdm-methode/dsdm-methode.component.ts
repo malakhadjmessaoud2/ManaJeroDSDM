@@ -12,6 +12,7 @@ import { KPI } from '../model/kpi.model';
 import { Feedback } from '../model/feedback.model';
 import { ImprovementPlan } from '../model/improvement-plan.model';
 import { Report } from '../model/report.model';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'ngx-dsdm-methode',
@@ -34,11 +35,13 @@ export class DsdmMethodeComponent implements OnInit {
   deploymentPlans: DeploymentPlan[] = [];
   newDeploymentPlan: { environment: string; dataMigration: string; preProdTests: string } = { environment: '', dataMigration: '', preProdTests: '' };
   newRelease: { name: string; details: string } = { name: '', details: '' };
+  showDeploymentPlanForm = false;
 
   // Phase 4
   sprints: Sprint[] = [];
   newSprint: { name: string } = { name: '' };
   newIteration: { feature: string; deliverables: string } = { feature: '', deliverables: '' };
+  public showSprintForm: boolean = false;
 
   // Phase 3
   foundations: Foundation | null = null;
@@ -51,6 +54,8 @@ export class DsdmMethodeComponent implements OnInit {
     id_user: '',
     project: ''
   };
+  public isEditModeFoundations: boolean = false;
+
 
   // Phase 2
   feasibility: Feasibility | null = null;
@@ -79,6 +84,45 @@ export class DsdmMethodeComponent implements OnInit {
     id_user: '',
     project: ''
   };
+  isEditMode: boolean = false;
+  public editor = ClassicEditor;
+  public editorConfig : any = {
+    toolbar: {
+      items: [
+        'undo', 'redo', '|',
+        'bold', 'italic', 'link', '|',
+        'fontColor', 'fontBackgroundColor', '|',
+        'alignment', '|',
+        'bulletedList', 'numberedList', 'blockQuote', '|',
+        'imageUpload', 'insertTable', 'mediaEmbed', '|',
+        'fontSize', 'fontFamily', 'highlight', '|',
+        'codeBlock', 'horizontalLine'
+      ]
+    },
+    language: 'en',
+    readOnly: false
+  };
+  public displayEditorConfig = {
+    ...this.editorConfig,
+    readOnly: true // always read-only for display
+  };
+
+  onReady(editor: any) {
+    console.log('Editor is ready to use!', editor);
+  }
+
+  onChange(event: any) {
+    console.log('Editor content changed:', event);
+  }
+
+  onBlur(event: any) {
+    console.log('Editor lost focus:', event);
+  }
+
+  onFocus(event: any) {
+    console.log('Editor is focused:', event);
+  }
+
 
   constructor(private route: ActivatedRoute, private phaseService: PhaseServiceService) { }
 
@@ -102,6 +146,11 @@ export class DsdmMethodeComponent implements OnInit {
         });
       }
     });
+    this.updateEditorConfig();
+
+  }
+  updateEditorConfig(): void {
+    this.editorConfig.readOnly = !this.isEditMode;
   }
 
   // Phase 1
@@ -133,6 +182,45 @@ export class DsdmMethodeComponent implements OnInit {
           console.error('Error adding DSDM', error);
         }
       );
+    }
+  }
+  editDsdm(): void {
+    if (this.newDsdm && this.project) {
+      console.log('context',this.newDsdm.context, 'edite mode',this.isEditMode);
+      this.phaseService.updateDsdm(
+
+        this.project,
+        this.newDsdm.id,
+        this.newDsdm.context,
+        this.newDsdm.priorisation,
+        this.newDsdm.status,
+        this.newDsdm.startDate.toString().split('T')[0],
+        this.newDsdm.endDate.toString().split('T')[0],
+        this.newDsdm.id_user
+      ).subscribe(
+        response => {
+          console.log('DSDM updated successfully', response);
+          this.loadDsdmForProject(this.project); // Reload the data after updating
+          this.isEditMode = false;
+        },
+        error => {
+          console.error('Error updating DSDM', error);
+        }
+      );
+    }
+  }
+
+  enableEditMode(): void {
+    if (this.dsdm) {
+      this.newDsdm = { ...this.dsdm }; // Copy current dsdm values to newDsdm for editing
+    }
+    this.isEditMode = true;
+  }
+
+  cancelEdit(): void {
+    this.isEditMode = false;
+    if (this.project) {
+      this.loadDsdmForProject(this.project); // Reload original data
     }
   }
 
@@ -168,10 +256,60 @@ export class DsdmMethodeComponent implements OnInit {
     }
   }
 
-  editFeasibility(): void {
+  isEditModeFeasibility: boolean = false;
+
+enableEditModeFeasibility(): void {
+  if (this.feasibility) {
     this.newFeasibility = { ...this.feasibility };
-    this.feasibility = null;
   }
+  this.isEditModeFeasibility = true;
+}
+
+cancelEditFeasibility(): void {
+  this.isEditModeFeasibility = false;
+  if (this.project) {
+    this.loadFeasibilityForProject(this.project); // Recharger les données originales
+  }
+}
+editFeasibility(): void {
+  if (this.feasibility) {
+    this.newFeasibility = {
+      id: this.feasibility.id,
+      technicalFeasibility: this.feasibility.technicalFeasibility,
+      commercialFeasibility: this.feasibility.commercialFeasibility,
+      mvp: this.feasibility.mvp,
+      releaseBoard: this.feasibility.releaseBoard,
+      viability: this.feasibility.viability,
+      id_user: this.feasibility.id_user,
+      project: this.feasibility.project
+    };
+    this.isEditModeFeasibility = true;
+  } else {
+    console.error('Feasibility data not available for editing');
+  }
+}
+saveFeasibility(): void {
+  if (this.newFeasibility && this.project) {
+    this.phaseService.updateFeasibility(
+      this.project,
+      this.newFeasibility.id,
+      this.newFeasibility.technicalFeasibility,
+      this.newFeasibility.commercialFeasibility,
+      this.newFeasibility.mvp,
+      this.newFeasibility.releaseBoard,
+      this.newFeasibility.viability,
+      this.newFeasibility.id_user
+    ).subscribe(
+      response => {
+        console.log('Feasibility updated successfully', response);
+        this.loadFeasibilityForProject(this.project); // Reload the data after updating
+        this.isEditModeFeasibility = false;
+      },
+      error => {
+        console.error('Error updating feasibility', error);
+      }
+    );
+  }}
 
   // Phase 3
   loadFoundationsForProject(projectId: string): void {
@@ -203,13 +341,61 @@ export class DsdmMethodeComponent implements OnInit {
       );
     }
   }
-
   editFoundations(): void {
-    this.newFoundations = { ...this.foundations };
-    this.foundations = null;
+    if (this.foundations) {
+      this.newFoundations = {
+        id: this.foundations.id,
+        projectVision: this.foundations.projectVision,
+        userNeeds: this.foundations.userNeeds,
+        projectCharter: this.foundations.projectCharter,
+        requirements: this.foundations.requirements,
+        id_user: this.foundations.id_user,
+        project: this.foundations.project
+      };
+      this.isEditModeFoundations = true;
+    } else {
+      console.error('Foundations data not available for editing');
+    }
+  }
+
+  saveFoundations(): void {
+    if (this.newFoundations && this.project) {
+      this.phaseService.updateFoundations(
+        this.project,
+        this.newFoundations.id,
+        this.newFoundations.projectVision,
+        this.newFoundations.userNeeds,
+        this.newFoundations.projectCharter,
+        this.newFoundations.requirements,
+        this.newFoundations.id_user
+      ).subscribe(
+        response => {
+          console.log('Foundations updated successfully', response);
+          this.loadFoundationsForProject(this.project); // Reload the data after updating
+          this.isEditModeFoundations = false;
+        },
+        error => {
+          console.error('Error updating foundations', error);
+        }
+      );
+    }
+  }
+
+  cancelEditFoundations(): void {
+    this.isEditModeFoundations = false;
+    if (this.project) {
+      this.loadFoundationsForProject(this.project); // Recharger les données originales
+    }
   }
 
   // Phase 4
+  toggleSprintForm(): void {
+    this.showSprintForm = !this.showSprintForm;
+  }
+
+  toggleIterationForm(sprint: Sprint): void {
+    sprint.showIterationForm = !sprint.showIterationForm;
+  }
   loadSprintsForProject(projectId: string): void {
     this.phaseService.getSprintsByProjectId(projectId).subscribe(sprints => {
       this.sprints = sprints;
@@ -263,8 +449,22 @@ export class DsdmMethodeComponent implements OnInit {
   editIteration(sprint: Sprint, iteration: Iteration): void {
     // Implement edit logic if needed
   }
-
+  deleteIteration(sprint, iteration) {
+    const index = sprint.iterations.indexOf(iteration);
+    if (index > -1) {
+      sprint.iterations.splice(index, 1);
+    }
+  }
   // Phase 5
+  toggleDeploymentPlanForm() {
+    this.showDeploymentPlanForm = !this.showDeploymentPlanForm;
+  }
+  toggleReleaseForm(plan) {
+    plan.showReleaseForm = !plan.showReleaseForm;
+  }
+  deleteRelease(plan, release) {
+    plan.releases = plan.releases.filter(r => r !== release);
+  }
   loadDeploymentPlansForProject(projectId: string): void {
     this.phaseService.getDeploymentPlansByProjectId(projectId).subscribe(deploymentPlans => {
       this.deploymentPlans = deploymentPlans;
