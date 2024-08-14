@@ -3,4 +3,6 @@ export class KPI {
   name!: string;
   value!: string;
   projectId!: string;
+  archived?:boolean = false;
+
 }

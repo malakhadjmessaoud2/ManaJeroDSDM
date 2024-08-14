@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { NbButtonModule, NbCardModule, NbDatepickerModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbSelectModule, NbTableModule, NbTabsetModule, NbThemeModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
+import { NbAccordionModule, NbActionsModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbRadioModule, NbSelectModule, NbStepperModule, NbTableModule, NbTabsetModule, NbThemeModule, NbToastrModule, NbTreeGridModule, NbUserModule } from '@nebular/theme';
 import { InviteUserModalComponent } from './invite-user-modal/invite-user-modal.component';
 import { FormsModule } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -12,6 +12,10 @@ import { EditorsModule } from '../editors/editors.module';
 import { EditorsRoutingModule } from '../editors/editors-routing.module';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
+import { DsdmDashComponent } from './dsdm-dash/dsdm-dash.component';
+import { ThemeModule } from '../../@theme/theme.module';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { DashboardModule } from '../dashboard/dashboard.module';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,8 +30,10 @@ const routes: Routes = [
     InviteUserModalComponent,
     ListProjectComponent,
     DsdmMethodeComponent,
+    DsdmDashComponent
   ],
   imports: [
+    // DashboardModule,
     NbToastrModule.forRoot(),
     NbDatepickerModule.forRoot(),
     NbDateFnsDateModule.forRoot({ format: 'dd/MM/yyyy' }),
@@ -47,7 +53,15 @@ const routes: Routes = [
     Ng2SmartTableModule,
     NbThemeModule.forRoot(),
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ThemeModule,
+    NbUserModule,
+    NbActionsModule,
+    NbRadioModule,
+    NgxEchartsModule,
+    NbAccordionModule,
+    NbStepperModule,
+
   ],
   entryComponents: [InviteUserModalComponent],
 

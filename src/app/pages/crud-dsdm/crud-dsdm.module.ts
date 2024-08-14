@@ -42,7 +42,6 @@ import { WhatifDsdmComponent } from './whatif-dsdm/whatif-dsdm.component';
     FormsModule,
     ThemeModule,
     NbMenuModule,
-    DashboardModule,
     ECommerceModule,
     NbTabsetModule,
     NbRouteTabsetModule,

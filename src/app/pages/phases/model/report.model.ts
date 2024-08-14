@@ -3,4 +3,6 @@ export class Report {
   title!: string;
   content!: string;
   projectId!: string;
+  archived?:boolean = false;
+
 }

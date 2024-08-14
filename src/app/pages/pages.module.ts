@@ -20,12 +20,11 @@ import { RouterModule } from '@angular/router';
     PagesRoutingModule,
     RouterModule,
     NbLayoutModule,
-    
+
     LayoutModule,
     FormsModule,
     ThemeModule,
     NbMenuModule,
-    DashboardModule,
     ECommerceModule,
     NbTabsetModule,
     NbRouteTabsetModule,

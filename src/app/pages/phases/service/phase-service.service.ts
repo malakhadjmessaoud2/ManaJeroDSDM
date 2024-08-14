@@ -105,8 +105,6 @@ export class PhaseServiceService {
 
     return this.http.put<Feasibility>(url, {}, { params });
   }
-
-
   addFeasibility(
     idProject: string,
     technicalFeasibility: string,
@@ -127,7 +125,6 @@ export class PhaseServiceService {
 
     return this.http.post<Feasibility>(url, params);
   }
-
   getFeasibilityByProjectId(projectId: string): Observable<Feasibility | null> {
     return this.http.get<Feasibility | null>(`${this.apiUrlFeasibility}/showfeasibility/${projectId}`);
   }
@@ -155,7 +152,6 @@ export class PhaseServiceService {
   getFoundationByProjectId(projectId: string): Observable<Foundation | null> {
     return this.http.get<Foundation | null>(`${this.apiUrlFoundation}/showfoundation/${projectId}`);
   }
-// Phase 3
 
 updateFoundations(projectId: string, foundationId: string, projectVision: string, userNeeds: string, projectCharter: string, requirements: string, id_user: string): Observable<Foundation> {
   const url = `${this.apiUrlFoundation}/updatefoundation/${projectId}/${foundationId}`;
@@ -180,6 +176,21 @@ updateFoundations(projectId: string, foundationId: string, projectVision: string
       .set('name', name);
     return this.http.post<Sprint>(url, params);
   }
+  updateSprint(projectId: string, id: string, name: string): Observable<Sprint> {
+    const url = `${this.apiUrlSprint}/updateSprint/${projectId}/${id}`;
+    const params = new HttpParams().set('name', name);
+    return this.http.put<Sprint>(url, {}, { params });
+  }
+  archiveSprint(projectId: string, id: string): Observable<Sprint> {
+    const url = `${this.apiUrlSprint}/archiveSprint/${projectId}/${id}`;
+    return this.http.put<Sprint>(url, {});
+  }
+  deleteSprint(projectId: string, id: string): Observable<void> {
+    const url = `${this.apiUrlSprint}/deleteSprint/${projectId}/${id}`;
+    return this.http.delete<void>(url);
+  }
+
+
 
   // Iterations
   addIteration(sprintId: string, feature: string, deliverables: string): Observable<Iteration> {
@@ -192,6 +203,22 @@ updateFoundations(projectId: string, foundationId: string, projectVision: string
 
   getIterationsBySprintId(sprintId: string): Observable<Iteration[]> {
     return this.http.get<Iteration[]>(`${this.apiUrlIteration}/ShowIterations/${sprintId}`);
+  }
+
+  updateIteration(sprintId: string, id: string, feature: string, deliverables: string): Observable<Iteration> {
+    const url = `${this.apiUrlIteration}/updateIteration/${sprintId}/${id}`;
+    let params = new HttpParams()
+      .set('feature', feature)
+      .set('deliverables', deliverables);
+    return this.http.put<Iteration>(url, {}, { params });
+  }
+  archiveIteration(sprintId: string, id: string): Observable<Iteration> {
+    const url = `${this.apiUrlIteration}/archiveIteration/${sprintId}/${id}`;
+    return this.http.put<Iteration>(url, {});
+}
+  deleteIteration(sprintId: string, id: string): Observable<void> {
+    const url = `${this.apiUrlIteration}/deleteIteration/${sprintId}/${id}`;
+    return this.http.delete<void>(url);
   }
 
   // Phase 5
@@ -208,6 +235,24 @@ updateFoundations(projectId: string, foundationId: string, projectVision: string
       .set('preProdTests', preProdTests);
     return this.http.post<DeploymentPlan>(url, params);
   }
+   updateDeploymentPlan(projectId: string, id: string, environment: string, dataMigration: string, preProdTests: string): Observable<DeploymentPlan> {
+    const url = `${this.apiUrlDeploymentPlan}/updateDeploymentPlan/${projectId}/${id}`;
+    const params = new HttpParams()
+      .set('environment', environment)
+      .set('dataMigration', dataMigration)
+      .set('preProdTests', preProdTests);
+    return this.http.put<DeploymentPlan>(url, {}, { params });
+  }
+
+  archiveDeploymentPlan(projectId: string, id: string): Observable<DeploymentPlan> {
+    const url = `${this.apiUrlDeploymentPlan}/archiveDeploymentPlan/${projectId}/${id}`;
+    return this.http.put<DeploymentPlan>(url, {});
+  }
+
+  deleteDeploymentPlan(projectId: string, id: string): Observable<void> {
+    const url = `${this.apiUrlDeploymentPlan}/deleteDeploymentPlan/${projectId}/${id}`;
+    return this.http.delete<void>(url);
+  }
 
   // Releases
   addRelease(deploymentPlanId: string, name: string, details: string): Observable<Release> {
@@ -221,7 +266,21 @@ updateFoundations(projectId: string, foundationId: string, projectVision: string
   getReleasesByDeploymentPlanId(deploymentPlanId: string): Observable<Release[]> {
     return this.http.get<Release[]>(`${this.apiUrlRelease}/showReleases/${deploymentPlanId}`);
   }
-
+  updateRelease(deploymentPlanId: string, id: string, name: string, details: string): Observable<Release> {
+    const url = `${this.apiUrlRelease}/updateRelease/${deploymentPlanId}/${id}`;
+    let params = new HttpParams()
+      .set('name', name)
+      .set('details', details);
+    return this.http.put<Release>(url, {}, { params });
+  }
+  archiveRelease(deploymentPlanId: string, id: string): Observable<Release> {
+    const url = `${this.apiUrlRelease}/archiveRelease/${deploymentPlanId}/${id}`;
+    return this.http.put<Release>(url, {});
+  }
+  deleteRelease(deploymentPlanId: string, id: string): Observable<void> {
+    const url = `${this.apiUrlRelease}/deleteRelease/${deploymentPlanId}/${id}`;
+    return this.http.delete<void>(url);
+  }
   // Phase 6
   // KPIs
   getKPIsByProjectId(projectId: string): Observable<KPI[]> {
@@ -233,6 +292,21 @@ updateFoundations(projectId: string, foundationId: string, projectVision: string
     const params = new HttpParams().set('name', name).set('value', value);
     return this.http.post<KPI>(url, params);
   }
+  updateKPI(projectId: string, id: string, name: string, value: string): Observable<KPI> {
+    const url = `${this.apiUrlKPI}/updateKPI/${projectId}/${id}`;
+    const params = new HttpParams().set('name', name).set('value', value);
+    return this.http.put<KPI>(url, {}, { params });
+}
+
+archiveKPI(projectId: string, id: string): Observable<KPI> {
+    const url = `${this.apiUrlKPI}/archiveKPI/${projectId}/${id}`;
+    return this.http.put<KPI>(url, {});
+}
+
+deleteKPI(projectId: string, id: string): Observable<void> {
+    const url = `${this.apiUrlKPI}/deleteKPI/${projectId}/${id}`;
+    return this.http.delete<void>(url);
+}
 
   // Reports
   getReportsByProjectId(projectId: string): Observable<Report[]> {
@@ -244,6 +318,22 @@ updateFoundations(projectId: string, foundationId: string, projectVision: string
     const params = new HttpParams().set('title', title).set('content', content);
     return this.http.post<Report>(url, params);
   }
+  updateReport(projectId: string, id: string, title: string, content: string): Observable<Report> {
+    const url = `${this.apiUrlReport}/updateReport/${projectId}/${id}`;
+    const params = new HttpParams().set('title', title).set('content', content);
+    return this.http.put<Report>(url, {}, { params });
+  }
+
+  archiveReport(projectId: string, id: string): Observable<Report> {
+    const url = `${this.apiUrlReport}/archiveReport/${projectId}/${id}`;
+    return this.http.put<Report>(url, {});
+  }
+
+  deleteReport(projectId: string, id: string): Observable<void> {
+    const url = `${this.apiUrlReport}/deleteReport/${projectId}/${id}`;
+    return this.http.delete<void>(url);
+  }
+
 
   // Feedbacks
   getFeedbacksByProjectId(projectId: string): Observable<Feedback[]> {
@@ -255,6 +345,21 @@ updateFoundations(projectId: string, foundationId: string, projectVision: string
     const params = new HttpParams().set('content', content);
     return this.http.post<Feedback>(url, params);
   }
+updateFeedback(projectId: string, id: string, content: string): Observable<Feedback> {
+  const url = `${this.apiUrlFeedback}/updateFeedback/${projectId}/${id}`;
+  const params = new HttpParams().set('content', content);
+  return this.http.put<Feedback>(url, {}, { params });
+}
+
+archiveFeedback(projectId: string, id: string): Observable<Feedback> {
+  const url = `${this.apiUrlFeedback}/archiveFeedback/${projectId}/${id}`;
+  return this.http.put<Feedback>(url, {});
+}
+
+deleteFeedback(projectId: string, id: string): Observable<void> {
+  const url = `${this.apiUrlFeedback}/deleteFeedback/${projectId}/${id}`;
+  return this.http.delete<void>(url);
+}
 
   // Improvement Plans
   getImprovementPlansByProjectId(projectId: string): Observable<ImprovementPlan[]> {
@@ -265,5 +370,18 @@ updateFoundations(projectId: string, foundationId: string, projectVision: string
     const url = `${this.apiUrlImprovementPlan}/addImprovementPlan/${projectId}`;
     const params = new HttpParams().set('content', content);
     return this.http.post<ImprovementPlan>(url, params);
+  }
+   updateImprovementPlan(projectId: string, id: string, content: string): Observable<ImprovementPlan> {
+    const url = `${this.apiUrlImprovementPlan}/updateImprovementPlan/${projectId}/${id}`;
+    const params = new HttpParams().set('content', content);
+    return this.http.put<ImprovementPlan>(url, {}, { params });
+  }
+  archiveImprovementPlan(projectId: string, id: string): Observable<ImprovementPlan> {
+    const url = `${this.apiUrlImprovementPlan}/archiveImprovementPlan/${projectId}/${id}`;
+    return this.http.put<ImprovementPlan>(url, {});
+  }
+  deleteImprovementPlan(projectId: string, id: string): Observable<void> {
+    const url = `${this.apiUrlImprovementPlan}/deleteImprovementPlan/${projectId}/${id}`;
+    return this.http.delete<void>(url);
   }
 }

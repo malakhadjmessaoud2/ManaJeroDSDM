@@ -1,155 +1,97 @@
-/* Styles communs */
-.form-container {
-  padding: 20px;
-  background-color: #f7f9fc;
-  border-radius: 8px;
+nb-card {
+  border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-  animation: fadeIn 0.5s ease-in-out;
+  background-color: #ffffff;
+}
+
+nb-card-body {
+  padding: 20px;
+}
+
+.form-container {
+  margin-top: 20px;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #333;
 }
 
 .field-description {
   display: block;
-  font-size: 12px;
-  color: #6c757d;
   margin-bottom: 5px;
+  color: #888;
 }
 
-button[nbButton] {
-  margin-right: 10px;
+.description {
+  color: #555;
+  font-size: 16px;
 }
 
-.edit-button-container {
-  text-align: right;
-  margin-top: 20px;
+.dsdm-item,
+.feasibility-item {
+  margin-bottom: 15px;
 }
 
-/* Titres et Labels */
-h2 {
-  color: #1a73e8;
+.dsdm-item h4,
+.feasibility-item h4 {
+  font-size: 18px;
+  color: #444;
 }
 
-h3, h4, label {
-  color: #333;
+.dsdm-item p,
+.feasibility-item p {
+  font-size: 16px;
+  color: #666;
 }
 
-/* Styles des cartes */
-.nb-card-header {
-  background-color: #2a2a2a;
-  color: white;
-  padding: 10px;
-  border-radius: 8px 8px 0 0;
-}
-
-.nb-card-body {
-  padding: 20px;
-  background-color: #f7f7f7;
-}
-
-/* Tableaux */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-.table th, .table td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid #e3e3e3;
-}
-
-.table th {
-  background-color: #f0f0f0;
+.status-approved {
+  color: green;
   font-weight: bold;
 }
 
-/* Éléments spécifiques */
-.plan-details, .release-item, .iteration-item, .kpi-item, .report-item, .feedback-item, .improvement-plan-item {
-  background-color: #ffffff;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #e3e3e3;
-}
-
-/* Status */
-.status-approved {
-  color: #28a745;
-}
-
 .status-planned {
-  color: #ffc107;
+  color: blue;
+  font-weight: bold;
 }
 
 .status-on-hold {
-  color: #dc3545;
+  color: orange;
+  font-weight: bold;
 }
 
-/* Boutons */
-button {
-  margin-top: 10px;
+.edit-button-container {
+  margin-top: 20px;
 }
 
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Éditeur CK */
-.ck.ck-editor__editable[contenteditable="false"] {
-  background-color: #f0f0f0;
-  cursor: not-allowed;
-}
-
-/* Cards spécifiques */
-.sprint-card {
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.iteration-form {
-  margin-top: 10px;
-}
-
-.nb-card-header {
+.form-actions {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  margin-top: 20px;
 }
 
-/* Réactivité */
-@media (max-width: 768px) {
-  .nb-tabset {
-    flex-direction: column;
-  }
-
-  .nb-tab {
-    width: 100%;
-    text-align: center;
-  }
+.nb-stepper {
+  --stepper-step-icon-background-color: #4caf50;
+  --stepper-step-active-icon-background-color: #8bc34a;
+  --stepper-step-title-color: #4caf50;
+  --stepper-step-active-title-color: #8bc34a;
 }
-/* Réactivité */
-@media (max-width: 768px) {
-  nb-tabset {
-    display: flex;
-    flex-direction: column;
-  }
 
-  nb-tab {
-    width: 100%;
-    text-align: center;
-  }
+.nb-stepper-step {
+  --stepper-step-border-width: 0px;
+}
 
-  nb-card-header {
-    display: block;
-  }
+.nb-stepper-label {
+  font-weight: bold;
+  color: #333;
 }

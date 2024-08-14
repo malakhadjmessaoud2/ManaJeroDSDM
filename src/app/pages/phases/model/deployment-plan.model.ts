@@ -7,4 +7,6 @@ export class DeploymentPlan {
   preProdTests!: string;
   projectId!: string;
   releases!: Release[];
+  archived?:boolean = false;
+
 }

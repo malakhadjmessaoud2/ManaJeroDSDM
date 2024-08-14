@@ -3,4 +3,6 @@ export class Release {
   name!: string;
   details!: string;
   deploymentPlanId!: string;
+  archived?:boolean = false;
+
 }
