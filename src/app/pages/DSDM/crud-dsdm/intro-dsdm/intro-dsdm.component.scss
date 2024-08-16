@@ -1,0 +1,76 @@
+/* Étendre la hauteur de la section d'introduction */
+.intro-section, .form-section {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 100%;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+  height: auto; /* Ajuster automatiquement la hauteur */
+}
+
+/* Ajuster l'image pour qu'elle soit plus petite */
+.intro-image, .preview-image {
+  max-height: 200px; /* Taille maximale de l'image */
+  width: auto;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+/* Étendre la hauteur du nb-stepper */
+.nb-stepper {
+
+  max-height: none; /* Désactiver la hauteur maximale */
+  height: auto; /* Ajuster automatiquement la hauteur */
+  overflow: visible; /* Empêcher le scroll */
+}
+
+/* Ajouter une flexibilité au contenu du stepper */
+.nb-stepper-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nb-step {
+  flex-grow: 1;
+}
+
+.nb-step-label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Suppression du scroll au niveau du step */
+.nb-step-body {
+  overflow: visible;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .intro-form {
+    width: 90%;
+  }
+
+  .intro-image, .preview-image {
+    max-height: 100px;
+  }
+
+  .submit-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button[nbButton] {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+
+
+  .intro-image, .preview-image {
+    max-height: 80px;
+  }
+}
