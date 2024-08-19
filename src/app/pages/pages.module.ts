@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbAccordionModule, NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbListModule, NbMenuModule, NbRouteTabsetModule, NbStepperModule, NbTabsetModule, NbUserModule } from '@nebular/theme';
+import { NbAccordionModule, NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbListModule, NbMenuModule, NbRouteTabsetModule, NbStepperModule, NbTabsetModule, NbTreeGridModule, NbUserModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -10,7 +10,6 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { FormsModule } from '@angular/forms';
 
 import { LayoutModule } from './layout/layout.module';
-import { CrudDsdmModule } from './crud-dsdm/crud-dsdm.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -25,7 +24,6 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ThemeModule,
     NbMenuModule,
-    DashboardModule,
     ECommerceModule,
     NbTabsetModule,
     NbRouteTabsetModule,

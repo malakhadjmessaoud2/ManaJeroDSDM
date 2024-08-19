@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+<!-- Progression des Phases DSDM -->
+<nb-card>
+  <nb-card-header>DSDM Phases Progression</nb-card-header>
+  <nb-card-body>
+    <div class="progress-section">
+      <div echarts [options]="phaseChartOptions" class="echart"></div>
+    </div>
+  </nb-card-body>
+</nb-card>
+  </div>
+
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+        <nb-card>
+          <nb-card-header>Sprints and Iterations</nb-card-header>
+          <nb-card-body>
+            <div class="count-section">
+              <div echarts [options]="sprintChartOptions" class="echart"></div>
+              <div echarts [options]="iterationChartOptions" class="echart"></div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+  </div>
+</div>
+
+<nb-card>
+    <nb-card-header>Work Progress</nb-card-header>
+    <nb-card-body>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar"
+             [ngStyle]="{'width': workProgress + '%', 'background-color': '#ffaf4d'}"
+             aria-valuenow="workProgress" aria-valuemin="0" aria-valuemax="100">
+          {{ workProgress }}%
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>

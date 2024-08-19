@@ -5,7 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-import { DSDMComponent } from './crud-dsdm/dsdm/dsdm.component';
+//import { DSDMComponent } from '../pages/DSDM/crud-dsdm/dsdm/dsdm.component';
 
 const routes: Routes = [{
   path: '',
@@ -13,10 +13,10 @@ const routes: Routes = [{
   children: [
     {
        path: 'dsdm',
-       loadChildren: () => import('./crud-dsdm/crud-dsdm.module').then(m => m.CrudDsdmModule) ,
+       loadChildren: () => import('../pages/DSDM/crud-dsdm/crud-dsdm.module').then(m => m.CrudDsdmModule) ,
 
     },
-    { path: 'phases', loadChildren: () => import('./phases/phases.module').then(m => m.PhasesModule) },
+    { path: 'phases', loadChildren: () => import('../pages/DSDM/phases/phases.module').then(m => m.PhasesModule) },
 
     {
       path: 'dashboard',

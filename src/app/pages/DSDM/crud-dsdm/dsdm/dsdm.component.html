@@ -1,0 +1,254 @@
+<!-- start tuto -->
+<div class="container my-3">
+  <button nbButton shape="semi-round" status="primary" size="large" [routerLink]="['/pages/phases/listProject']">
+    <nb-icon icon="flip-outline"></nb-icon> Use Methode
+  </button>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <nb-card size="medium">
+        <nb-card-body>
+          <nb-stepper orientation="vertical">
+            <nb-step label="Introduction">
+              <div class="d-flex justify-content-between">
+                <button nbButton disabled nbStepperNext>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </div>
+              <ngx-intro-dsdm></ngx-intro-dsdm>
+
+            </nb-step>
+            <nb-step label="Advantages">
+              <div class="d-flex justify-content-between">
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </div>
+              <ngx-adv-dsdm></ngx-adv-dsdm>
+
+            </nb-step>
+            <nb-step label="Limitations">
+              <div class="d-flex justify-content-between">
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </div>
+              <ngx-lim-dsdm></ngx-lim-dsdm>
+
+            </nb-step>
+            <nb-step label="Why">
+              <div class="d-flex justify-content-between">
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </div>
+              <ngx-why-dsdm></ngx-why-dsdm>
+            </nb-step>
+            <nb-step label="What">
+              <div class="d-flex justify-content-between">
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </div>
+              <h3>What: Framework and Key Principles of DSDM</h3>
+              <div class="accordion-container">
+                <div class="section-title">
+                  <h2>DSDM is based on eight core principles:</h2>
+                </div>
+                <nb-accordion multi>
+                  <!-- Accordion items -->
+                  <nb-accordion-item>
+                    <nb-accordion-item-header>
+                      Focus on the Business Need
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                      <div class="content-section">
+                        <p>
+                          DSDM has a strong business-driven approach. A business case must be established for the project and the team must understand project priorities. Every decision the team makes during the project should help achieve the project goal, and the team must ensure the project is delivered on time.
+                        </p>
+                      </div>
+                    </nb-accordion-item-body>
+                  </nb-accordion-item>
+                  <!-- Accordion items continued -->
+                  <nb-accordion-item>
+                    <nb-accordion-item-header>
+                      Deliver on Time
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                      <div class="content-section">
+                        <p>
+                          DSDM is an agile framework that works plans work in fixed time periods (timeboxes), rather like sprints in Agile Scrum. The aim is to deliver a usable software product at the end of each timebox (iteration). DSDM is thus an incremental approach, as well as an iterative development approach to delivering software. DSDM places a strong emphasis on prompt delivery, proposing that even projects without any need for a fixed deadline still benefit from one. This is because having deadlines is the best way to control changing requirements. To stick to this principle, DSDM teams should focus on priorities, hit deadlines and manage their time by using the MoSCoW and timeboxing techniques.
+                        </p>
+                      </div>
+                    </nb-accordion-item-body>
+                  </nb-accordion-item>
+
+                  <nb-accordion-item>
+                    <nb-accordion-item-header>
+                      Collaborate
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                      <div class="content-section">
+                        <p>
+                          Team spirit and collaboration are highly important for DSDM teams. This is based on a rejection of having multiple departments that rarely interact. Teams should instead work as one unit and collaborate to encourage understanding, higher performance, and shared ownership.
+                        </p>
+                      </div>
+                    </nb-accordion-item-body>
+                  </nb-accordion-item>
+
+                  <nb-accordion-item>
+                    <nb-accordion-item-header>
+                      Quality and Non-Compromise
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                      <div class="content-section">
+                        <p>
+                          Quality is always fixed on DSDM projects and must be decided at the start. The final product shouldn’t be any more or any less than the quality decided upon.
+                        </p>
+                      </div>
+                    </nb-accordion-item-body>
+                  </nb-accordion-item>
+
+                  <nb-accordion-item>
+                    <nb-accordion-item-header>
+                      Iterative Development
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                      <div class="content-section">
+                        <p>
+                          DSDM differs from other agile methods as it requires the foundations of the project to be agreed early. The foundations don’t need to be in too much detail – just agree on what the problem is and how to solve it. Once foundations are established, the solution must be delivered incrementally.
+                        </p>
+                      </div>
+                    </nb-accordion-item-body>
+                  </nb-accordion-item>
+
+                  <nb-accordion-item>
+                    <nb-accordion-item-header>
+                      Continuous Elaboration
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                      <div class="content-section">
+                        <p>
+                          DSDM proposes that nothing is created perfectly the first time and projects operate in a constantly changing world. Incremental delivery allows for such change to be embraced and leads to higher stakeholder satisfaction. Each iteration is combined with testing, demonstrations, and feedback. This ensures that each iteration improves upon the last and leads to a decent final product.
+                        </p>
+                      </div>
+                    </nb-accordion-item-body>
+                  </nb-accordion-item>
+
+                  <nb-accordion-item>
+                    <nb-accordion-item-header>
+                      Demonstrable Control
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                      <div class="content-section">
+                        <p>
+                          Bad communication often leads to project failure and traditional non-agile approaches fail to address this. DSDM aims to improve communication by using frequent face-to-face meetings, visual communication (modeling), advance releases of prototypes, and workshop sessions.
+                        </p>
+                      </div>
+                    </nb-accordion-item-body>
+                  </nb-accordion-item>
+
+                  <nb-accordion-item>
+                    <nb-accordion-item-header>
+                      Clear and Continuous Communication
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                      <div class="content-section">
+                        <p>
+                          It is vital to keep control of the project. DSDM proposes that it is only possible to do this by using a plan aligned to the project aims, with both being accessible to the entire team.
+                        </p>
+                      </div>
+                    </nb-accordion-item-body>
+                  </nb-accordion-item>
+                </nb-accordion>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </div>
+            </nb-step>
+            <nb-step label="How">
+              <div class="d-flex justify-content-between">
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </div>
+              <ngx-how-dsdm></ngx-how-dsdm>
+            </nb-step>
+            <nb-step label="What if">
+              <div class="d-flex justify-content-between">
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </div>
+              <ngx-whatif-dsdm></ngx-whatif-dsdm>
+
+            </nb-step>
+          </nb-stepper>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>
+<!-- end tuto -->
+
+<div class="container my-3">
+  <button
+    nbButton
+    shape="semi-round"
+    status="primary"
+    size="large"
+    [routerLink]="['/pages/dsdm/add']"
+  >
+    <nb-icon icon="plus-circle-outline"></nb-icon> Add Component
+  </button>
+</div>
+
+<!-- space -->
+<div style="height: 20px; background-color: #edf1f7"></div>
+
+<!-- Dynamic component display -->
+<ng-container>
+  <div class="row">
+    <div class="col-12" *ngFor="let composant of composants; let i = index">
+      <nb-card>
+        <nb-card-header>
+          <div class="step-label">{{ composant.nomComposant }}</div>
+        </nb-card-header>
+        <nb-card-body>
+          <h3>{{ composant.titre }}</h3>
+          <h6 style="text-align: left">
+            <p>{{ composant.desc }}</p>
+          </h6>
+          <img
+            *ngIf="getImageByIndex(i)"
+            [src]="'data:image/jpeg;base64,' + images[i]"
+            alt="Selected Image"
+            class="img-fluid"
+          />
+          <div class="d-flex justify-content-between">
+            <button
+              nbButton
+              shape="semi-round"
+              status="info"
+              size="medium"
+              [routerLink]="['/pages/dsdm/update']"
+              [queryParams]="{
+                id: composant.id,
+                name: composant.nomComposant,
+                title: composant.titre,
+                desc: composant.desc
+              }"
+            >
+              <nb-icon icon="edit-outline"></nb-icon>
+            </button>
+            <button
+              nbButton
+              shape="semi-round"
+              status="danger"
+              size="medium"
+              (click)="deleteComposant(composant.id)"
+            >
+              <nb-icon icon="trash-2-outline"></nb-icon>
+            </button>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</ng-container>

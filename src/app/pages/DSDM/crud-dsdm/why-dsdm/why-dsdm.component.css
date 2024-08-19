@@ -1,0 +1,87 @@
+/* Styles pour la section "Why" */
+.why-section, .form-section {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 100%;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+  height: auto; /* Ajuster automatiquement la hauteur */
+}
+
+.why-image, .preview-image {
+  max-height: 200px; /* Taille maximale de l'image */
+  width: auto;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+.error-message {
+  margin-top: 5px;
+}
+
+.error-text {
+  color: red;
+}
+
+.upload-section, .image-preview {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.image-container {
+  display: inline-block;
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.submit-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button[nbButton] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button[nbButton] nb-icon {
+  margin: 0;
+}
+
+/* Styles responsives pour la section "Why" */
+@media (max-width: 768px) {
+  .why-form {
+    width: 90%;
+  }
+  .why-image, .preview-image {
+    max-height: 100px;
+  }
+  .delete-button {
+    top: 5px;
+    right: 5px;
+  }
+  .submit-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  button[nbButton] {
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .why-card, .form-section {
+    margin: 10px;
+  }
+  .why-image, .preview-image {
+    max-height: 75px;
+  }
+}/*# sourceMappingURL=why-dsdm.component.css.map */

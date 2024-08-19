@@ -1,0 +1,184 @@
+/* Base Styles for nb-step */
+nb-step {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/* Styles for Buttons */
+.nb-step .d-flex {
+  margin-bottom: 10px;
+}
+
+.nb-step button[nbButton] {
+  margin: 0 2px;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+/* Card Styles */
+nb-card {
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+nb-card-header {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+nb-card-body {
+  padding: 15px;
+}
+
+/* Form Styles */
+.form-container {
+  margin-top: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.field-description {
+  display: block;
+  margin-bottom: 4px;
+  color: #888;
+  font-size: 12px;
+}
+
+.description {
+  color: #555;
+  font-size: 14px;
+}
+
+button[nbButton] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+/* Table Styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  font-weight: bold;
+  color: #333;
+}
+
+.table td {
+  color: #666;
+}
+
+/* Stepper Styles */
+.nb-stepper {
+  --stepper-step-icon-background-color: #4caf50;
+  --stepper-step-active-icon-background-color: #8bc34a;
+  --stepper-step-title-color: #4caf50;
+  --stepper-step-active-title-color: #8bc34a;
+}
+
+.nb-stepper-step {
+  --stepper-step-border-width: 0px;
+}
+
+.nb-stepper-label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  nb-card-body {
+    padding: 12px;
+  }
+
+  .form-container {
+    margin-top: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  button[nbButton] {
+    width: 100%;
+    font-size: 13px;
+    padding: 6px 12px;
+    margin-bottom: 8px;
+  }
+
+  nb-card-header {
+    font-size: 14px;
+  }
+
+  .table th, .table td {
+    padding: 6px;
+  }
+
+  .table th {
+    font-size: 13px;
+  }
+
+  .table td {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  nb-card-body {
+    padding: 10px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .description {
+    font-size: 11px;
+  }
+
+  button[nbButton] {
+    font-size: 12px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+  }
+
+  nb-card-header {
+    font-size: 12px;
+  }
+
+  .table th, .table td {
+    padding: 5px;
+  }
+
+  .table th {
+    font-size: 12px;
+  }
+
+  .table td {
+    font-size: 11px;
+  }
+}
