@@ -1,25 +1,20 @@
-.why-section {
+/* Styles pour la section "Why" */
+.why-section, .form-section {
   text-align: center;
-  margin: 20px;
+  margin: 20px auto;
+  max-width: 100%;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+  height: auto; /* Ajuster automatiquement la hauteur */
 }
 
-.why-image {
-  max-height: 150px;
+.why-image, .preview-image {
+  max-height: 200px; /* Taille maximale de l'image */
   width: auto;
   margin: 10px 0;
-}
-
-.form-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 20px;
-}
-
-.why-form {
-  width: 100%;
-  max-width: 600px;
+  border-radius: 8px;
 }
 
 .error-message {
@@ -30,12 +25,7 @@
   color: red;
 }
 
-.upload-section {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.image-preview {
+.upload-section, .image-preview {
   text-align: center;
   margin: 20px 0;
 }
@@ -43,11 +33,6 @@
 .image-container {
   display: inline-block;
   position: relative;
-}
-
-.preview-image {
-  max-height: 150px;
-  width: auto;
 }
 
 .delete-button {
@@ -72,12 +57,12 @@ button[nbButton] nb-icon {
   margin: 0;
 }
 
-/* Responsive styles */
+/* Styles responsives pour la section "Why" */
 @media (max-width: 768px) {
   .why-form {
     width: 90%;
   }
-  .why-image {
+  .why-image, .preview-image {
     max-height: 100px;
   }
   .delete-button {
@@ -96,7 +81,7 @@ button[nbButton] nb-icon {
   .why-card, .form-section {
     margin: 10px;
   }
-  .why-image {
-    max-height: 80px;
+  .why-image, .preview-image {
+    max-height: 75px;
   }
 }/*# sourceMappingURL=why-dsdm.component.css.map */

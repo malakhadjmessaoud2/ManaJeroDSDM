@@ -83,6 +83,7 @@ export class DsdmMethodeComponent implements OnInit {
     id_user: "",
     project: "",
   };
+
   isEditMode: boolean = false;
   public editor = ClassicEditor;
 
@@ -145,7 +146,6 @@ export class DsdmMethodeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private phaseService: PhaseServiceService,
-    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -215,9 +215,12 @@ export class DsdmMethodeComponent implements OnInit {
         this.dsdmDashComponent.initPhaseChartOptions();
     } else {
         console.log('Les données DSDM ne sont pas disponibles.');
+        this.preProjetCompletion = { completed: 0, remaining: 100 };
+        this.dsdmDashComponent.initPhaseChartOptions();
+
+
     }
 }
-
 
   loadDsdmForProject(projectId: string): void {
     this.phaseService.getDsdmByProjectId(projectId).subscribe((dsdm) => {
@@ -226,9 +229,6 @@ export class DsdmMethodeComponent implements OnInit {
 
     });
   }
-
-
-
 
   addDsdm(): void {
     if (this.project) {
@@ -304,13 +304,61 @@ export class DsdmMethodeComponent implements OnInit {
   }
 
   // Phase 2
+  feasibilityCompletion: { completed: number; remaining: number };
+
   loadFeasibilityForProject(projectId: string): void {
     this.phaseService
       .getFeasibilityByProjectId(projectId)
       .subscribe((feasibility) => {
         this.feasibility = feasibility;
+        this.calculateFeasibilityCompletion(); // Appelle le calcul après le chargement de la faisabilité
+
       });
   }
+  calculateFeasibilityCompletion(): void {
+    console.log('Début du calcul pour FAISABILITÉ');
+
+    if (this.feasibility) {
+      console.log('Les données de faisabilité sont disponibles:', this.feasibility);
+
+      const fields = [
+        'technicalFeasibility',
+        'commercialFeasibility',
+        'mvp',
+        'releaseBoard',
+        'viability'
+      ];
+      console.log('Champs à vérifier:', fields);
+
+      const filledFields = fields.filter(field => {
+        const fieldValue = this.feasibility![field];
+        console.log(`Vérification du champ "${field}":`, fieldValue);
+        return fieldValue && fieldValue !== '';
+      }).length;
+
+      console.log('Nombre de champs remplis:', filledFields);
+
+      if (filledFields === fields.length) {
+        this.feasibilityCompletion = { completed: 100, remaining: 0 };
+      } else {
+        const completionPercentage = (filledFields / fields.length) * 100;
+        this.feasibilityCompletion = {
+          completed: completionPercentage,
+          remaining: 100 - completionPercentage
+        };
+      }
+
+      console.log('Avancement de la FAISABILITÉ :', this.feasibilityCompletion);
+
+      // Mettre à jour les options du graphique ici
+      this.dsdmDashComponent.initPhaseChartOptions();
+    } else {
+      console.log('Les données de faisabilité ne sont pas disponibles.');
+      this.feasibilityCompletion = { completed: 0, remaining: 100 };
+      this.dsdmDashComponent.initPhaseChartOptions();
+    }
+  }
+
 
   addFeasibility(): void {
     if (this.project) {
@@ -398,14 +446,64 @@ export class DsdmMethodeComponent implements OnInit {
   }
 
   // Phase 3
-  loadFoundationsForProject(projectId: string): void {
-    this.phaseService
-      .getFoundationByProjectId(projectId)
-      .subscribe((foundations) => {
-        this.foundations = foundations;
-      });
-  }
 
+  foundationCompletion: { completed: number; remaining: number };
+
+  loadFoundationsForProject(projectId: string): void {
+    this.phaseService.getFoundationByProjectId(projectId).subscribe(
+      (foundations) => {
+        this.foundations = foundations;
+        this.calculateFoundationCompletion();
+      },
+      (error) => {
+        console.error('Error fetching foundations:', error);
+        // Handle the error scenario
+        this.foundationCompletion = { completed: 0, remaining: 100 };
+        this.dsdmDashComponent.initPhaseChartOptions();
+      }
+    );
+  }
+  calculateFoundationCompletion(): void {
+    console.log('Début du calcul pour FONDATIONS');
+
+    if (this.foundations) {
+        console.log('Les données de fondations sont disponibles:', this.foundations);
+
+        const fields = [
+          'projectVision',
+           'userNeeds',
+            'projectCharter',
+             'requirements'
+            ];
+        console.log('Champs à vérifier:', fields);
+
+        const filledFields = fields.filter(field => {
+            const fieldValue = this.foundations![field];
+            console.log(`Vérification du champ "${field}":`, fieldValue);
+            return fieldValue && fieldValue !== '';
+        }).length;
+
+        console.log('Nombre de champs remplis:', filledFields);
+
+        if (filledFields === fields.length) {
+            this.foundationCompletion = { completed: 100, remaining: 0 };
+        } else {
+            const completionPercentage = (filledFields / fields.length) * 100;
+            this.foundationCompletion = {
+               completed: completionPercentage,
+               remaining: 100 - completionPercentage };
+        }
+
+        console.log('Avancement des FONDATIONS :', this.foundationCompletion);
+
+        // Mettez à jour les options du graphique ici
+        this.dsdmDashComponent.initPhaseChartOptions();
+    } else {
+        console.log('Les données de fondations ne sont pas disponibles.');
+        this.foundationCompletion = { completed: 0, remaining: 100 };
+        this.dsdmDashComponent.initPhaseChartOptions();
+    }
+}
   addFoundations(): void {
     if (this.project) {
       this.newFoundations.project = this.project;
@@ -447,7 +545,6 @@ export class DsdmMethodeComponent implements OnInit {
       console.error("Foundations data not available for editing");
     }
   }
-
   saveFoundations(): void {
     if (this.newFoundations && this.project) {
       this.phaseService
@@ -472,7 +569,6 @@ export class DsdmMethodeComponent implements OnInit {
         );
     }
   }
-
   cancelEditFoundations(): void {
     this.isEditModeFoundations = false;
     if (this.project) {
@@ -491,18 +587,88 @@ export class DsdmMethodeComponent implements OnInit {
   // To separate archived and non-archived sprints
   archivedSprints: Sprint[] = [];
   nonArchivedSprints: Sprint[] = [];
+  loadIterationsForSprint(sprintId: string): void {
+    this.phaseService
+      .getIterationsBySprintId(sprintId)
+      .subscribe((iterations) => {
+        const sprint = this.sprints.find((s) => s.id === sprintId);
+        if (sprint) {
+          sprint.iterations = iterations;
+          this.updateIterationChart();
+
+        }
+      });
+  }
+  updateIterationChart(): void {
+    const sprintNames = this.sprints.map((sprint, index) => `Sprint ${index + 1}`);
+    const iterationCounts = this.sprints.map((sprint) => sprint.iterations.length);
+
+    // Call the DsdmDashComponent to update the chart
+    this.dsdmDashComponent.updateIterationChart(sprintNames, iterationCounts);
+  }
   // Load sprints and categorize them
   loadSprintsForProject(projectId: string): void {
     this.phaseService.getSprintsByProjectId(projectId).subscribe((sprints) => {
       this.sprints = sprints;
       this.archivedSprints = sprints.filter((sprint) => sprint.archived);
       this.nonArchivedSprints = sprints.filter((sprint) => !sprint.archived);
+
       // Load iterations for each sprint
+      let iterationsLoaded = 0;
       this.sprints.forEach((sprint) => {
-        this.loadIterationsForSprint(sprint.id);
+        this.phaseService.getIterationsBySprintId(sprint.id).subscribe((iterations) => {
+          sprint.iterations = iterations;
+          iterationsLoaded++;
+          // Once all iterations are loaded, update the chart
+          if (iterationsLoaded === this.sprints.length) {
+            this.updateIterationChart();
+          }
+        });
+
       });
+
+      this.calculateSprintCompletion();
+      this.updateSprintChart();
     });
   }
+
+  getRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  updateSprintChart(): void {
+    console.log("Updating sprint chart with sprints:", this.sprints);
+
+    const sprintData = this.sprints.map((sprint, index) => ({
+      value: 1,
+      name: `Sprint ${index + 1}`,
+      itemStyle: { color: this.getRandomColor() },
+    }));
+
+    console.log("Sprint data for chart:", sprintData);
+
+    // Mise à jour du graphique via DsdmDashComponent
+    this.dsdmDashComponent.updateSprintChart(sprintData);
+  }
+
+  sprintCompletion: { completed: number; remaining: number };
+  calculateSprintCompletion(): void {
+    if (this.sprints && this.sprints.length > 0) {
+      const filledSprints = this.sprints.filter(sprint => sprint.name && sprint.name !== '').length;
+      const completionPercentage = (filledSprints / this.sprints.length) * 100;
+      this.sprintCompletion = { completed: completionPercentage, remaining: 100 - completionPercentage };
+      this.dsdmDashComponent.initSprintChartOptions();
+    } else {
+      this.sprintCompletion = { completed: 0, remaining: 100 };
+      this.dsdmDashComponent.initSprintChartOptions();
+    }
+  }
+
   // Method to update a sprint
   newSprintName = ""; // Nouveau nom de sprint
   isEditModeSprint: boolean = false; // État pour savoir si on est en mode édition
@@ -602,25 +768,7 @@ export class DsdmMethodeComponent implements OnInit {
   toggleIterationForm(sprint: Sprint): void {
     sprint.showIterationForm = !sprint.showIterationForm;
   }
-  loadSprintsForProject1(projectId: string): void {
-    this.phaseService.getSprintsByProjectId(projectId).subscribe((sprints) => {
-      this.sprints = sprints;
-      // Load iterations for each sprint
-      this.sprints.forEach((sprint) => {
-        this.loadIterationsForSprint(sprint.id);
-      });
-    });
-  }
-  loadIterationsForSprint(sprintId: string): void {
-    this.phaseService
-      .getIterationsBySprintId(sprintId)
-      .subscribe((iterations) => {
-        const sprint = this.sprints.find((s) => s.id === sprintId);
-        if (sprint) {
-          sprint.iterations = iterations;
-        }
-      });
-  }
+
   addSprint(): void {
     if (this.project && this.newSprint.name) {
       this.phaseService.addSprint(this.project, this.newSprint.name).subscribe(
@@ -750,8 +898,57 @@ export class DsdmMethodeComponent implements OnInit {
         this.deploymentPlans.forEach((plan) => {
           this.loadReleasesForDeploymentPlan(plan.id);
         });
+        this.calculateDeploymentPlanCompletion();
+
       });
   }
+  deploymentPlanCompletion: { completed: number; remaining: number };
+
+calculateDeploymentPlanCompletion(): void {
+  console.log('Début du calcul pour DEPLOIEMENT');
+
+  if (this.deploymentPlans && this.deploymentPlans.length > 0) {
+    console.log('Les données de déploiement sont disponibles:', this.deploymentPlans);
+
+    const fields = ['environment', 'dataMigration', 'preProdTests'];
+    console.log('Champs à vérifier:', fields);
+
+    let totalFilledFields = 0;
+    let totalFields = fields.length * this.deploymentPlans.length;
+
+    this.deploymentPlans.forEach((plan) => {
+      const filledFields = fields.filter(field => {
+        const fieldValue = plan[field];
+        console.log(`Vérification du champ "${field}" pour le plan ${plan.id}:`, fieldValue);
+        return fieldValue && fieldValue !== '';
+      }).length;
+
+      totalFilledFields += filledFields;
+    });
+
+    console.log('Nombre total de champs remplis:', totalFilledFields);
+
+    if (totalFilledFields === totalFields) {
+      this.deploymentPlanCompletion = { completed: 100, remaining: 0 };
+    } else {
+      const completionPercentage = (totalFilledFields / totalFields) * 100;
+      this.deploymentPlanCompletion = {
+        completed: completionPercentage,
+        remaining: 100 - completionPercentage
+      };
+    }
+
+    console.log('Avancement du DEPLOIEMENT :', this.deploymentPlanCompletion);
+
+    // Mettre à jour les options du graphique ici
+    this.dsdmDashComponent.initPhaseChartOptions();
+  } else {
+    console.log('Les données de déploiement ne sont pas disponibles.');
+    this.deploymentPlanCompletion = { completed: 0, remaining: 100 };
+    this.dsdmDashComponent.initPhaseChartOptions();
+  }
+}
+
 
   loadReleasesForDeploymentPlan(deploymentPlanId: string): void {
     this.phaseService
@@ -990,10 +1187,52 @@ get archivedDeploymentPlans() {
 
   // Phase 6
   archivedKpis: KPI[] = [];
+  postProjectCompletion: { completed: number; remaining: number } = { completed: 0, remaining: 100 };
+
+  calculatePostProjectCompletion(): void {
+    console.log('Début du calcul pour POST-PROJET');
+
+    let completedParts = 0;
+    const totalParts = 4; // Il y a 4 parties: KPI, Report, Feedback, ImprovementPlan
+
+    // Vérifier si tous les KPIs sont remplis
+    const kpisFilled = this.kpis.every(kpi => kpi.name && kpi.name !== '' && kpi.value !== '');
+    if (kpisFilled && this.kpis.length > 0) {
+      completedParts++;
+    }
+
+    // Vérifier si tous les Reports sont remplis
+    const reportsFilled = this.reports.every(report => report.title && report.title !== '' && report.content !== '');
+    if (reportsFilled && this.reports.length > 0) {
+      completedParts++;
+    }
+
+    // Vérifier si tous les Feedbacks sont remplis
+    const feedbacksFilled = this.feedbacks.every(feedback => feedback.content && feedback.content !== '');
+    if (feedbacksFilled && this.feedbacks.length > 0) {
+      completedParts++;
+    }
+
+    // Vérifier si tous les ImprovementPlans sont remplis
+    const improvementPlansFilled = this.improvementPlans.every(plan => plan.content && plan.content !== '');
+    if (improvementPlansFilled && this.improvementPlans.length > 0) {
+      completedParts++;
+    }
+
+    const completionPercentage = (completedParts / totalParts) * 100;
+    this.postProjectCompletion = { completed: completionPercentage, remaining: 100 - completionPercentage };
+
+    console.log('Avancement du POST-PROJET:', this.postProjectCompletion);
+
+    // Mettre à jour les options du graphique ici
+    this.dsdmDashComponent.initPhaseChartOptions();
+  }
 
   loadKPIs(projectId: string): void {
     this.phaseService.getKPIsByProjectId(projectId).subscribe((data: KPI[]) => {
       this.kpis = data.filter(kpi => !kpi.archived);
+      this.calculatePostProjectCompletion();
+
     });
   }
   loadArchivedKPIs(projectId: string): void {
@@ -1036,11 +1275,14 @@ get archivedDeploymentPlans() {
       .getReportsByProjectId(projectId)
       .subscribe((data: Report[]) => {
         this.reports = data.filter(report => !report.archived);
+        this.calculatePostProjectCompletion();
+
       });
   }
   loadArchivedReports(projectId: string): void {
     this.phaseService.getReportsByProjectId(projectId).subscribe((data: Report[]) => {
       this.archivedReports = data.filter(report => report.archived);
+
     });
   }
 
@@ -1086,7 +1328,10 @@ get archivedDeploymentPlans() {
   loadImprovementPlans(projectId: string): void {
     this.phaseService
       .getImprovementPlansByProjectId(projectId).subscribe((data: ImprovementPlan[]) => {
-        this.improvementPlans = data.filter(plan => !plan.archived);    });
+        this.improvementPlans = data.filter(plan => !plan.archived);
+        this.calculatePostProjectCompletion();
+
+         });
   }
   loadArchivedImprovementPlans(projectId: string): void {
     this.phaseService.getImprovementPlansByProjectId(projectId).subscribe((data: ImprovementPlan[]) => {
@@ -1136,6 +1381,8 @@ get archivedDeploymentPlans() {
       .getFeedbacksByProjectId(projectId)
       .subscribe((data: Feedback[]) => {
         this.feedbacks = data.filter(f => !f.archived);
+        this.calculatePostProjectCompletion();
+
       });
   }
   loadArchivedFeedbacks(projectId: string): void {

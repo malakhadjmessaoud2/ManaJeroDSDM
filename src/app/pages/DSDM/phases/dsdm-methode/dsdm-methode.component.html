@@ -7,87 +7,95 @@
           <button nbButton nbStepperNext>next</button>
         </div>
         <div class="form-container" *ngIf="isEditMode || !dsdm">
-          <form (ngSubmit)="isEditMode ? editDsdm() : addDsdm()" #dsdmForm="ngForm" class="dsdm-form">
-            <h3>Objectif:</h3>
+          <form (ngSubmit)="isEditMode ? editDsdm() : addDsdm()" #dsdmForm="ngForm" class="dsdm-form" novalidate>
+
+            <h3>Objective:</h3>
             <p class="description">
-              L'objectif de cette phase est de bien prioriser le projet selon le contexte ; la priorisation se fera
-              selon les autres projets en cours de réalisation et les objectifs business de l’entreprise.
+              The objective of this phase is to properly prioritize the project according to the context; the prioritization will be done according to the other projects in progress and the business objectives of the company.
             </p>
+
             <div class="form-group">
-              <label for="context">Contexte</label>
-              <span class="field-description">Décrivez le contexte du projet.</span>
+              <label for="context">Context</label>
+              <span class="field-description">Describe the context of the project.</span>
               <input nbInput fullWidth id="context" class="form-control" [(ngModel)]="newDsdm.context" name="context"
-                placeholder="Contexte du projet" required />
+                placeholder="Contexte du projet" required #context="ngModel" />
+              <div *ngIf="context.invalid && context.touched" class="text-danger">
+                Context is required.
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="priorisation">Priorisation et objectif business</label>
-              <span class="field-description">Décrivez la priorisation et les objectifs business du
-                projet.</span>
-
+              <label for="priorisation">Prioritization and business objective</label>
+              <span class="field-description">Describe the prioritization and business objectives of the project.</span>
               <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)"
                 (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newDsdm.priorisation"
-                [ngModelOptions]="{ standalone: true }">
+                [ngModelOptions]="{ standalone: true }" name="priorisation" required #priorisation="ngModel">
               </ckeditor>
-
-              <!-- <textarea nbInput fullWidth id="priorisation" name="priorisation" class="form-control" [(ngModel)]="newDsdm.priorisation"
-              placeholder="Priorisation et objectif business" required></textarea> -->
+              <div *ngIf="priorisation.invalid && priorisation.touched" class="text-danger">
+                Prioritization is required.
+              </div>
             </div>
 
             <div class="form-group">
               <label for="status">Statut</label>
-              <span class="field-description">Sélectionnez le statut actuel du projet.</span>
-              <select nbInput fullWidth id="status" class="form-control" [(ngModel)]="newDsdm.status" name="status"
-                required>
+              <span class="field-description">Select the current status of the project.</span>
+              <select nbInput fullWidth id="status" class="form-control" [(ngModel)]="newDsdm.status" name="status" required #status="ngModel">
                 <option value="Approved">
-                  Approved: Approuvé pour passer à la phase de faisabilité.
+                  Approved: Approved to proceed to feasibility phase.
                 </option>
                 <option value="Planned">
-                  Planned: Planifié mais n'a pas encore commencé.
+                  Planned: Planned but not yet started.
                 </option>
                 <option value="On Hold">
-                  On Hold: En attente en raison de contraintes.
+                  On Hold: On hold due to constraints.
                 </option>
               </select>
+              <div *ngIf="status.invalid && status.touched" class="text-danger">
+                Status is required.
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="startDate">Date de début</label>
-              <span class="field-description">Sélectionnez la date de début du projet.</span>
-              <input nbInput type="date" fullWidth id="startDate" [(ngModel)]="newDsdm.startDate" name="startDate"
-                required />
+              <label for="startDate">Start Date</label>
+              <span class="field-description">Select the start date of the project.</span>
+              <input nbInput type="date" fullWidth id="startDate" [(ngModel)]="newDsdm.startDate" name="startDate" required #startDate="ngModel" />
+              <div *ngIf="startDate.invalid && startDate.touched" class="text-danger">
+                Start date is required.
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="endDate">Date de fin</label>
-              <span class="field-description">Sélectionnez la date de fin estimée du projet.</span>
-              <input nbInput type="date" fullWidth id="endDate" [(ngModel)]="newDsdm.endDate" name="endDate" />
+              <label for="endDate">End Date</label>
+              <span class="field-description">Select the end date of the project.</span>
+              <input nbInput type="date" fullWidth id="endDate" [(ngModel)]="newDsdm.endDate" name="endDate" required #endDate="ngModel" />
+              <div *ngIf="endDate.invalid && endDate.touched" class="text-danger">
+                End date is required.
+              </div>
             </div>
 
             <button nbButton status="primary" type="submit" [disabled]="!dsdmForm.valid">
-              {{ isEditMode ? "Mettre à jour" : "Soumettre" }}
+              {{ isEditMode ? "Update" : "Submit" }}
             </button>
             <button nbButton status="warning" (click)="cancelEdit()" *ngIf="isEditMode">
-              Annuler
+              Cancel
             </button>
           </form>
         </div>
 
+
         <div class="form-container" *ngIf="dsdm && !isEditMode">
           <nb-card-header>
-            <h2>Phase de pré-projet</h2>
-            <h6>Objectif:</h6>
+            <h2>Pre-project phase</h2>
+            <h6>Objective:</h6>
             <p>
-              L'objectif de cette phase est de bien prioriser le projet selon le contexte ;
-              la priorisation se fera selon les autres projets en cours de réalisation et
-              les objectifs business de l’entreprise.
+              The objective of this phase is to properly prioritize the project according to the context; the prioritization will be done according to the other projects in progress and the business objectives of the company.
             </p>
           </nb-card-header>
           <nb-card-body>
             <nb-accordion>
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Contexte</h4>
+                  <h4>Context</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
                   <p>{{ dsdm.context }}</p>
@@ -96,7 +104,7 @@
 
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Priorisation et objectif business</h4>
+                  <h4>Prioritization and business objective</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
                   <ckeditor [editor]="editor" [config]="displayEditorConfig" (ready)="onReady($event)"
@@ -108,7 +116,7 @@
 
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Statut</h4>
+                  <h4>Status</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
                   <p [ngClass]="{
@@ -123,7 +131,7 @@
 
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Date de début</h4>
+                  <h4>Start date</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
                   <p>{{ dsdm.startDate | date }}</p>
@@ -132,7 +140,7 @@
 
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Date de fin</h4>
+                  <h4>End date</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
                   <p>{{ dsdm.endDate | date }}</p>
@@ -150,23 +158,21 @@
 
       </nb-step>
 
-      <nb-step label="FAISABILITY">
+      <nb-step label="FEASIBILITY">
         <div class="d-flex justify-content-between">
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>next</button>
+          <button nbButton nbStepperPrevious>Prev</button>
+          <button nbButton nbStepperNext>Next</button>
         </div>
         <div class="form-container" *ngIf="isEditModeFeasibility || !feasibility">
-          <form (ngSubmit)="
-              isEditModeFeasibility ? saveFeasibility() : addFeasibility()
-            " #feasibilityForm="ngForm" class="feasibility-form">
-            <h3>Objectif :</h3>
+          <form (ngSubmit)="isEditModeFeasibility ? saveFeasibility() : addFeasibility()" #feasibilityForm="ngForm" class="feasibility-form">
+            <h3>Objective:</h3>
             <p class="description">
-              Évaluer la faisabilité technique et commerciale du projet pour déterminer s'il est réalisable et
-              bénéfique, assurant ainsi son succès futur et sa rentabilité. </p>
+              Assess the technical and commercial feasibility of the project to determine if it is achievable and beneficial, thereby ensuring its future success and profitability.
+            </p>
 
             <div class="form-group">
-              <label for="technicalFeasibility">Analyse de Faisabilité Technique</label>
-              <span class="field-description">Décrivez les technologies envisagées et leur viabilité.</span>
+              <label for="technicalFeasibility">Technical Feasibility Analysis</label>
+              <span class="field-description">Describe the technologies considered and their viability.</span>
               <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)"
                 (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFeasibility.technicalFeasibility"
                 name="technicalFeasibility" [ngModelOptions]="{ standalone: true }">
@@ -174,8 +180,8 @@
             </div>
 
             <div class="form-group">
-              <label for="commercialFeasibility">Analyse de Faisabilité Commerciale</label>
-              <span class="field-description">Analyse des coûts et des revenus potentiels.</span>
+              <label for="commercialFeasibility">Commercial Feasibility Analysis</label>
+              <span class="field-description">Analyze the potential costs and revenues.</span>
               <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)"
                 (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFeasibility.commercialFeasibility"
                 name="commercialFeasibility" [ngModelOptions]="{ standalone: true }">
@@ -184,7 +190,7 @@
 
             <div class="form-group">
               <label for="mvp">MVP</label>
-              <span class="field-description">Décrivez les fonctionnalités essentielles du MVP.</span>
+              <span class="field-description">Describe the essential features of the MVP.</span>
               <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)"
                 (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFeasibility.mvp" name="mvp"
                 [ngModelOptions]="{ standalone: true }">
@@ -193,7 +199,7 @@
 
             <div class="form-group">
               <label for="releaseBoard">Release Board</label>
-              <span class="field-description">Planification des versions avec des dates clés.</span>
+              <span class="field-description">Plan releases with key dates.</span>
               <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)"
                 (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFeasibility.releaseBoard"
                 name="releaseBoard" [ngModelOptions]="{ standalone: true }">
@@ -201,8 +207,8 @@
             </div>
 
             <div class="form-group">
-              <label for="viability">Viabilité du Projet</label>
-              <span class="field-description">Justifiez les coûts par rapport aux besoins.</span>
+              <label for="viability">Project Viability</label>
+              <span class="field-description">Justify costs against needs.</span>
               <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)"
                 (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFeasibility.viability"
                 name="viability" [ngModelOptions]="{ standalone: true }">
@@ -210,29 +216,28 @@
             </div>
 
             <button nbButton status="primary" type="submit" [disabled]="!feasibilityForm.valid">
-              {{ isEditModeFeasibility ? "Mettre à jour" : "Soumettre" }}
+              {{ isEditModeFeasibility ? "Update" : "Submit" }}
             </button>
 
             <button nbButton status="warning" (click)="cancelEdit()" *ngIf="isEditMode">
-              Annuler
+              Cancel
             </button>
             <button nbButton status="warning" (click)="cancelEditFeasibility()" *ngIf="isEditModeFeasibility">
-              Annuler
+              Cancel
             </button>
           </form>
         </div>
         <div class="form-container" *ngIf="feasibility && !isEditModeFeasibility">
           <nb-card-header>
-            <h2>La phase de faisabilité</h2>
-            <h6>Objectif:</h6>
-            <p>Évaluer la faisabilité technique et commerciale du projet pour déterminer s'il est réalisable et
-              bénéfique, assurant ainsi son succès futur et sa rentabilité.</p>
+            <h2>The Feasibility Phase</h2>
+            <h6>Objective:</h6>
+            <p>Assess the technical and commercial feasibility of the project to determine if it is achievable and beneficial, thereby ensuring its future success and profitability.</p>
           </nb-card-header>
           <nb-card-body>
             <nb-accordion>
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Analyse de Faisabilité Technique</h4>
+                  <h4>Technical Feasibility Analysis</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
                   <ckeditor [editor]="editor" [config]="displayEditorConfig"
@@ -242,7 +247,7 @@
 
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Analyse de Faisabilité Commerciale</h4>
+                  <h4>Commercial Feasibility Analysis</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
                   <ckeditor [editor]="editor" [config]="displayEditorConfig"
@@ -272,7 +277,7 @@
 
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Viabilité du Projet</h4>
+                  <h4>Project Viability</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
                   <ckeditor [editor]="editor" [config]="displayEditorConfig" [(ngModel)]="feasibility.viability"
@@ -281,168 +286,145 @@
               </nb-accordion-item>
             </nb-accordion>
 
-            <button nbButton status="info" (click)="editFeasibility()">Éditer</button>
+            <button nbButton status="info" (click)="editFeasibility()">Edit</button>
           </nb-card-body>
         </div>
       </nb-step>
-      <nb-step label="FONDATIONS">
+
+      <nb-step label="FOUNDATIONS">
         <div class="d-flex justify-content-between">
           <button nbButton nbStepperPrevious>prev</button>
           <button nbButton nbStepperNext>next</button>
         </div>
         <div class="form-container" *ngIf="isEditModeFoundations || !foundations">
-          <form (ngSubmit)="
-              isEditModeFoundations ? saveFoundations() : addFoundations()
-            " #foundationsForm="ngForm" class="foundations-form">
-            <h3>Objectif :</h3>
+          <form (ngSubmit)="isEditModeFoundations ? saveFoundations() : addFoundations()" #foundationsForm="ngForm" class="foundations-form">
+            <h3>Objective:</h3>
             <p class="description">
-              Construire une base solide pour le projet en définissant clairement les exigences, les ressources
-              nécessaires, et les responsabilités, assurant ainsi une compréhension commune et durable.
+              Build a solid foundation for the project by clearly defining the requirements, necessary resources, and responsibilities, ensuring a shared and enduring understanding.
             </p>
 
             <div class="form-group">
-              <label for="projectVision">Vision du Projet</label>
-              <span class="field-description">Décrivez la vision globale du projet et les objectifs
-                principaux.</span>
-              <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)"
-                (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFoundations.projectVision"
-                name="projectVision" [ngModelOptions]="{ standalone: true }"></ckeditor>
+              <label for="projectVision">Project Vision</label>
+              <span class="field-description">Describe the overall vision of the project and the main objectives.</span>
+              <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)" (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFoundations.projectVision" name="projectVision" [ngModelOptions]="{ standalone: true }"></ckeditor>
             </div>
 
             <div class="form-group">
-              <label for="userNeeds">Besoins des Utilisateurs</label>
-              <span class="field-description">Liste des besoins fonctionnels et non fonctionnels.</span>
-              <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)"
-                (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFoundations.userNeeds"
-                name="userNeeds" [ngModelOptions]="{ standalone: true }">
-              </ckeditor>
+              <label for="userNeeds">User Needs</label>
+              <span class="field-description">List functional and non-functional needs.</span>
+              <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)" (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFoundations.userNeeds" name="userNeeds" [ngModelOptions]="{ standalone: true }"></ckeditor>
             </div>
 
             <div class="form-group">
-              <label for="projectCharter">Documents de Fondation - Charte de Projet</label>
-              <span class="field-description">Décrivez les objectifs, le scope, les parties prenantes et
-                les critères de succès.</span>
-              <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)"
-                (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFoundations.projectCharter"
-                name="projectCharter" [ngModelOptions]="{ standalone: true }"></ckeditor>
+              <label for="projectCharter">Foundations Document - Project Charter</label>
+              <span class="field-description">Describe the goals, scope, stakeholders, and success criteria.</span>
+              <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)" (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFoundations.projectCharter" name="projectCharter" [ngModelOptions]="{ standalone: true }"></ckeditor>
             </div>
 
             <div class="form-group">
-              <label for="requirements">Documents de Fondation - Exigences Détaillées</label>
-              <span class="field-description">Liste complète des fonctionnalités et exigences non
-                fonctionnelles.</span>
-              <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)"
-                (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFoundations.requirements"
-                name="requirements" [ngModelOptions]="{ standalone: true }">
-              </ckeditor>
+              <label for="requirements">Foundations Document - Detailed Requirements</label>
+              <span class="field-description">Complete list of features and non-functional requirements.</span>
+              <ckeditor [editor]="editor" [config]="editorConfig" (ready)="onReady($event)" (change)="onChange($event)" (blur)="onBlur($event)" (focus)="onFocus($event)" [(ngModel)]="newFoundations.requirements" name="requirements" [ngModelOptions]="{ standalone: true }"></ckeditor>
             </div>
 
             <button nbButton status="primary" type="submit" [disabled]="!foundationsForm.valid">
-              {{ isEditModeFoundations ? "Mettre à jour" : "Soumettre" }}
+              {{ isEditModeFoundations ? "Update" : "Submit" }}
             </button>
-            <button nbButton status="warning" (click)="cancelEdit()" *ngIf="isEditMode">
-              Annuler
-            </button>
-            <button nbButton status="warning" (click)="cancelEditFoundations()" *ngIf="isEditModeFoundations">
-              Annuler
-            </button>
+            <button nbButton status="warning" (click)="cancelEdit()" *ngIf="isEditMode">Cancel</button>
+            <button nbButton status="warning" (click)="cancelEditFoundations()" *ngIf="isEditModeFoundations">Cancel</button>
           </form>
         </div>
 
         <div class="form-container" *ngIf="foundations && !isEditModeFoundations">
           <nb-card-header>
-            <h2>La phase de fondations</h2>
-            <h6>Objectif:</h6>
-            <p>Construire une base solide pour le projet en définissant clairement les exigences, les ressources
-              nécessaires, et les responsabilités, assurant ainsi une compréhension commune et durable.</p>
+            <h2>Foundations Phase</h2>
+            <h6>Objective:</h6>
+            <p>Build a solid foundation for the project by clearly defining the requirements, necessary resources, and responsibilities, ensuring a shared and enduring understanding.</p>
           </nb-card-header>
           <nb-card-body>
             <nb-accordion>
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Vision du Projet</h4>
+                  <h4>Project Vision</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
-                  <ckeditor [editor]="editor" [config]="displayEditorConfig" [(ngModel)]="foundations.projectVision"
-                    name="projectVision"></ckeditor>
+                  <ckeditor [editor]="editor" [config]="displayEditorConfig" [(ngModel)]="foundations.projectVision" name="projectVision"></ckeditor>
                 </nb-accordion-item-body>
               </nb-accordion-item>
 
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Besoins des Utilisateurs</h4>
+                  <h4>User Needs</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
-                  <ckeditor [editor]="editor" [config]="displayEditorConfig" [(ngModel)]="foundations.userNeeds"
-                    name="userNeeds"></ckeditor>
+                  <ckeditor [editor]="editor" [config]="displayEditorConfig" [(ngModel)]="foundations.userNeeds" name="userNeeds"></ckeditor>
                 </nb-accordion-item-body>
               </nb-accordion-item>
 
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Charte de Projet</h4>
+                  <h4>Project Charter</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
-                  <ckeditor [editor]="editor" [config]="displayEditorConfig" [(ngModel)]="foundations.projectCharter"
-                    name="projectCharter"></ckeditor>
+                  <ckeditor [editor]="editor" [config]="displayEditorConfig" [(ngModel)]="foundations.projectCharter" name="projectCharter"></ckeditor>
                 </nb-accordion-item-body>
               </nb-accordion-item>
 
               <nb-accordion-item>
                 <nb-accordion-item-header>
-                  <h4>Exigences Détaillées</h4>
+                  <h4>Detailed Requirements</h4>
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
-                  <ckeditor [editor]="editor" [config]="displayEditorConfig" [(ngModel)]="foundations.requirements"
-                    name="requirements"></ckeditor>
+                  <ckeditor [editor]="editor" [config]="displayEditorConfig" [(ngModel)]="foundations.requirements" name="requirements"></ckeditor>
                 </nb-accordion-item-body>
               </nb-accordion-item>
             </nb-accordion>
 
             <div class="edit-button-container">
               <button nbButton status="info" (click)="editFoundations()">
-                <nb-icon icon="edit-outline"></nb-icon> Éditer
+                <nb-icon icon="edit-outline"></nb-icon> Edit
               </button>
             </div>
           </nb-card-body>
         </div>
       </nb-step>
-      <nb-step label="DEVELOPPEMENT">
+
+      <nb-step label="DEVELOPMENT">
         <nb-card>
           <nb-card-header>
             <div class="d-flex justify-content-between align-items-center">
               <button nbButton nbStepperPrevious>PREV</button>
-              <h3 class="m-0">Gestion des Sprints et Itérations</h3>
+              <h3 class="m-0">Sprint and Iteration Management</h3>
               <button nbButton nbStepperNext>NEXT</button>
             </div>
           </nb-card-header>
           <nb-card-body>
 
             <button nbButton status="success" class="my-3" (click)="toggleSprintForm()">
-              <nb-icon icon="plus-circle-outline"></nb-icon> Ajouter un Sprint
+              <nb-icon icon="plus-circle-outline"></nb-icon> Add a Sprint
             </button>
 
-            <!-- Formulaire d'ajout de sprint -->
+            <!-- Sprint addition form -->
             <div class="form-container" *ngIf="showSprintForm">
               <form (ngSubmit)="addSprint()" #sprintForm="ngForm" class="sprint-form">
-                <h4>Ajouter un Sprint</h4>
+                <h4>Add a Sprint</h4>
                 <div class="form-group">
-                  <label for="sprintName">Nom du Sprint</label>
+                  <label for="sprintName">Sprint Name</label>
                   <input nbInput fullWidth id="sprintName" class="form-control" [(ngModel)]="newSprint.name"
                     name="sprintName" required />
                 </div>
                 <div class="d-flex justify-content-end">
                   <button nbButton status="primary" type="submit" [disabled]="!sprintForm.valid">
-                    Ajouter
+                    Add
                   </button>
                   <button nbButton status="danger" type="button" (click)="toggleSprintForm()" class="ml-2">
-                    Annuler
+                    Cancel
                   </button>
                 </div>
               </form>
             </div>
 
-            <!-- Liste des sprints -->
+            <!-- Sprint list -->
             <div class="form-container" *ngIf="sprints.length > 0">
               <nb-accordion>
                 <nb-accordion-item *ngFor="let sprint of nonArchivedSprints">
@@ -451,40 +433,40 @@
                   </nb-accordion-item-header>
                   <nb-accordion-item-body>
 
-                    <!-- Boutons d'action -->
+                    <!-- Action buttons -->
                     <div class="d-flex justify-content-between">
                       <div *ngIf="!isEditModeSprint || editingSprint.id !== sprint.id">
                         <button nbButton status="info" (click)="toggleSprintEdit(sprint)">
-                          <nb-icon icon="edit-outline"></nb-icon> Modifier
+                          <nb-icon icon="edit-outline"></nb-icon> Edit
                         </button>
                         <button nbButton status="warning" (click)="archiveSprint(sprint)">
-                          <nb-icon icon="archive-outline"></nb-icon> Archiver
+                          <nb-icon icon="archive-outline"></nb-icon> Archive
                         </button>
                       </div>
                     </div>
 
-                    <!-- Formulaire d'édition de sprint -->
+                    <!-- Sprint editing form -->
                     <form *ngIf="isEditModeSprint && editingSprint.id === sprint.id" (ngSubmit)="saveSprint()">
                       <div class="form-group">
-                        <label for="newSprintName">Nouveau nom</label>
-                        <input nbInput fullWidth [(ngModel)]="editingSprintName" name="newSprintName" required placeholder="Nouveau nom">
+                        <label for="newSprintName">New Name</label>
+                        <input nbInput fullWidth [(ngModel)]="editingSprintName" name="newSprintName" required placeholder="New name">
                       </div>
                       <div class="d-flex justify-content-end">
-                        <button nbButton status="success" type="submit">Mettre à jour</button>
+                        <button nbButton status="success" type="submit">Update</button>
                         <button nbButton status="warning" type="button" (click)="toggleSprintEdit(sprint)" class="ml-2">
-                          Annuler
+                          Cancel
                         </button>
                       </div>
                     </form>
 
-                    <!-- Ajouter une itération -->
+                    <!-- Add an iteration -->
                     <button nbButton status="primary" (click)="toggleIterationForm(sprint)" class="my-3">
-                      <nb-icon icon="plus-circle-outline"></nb-icon> Ajouter une Itération
+                      <nb-icon icon="plus-circle-outline"></nb-icon> Add an Iteration
                     </button>
 
                     <form *ngIf="sprint.showIterationForm" (ngSubmit)="addIteration(sprint)" #iterationForm="ngForm"
                       class="iteration-form">
-                      <h4>Ajouter une Itération à {{ sprint.name }}</h4>
+                      <h4>Add an Iteration to {{ sprint.name }}</h4>
                       <div class="form-group">
                         <label for="feature">Feature</label>
                         <input nbInput fullWidth id="feature" class="form-control" [(ngModel)]="newIteration.feature"
@@ -496,13 +478,13 @@
                           [(ngModel)]="newIteration.deliverables" required></textarea>
                       </div>
                       <button nbButton status="primary" type="submit" [disabled]="!iterationForm.valid">
-                        Ajouter Itération
+                        Add Iteration
                       </button>
                     </form>
 
-                    <!-- Liste des itérations -->
+                    <!-- Iteration list -->
                     <div class="iteration-list mt-4" *ngIf="sprint.iterations && sprint.iterations.length > 0">
-                      <h5>Liste des Itérations</h5>
+                      <h5>Iteration List</h5>
                       <table class="table table-striped">
                         <thead>
                           <tr>
@@ -550,9 +532,9 @@
                       </table>
                     </div>
 
-                    <!-- Liste des itérations archivées -->
+                    <!-- Archived iteration list -->
                     <div class="iteration-archive-list mt-4" *ngIf="sprint.iterations && sprint.iterations.length > 0">
-                      <h5>Archives des Itérations</h5>
+                      <h5>Archived Iterations</h5>
                       <table class="table table-striped">
                         <thead>
                           <tr>
@@ -580,10 +562,10 @@
               </nb-accordion>
             </div>
 
-            <!-- Section des Sprints archivés -->
+            <!-- Archived sprints section -->
             <nb-card class="mt-5">
               <nb-card-header>
-                <h4>Sprints Archivés</h4>
+                <h4>Archived Sprints</h4>
               </nb-card-header>
               <nb-card-body>
                 <nb-accordion>
@@ -593,9 +575,8 @@
                     </nb-accordion-item-header>
                     <nb-accordion-item-body>
                       <button nbButton status="danger" (click)="deleteSprint(sprint)">
-                        <nb-icon icon="trash-2-outline"></nb-icon> Supprimer
+                        <nb-icon icon="trash-2-outline"></nb-icon> Delete
                       </button>
-                      <!-- Ajoutez ici la gestion des itérations archivées si nécessaire -->
                     </nb-accordion-item-body>
                   </nb-accordion-item>
                 </nb-accordion>
@@ -605,54 +586,52 @@
           </nb-card-body>
         </nb-card>
       </nb-step>
-
-
-      <nb-step label="DEPLOIEMENT">
+      <nb-step label="DEPLOYMENT">
         <nb-card>
           <nb-card-header>
             <div class="d-flex justify-content-between align-items-center">
-              <button nbButton nbStepperPrevious >PREV</button>
-              <h3 class="m-0">Gestion des Plans de Déploiement</h3>
-              <button nbButton nbStepperNext >NEXT</button>
+              <button nbButton nbStepperPrevious>PREV</button>
+              <h3 class="m-0">Deployment Plan Management</h3>
+              <button nbButton nbStepperNext>NEXT</button>
             </div>
           </nb-card-header>
           <nb-card-body>
 
             <button nbButton status="success" class="my-3" (click)="toggleDeploymentPlanForm()">
-              <nb-icon icon="plus-circle-outline"></nb-icon> Ajouter un Plan de Déploiement
+              <nb-icon icon="plus-circle-outline"></nb-icon> Add Deployment Plan
             </button>
 
-            <!-- Formulaire d'ajout de plan de déploiement -->
+            <!-- Deployment Plan Form -->
             <div class="form-container" *ngIf="showDeploymentPlanForm">
               <form (ngSubmit)="addDeploymentPlan()" #deploymentPlanForm="ngForm" class="deployment-form">
-                <h4>Ajouter un Plan de Déploiement</h4>
+                <h4>Add Deployment Plan</h4>
                 <div class="form-group">
-                  <label for="environment">Environnement de Production</label>
+                  <label for="environment">Production Environment</label>
                   <input nbInput fullWidth id="environment" class="form-control" [(ngModel)]="newDeploymentPlan.environment"
                     name="environment" required />
                 </div>
                 <div class="form-group">
-                  <label for="dataMigration">Migration des Données</label>
+                  <label for="dataMigration">Data Migration</label>
                   <textarea nbInput fullWidth id="dataMigration" name="dataMigration" class="form-control"
                     [(ngModel)]="newDeploymentPlan.dataMigration" required></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="preProdTests">Tests de Pré-production</label>
+                  <label for="preProdTests">Pre-production Tests</label>
                   <textarea nbInput fullWidth id="preProdTests" name="preProdTests" class="form-control"
                     [(ngModel)]="newDeploymentPlan.preProdTests" required></textarea>
                 </div>
                 <div class="d-flex justify-content-end">
                   <button nbButton status="primary" type="submit" [disabled]="!deploymentPlanForm.valid">
-                    Ajouter Plan de Déploiement
+                    Add Deployment Plan
                   </button>
                   <button nbButton status="danger" type="button" (click)="toggleDeploymentPlanForm()" class="ml-2">
-                    Annuler
+                    Cancel
                   </button>
                 </div>
               </form>
             </div>
 
-            <!-- Liste des plans de déploiement -->
+            <!-- Deployment Plans List -->
             <div class="form-container" *ngIf="deploymentPlans.length > 0">
               <nb-accordion>
                 <nb-accordion-item *ngFor="let plan of nonArchivedDeploymentPlans">
@@ -661,128 +640,127 @@
                   </nb-accordion-item-header>
                   <nb-accordion-item-body>
                     <div class="plan-details">
-                      <p><strong>Environnement :</strong> {{ plan.environment }}</p>
-                      <p><strong>Migration des Données :</strong> {{ plan.dataMigration }}</p>
-                      <p><strong>Tests de Pré-production :</strong> {{ plan.preProdTests }}</p>
+                      <p><strong>Environment:</strong> {{ plan.environment }}</p>
+                      <p><strong>Data Migration:</strong> {{ plan.dataMigration }}</p>
+                      <p><strong>Pre-production Tests:</strong> {{ plan.preProdTests }}</p>
                     </div>
-                    <!-- Boutons d'action pour le plan de déploiement -->
+                    <!-- Action buttons for the deployment plan -->
                     <div class="d-flex justify-content-between">
                       <div *ngIf="!isEditModeDeploymentPlan || editingDeploymentPlan.id !== plan.id">
                         <button nbButton status="info" (click)="toggleDeploymentPlanEdit(plan)">
-                          <nb-icon icon="edit-outline"></nb-icon> Modifier
+                          <nb-icon icon="edit-outline"></nb-icon> Edit
                         </button>
                         <button nbButton status="warning" (click)="archiveDeploymentPlan(plan)">
-                          <nb-icon icon="archive-outline"></nb-icon> Archiver
+                          <nb-icon icon="archive-outline"></nb-icon> Archive
                         </button>
                       </div>
                     </div>
 
-                    <!-- Formulaire d'édition de plan de déploiement -->
+                    <!-- Edit Deployment Plan Form -->
                     <form *ngIf="isEditModeDeploymentPlan && editingDeploymentPlan.id === plan.id" (ngSubmit)="saveDeploymentPlan()">
                       <div class="form-group">
-                        <label for="newEnvironment">Nouvel Environnement</label>
-                        <input nbInput fullWidth [(ngModel)]="editingDeploymentPlan.environment" name="newEnvironment" required placeholder="Nouvel Environnement">
+                        <label for="newEnvironment">New Environment</label>
+                        <input nbInput fullWidth [(ngModel)]="editingDeploymentPlan.environment" name="newEnvironment" required placeholder="New Environment">
                       </div>
                       <div class="form-group">
-                        <label for="newDataMigration">Nouvelle Migration des Données</label>
+                        <label for="newDataMigration">New Data Migration</label>
                         <textarea nbInput fullWidth [(ngModel)]="editingDeploymentPlan.dataMigration" name="newDataMigration" required></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="newPreProdTests">Nouveaux Tests de Pré-production</label>
+                        <label for="newPreProdTests">New Pre-production Tests</label>
                         <textarea nbInput fullWidth [(ngModel)]="editingDeploymentPlan.preProdTests" name="newPreProdTests" required></textarea>
                       </div>
                       <div class="d-flex justify-content-end">
-                        <button nbButton status="success" type="submit">Mettre à jour</button>
+                        <button nbButton status="success" type="submit">Update</button>
                         <button nbButton status="warning" type="button" (click)="toggleDeploymentPlanEdit(plan)" class="ml-2">
-                          Annuler
+                          Cancel
                         </button>
                       </div>
                     </form>
 
-                    <!-- Bouton pour ajouter une release -->
+                    <!-- Button to add a release -->
                     <button nbButton status="primary" (click)="toggleReleaseForm(plan)" class="my-3">
-                      <nb-icon icon="plus-circle-outline"></nb-icon> Ajouter une Release
+                      <nb-icon icon="plus-circle-outline"></nb-icon> Add Release
                     </button>
 
-                    <!-- Formulaire d'ajout de release -->
-                    <form *ngIf="plan.showReleaseForm" (ngSubmit)="addRelease(plan)" #releaseForm="ngForm"
-                      class="release-form">
-                      <h4>Ajouter une Release pour {{ plan.environment }}</h4>
+                    <!-- Release Form -->
+                    <form *ngIf="plan.showReleaseForm" (ngSubmit)="addRelease(plan)" #releaseForm="ngForm" class="release-form">
+                      <h4>Add Release for {{ plan.environment }}</h4>
                       <div class="form-group">
-                        <label for="releaseName">Nom de la Release</label>
+                        <label for="releaseName">Release Name</label>
                         <input nbInput fullWidth id="releaseName" class="form-control" [(ngModel)]="newRelease.name"
                           name="releaseName" required />
                       </div>
                       <div class="form-group">
-                        <label for="releaseDetails">Détails de la Release</label>
+                        <label for="releaseDetails">Release Details</label>
                         <textarea nbInput fullWidth id="releaseDetails" name="releaseDetails" class="form-control"
                           [(ngModel)]="newRelease.details" required></textarea>
                       </div>
                       <div class="d-flex justify-content-end">
                         <button nbButton status="primary" type="submit" [disabled]="!releaseForm.valid">
-                          Ajouter Release
+                          Add Release
                         </button>
                       </div>
                     </form>
 
-                   <!-- Liste des releases -->
-<div class="release-list mt-4" *ngIf="plan && plan.releases && plan.releases.length > 0">
-  <h5>Liste des Releases</h5>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Détails</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let release of plan.releases" [hidden]="release.archived">
-        <td *ngIf="!isEditModeRelease || (editingRelease && editingRelease.id !== release.id)">
-          {{ release.name }}
-        </td>
-        <td *ngIf="!isEditModeRelease || (editingRelease && editingRelease.id !== release.id)">
-          {{ release.details }}
-        </td>
-        <td *ngIf="isEditModeRelease && editingRelease && editingRelease.id === release.id">
-          <input nbInput fullWidth [(ngModel)]="editingRelease.name" placeholder="Nom">
-        </td>
-        <td *ngIf="isEditModeRelease && editingRelease && editingRelease.id === release.id">
-          <textarea nbInput fullWidth [(ngModel)]="editingRelease.details" placeholder="Détails"></textarea>
-        </td>
-        <td>
-          <div class="d-flex">
-            <button nbButton status="info" *ngIf="!isEditModeRelease || (editingRelease && editingRelease.id !== release.id)"
-              (click)="editRelease(plan, release)">
-              <nb-icon icon="edit-outline"></nb-icon>
-            </button>
-            <button nbButton status="warning" *ngIf="!isEditModeRelease || (editingRelease && editingRelease.id !== release.id)"
-              (click)="archiveRelease(plan, release)">
-              <nb-icon icon="archive-outline"></nb-icon>
-            </button>
-            <button nbButton status="success" *ngIf="isEditModeRelease && editingRelease && editingRelease.id === release.id"
-              (click)="updateRelease(plan)">
-              <nb-icon icon="checkmark-outline"></nb-icon>
-            </button>
-            <button nbButton status="danger" *ngIf="isEditModeRelease && editingRelease && editingRelease.id === release.id"
-              (click)="cancelEditRelease()">
-              <nb-icon icon="close-outline"></nb-icon>
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-                    <!-- Liste des releases archivées -->
-                    <div class="release-archive-list mt-4" *ngIf="plan.releases && plan.releases.length > 0">
-                      <h5>Archives des Releases</h5>
+                    <!-- Releases List -->
+                    <div class="release-list mt-4" *ngIf="plan && plan.releases && plan.releases.length > 0">
+                      <h5>Releases List</h5>
                       <table class="table table-striped">
                         <thead>
                           <tr>
-                            <th>Nom</th>
-                            <th>Détails</th>
+                            <th>Name</th>
+                            <th>Details</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let release of plan.releases" [hidden]="release.archived">
+                            <td *ngIf="!isEditModeRelease || (editingRelease && editingRelease.id !== release.id)">
+                              {{ release.name }}
+                            </td>
+                            <td *ngIf="!isEditModeRelease || (editingRelease && editingRelease.id !== release.id)">
+                              {{ release.details }}
+                            </td>
+                            <td *ngIf="isEditModeRelease && editingRelease && editingRelease.id === release.id">
+                              <input nbInput fullWidth [(ngModel)]="editingRelease.name" placeholder="Name">
+                            </td>
+                            <td *ngIf="isEditModeRelease && editingRelease && editingRelease.id === release.id">
+                              <textarea nbInput fullWidth [(ngModel)]="editingRelease.details" placeholder="Details"></textarea>
+                            </td>
+                            <td>
+                              <div class="d-flex">
+                                <button nbButton status="info" *ngIf="!isEditModeRelease || (editingRelease && editingRelease.id !== release.id)"
+                                  (click)="editRelease(plan, release)">
+                                  <nb-icon icon="edit-outline"></nb-icon>
+                                </button>
+                                <button nbButton status="warning" *ngIf="!isEditModeRelease || (editingRelease && editingRelease.id !== release.id)"
+                                  (click)="archiveRelease(plan, release)">
+                                  <nb-icon icon="archive-outline"></nb-icon>
+                                </button>
+                                <button nbButton status="success" *ngIf="isEditModeRelease && editingRelease && editingRelease.id === release.id"
+                                  (click)="updateRelease(plan)">
+                                  <nb-icon icon="checkmark-outline"></nb-icon>
+                                </button>
+                                <button nbButton status="danger" *ngIf="isEditModeRelease && editingRelease && editingRelease.id === release.id"
+                                  (click)="cancelEditRelease()">
+                                  <nb-icon icon="close-outline"></nb-icon>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <!-- Archived Releases List -->
+                    <div class="release-archive-list mt-4" *ngIf="plan.releases && plan.releases.length > 0">
+                      <h5>Archived Releases</h5>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Details</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -805,289 +783,360 @@
               </nb-accordion>
             </div>
 
-            <!-- Liste des plans archivés -->
-            <div class="form-container" *ngIf="archivedDeploymentPlans.length > 0">
-              <nb-card-header>
-                <h2>Plans de Déploiement Archivés</h2>
-              </nb-card-header>
-              <nb-card-body>
-                <nb-accordion>
-                  <nb-accordion-item *ngFor="let plan of archivedDeploymentPlans">
-                    <nb-accordion-item-header>
-                      {{ plan.environment }}
-                    </nb-accordion-item-header>
-                    <nb-accordion-item-body>
-                      <div class="plan-details">
-                        <p>
-                          <strong>Migration des Données:</strong>
-                          {{ plan.dataMigration }}
-                        </p>
-                        <p>
-                          <strong>Tests de Pré-production:</strong>
-                          {{ plan.preProdTests }}
-                        </p>
-                      </div>
+            <!-- Archived Deployment Plans List -->
+            <div class="archive-list mt-4" *ngIf="archivedDeploymentPlans.length > 0">
+              <h4>Archived Deployment Plans</h4>
+              <nb-list>
+                <nb-list-item *ngFor="let plan of archivedDeploymentPlans">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <h5>{{ plan.environment }}</h5>
+                      <p><strong>Data Migration:</strong> {{ plan.dataMigration }}</p>
+                      <p><strong>Pre-production Tests:</strong> {{ plan.preProdTests }}</p>
+                    </div>
+                    <div class="d-flex align-items-center">
                       <button nbButton status="danger" (click)="deleteDeploymentPlan(plan)">
-                        <nb-icon icon="trash-2-outline"></nb-icon> Supprimer Définitivement
+                        <nb-icon icon="trash-2-outline"></nb-icon> Delete
                       </button>
-                    </nb-accordion-item-body>
-                  </nb-accordion-item>
-                </nb-accordion>
-              </nb-card-body>
+                    </div>
+                  </div>
+                </nb-list-item>
+              </nb-list>
             </div>
-
           </nb-card-body>
         </nb-card>
       </nb-step>
+<nb-step label="POST-PROJECT">
+  <div class="d-flex justify-content-between navigation-buttons">
+    <button nbButton nbStepperPrevious>Prev</button>
+    <button nbButton disabled nbStepperNext>Next</button>
+  </div>
+  <nb-card>
+    <nb-card-header>
+      <h2>Post-Project Phase</h2>
+      <p>
+        Objective: Measure the business performance of the product and ensure it
+        achieves the expected outcomes.
+      </p>
+    </nb-card-header>
+    <nb-card-body>
+      <!-- Performance Evaluation -->
+      <nb-tabset fullWidth>
+        <!-- Key Performance Indicators (KPI) -->
+        <nb-tab tabTitle="Performance Evaluation">
+          <form (ngSubmit)="addKpi()" #kpiForm="ngForm" class="kpi-form">
+            <h4>Key Performance Indicators (KPI)</h4>
+            <div class="form-group">
+              <label for="kpiName">KPI Name</label>
+              <input
+                nbInput
+                fullWidth
+                id="kpiName"
+                class="form-control"
+                [(ngModel)]="newKpi.name"
+                name="kpiName"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="kpiValue">KPI Value</label>
+              <input
+                nbInput
+                fullWidth
+                id="kpiValue"
+                class="form-control"
+                [(ngModel)]="newKpi.value"
+                name="kpiValue"
+                required
+              />
+            </div>
+            <button nbButton status="primary" type="submit" [disabled]="!kpiForm.valid">
+              Add KPI
+            </button>
+          </form>
 
-      <nb-step label="POST-PROJET">
-        <div class="d-flex justify-content-between navigation-buttons">
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton disabled nbStepperNext>next</button>
-        </div>
-        <nb-card>
-          <nb-card-header>
-            <h2>Phase de Post-projet</h2>
-            <p>
-              Objectif : Mesurer les performances business du produit et
-              s'assurer qu'il atteint les résultats attendus.
-            </p>
-          </nb-card-header>
-          <nb-card-body>
-            <!-- Évaluation des Performances -->
-            <nb-tabset fullWidth>
-              <!-- Indicateurs Clés de Performance (KPI) -->
-              <nb-tab tabTitle="Évaluation des Performances">
-                <form (ngSubmit)="addKpi()" #kpiForm="ngForm" class="kpi-form">
-                  <h4>Indicateurs Clés de Performance (KPI)</h4>
-                  <div class="form-group">
-                    <label for="kpiName">Nom du KPI</label>
-                    <input
-                      nbInput
-                      fullWidth
-                      id="kpiName"
-                      class="form-control"
-                      [(ngModel)]="newKpi.name"
-                      name="kpiName"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="kpiValue">Valeur du KPI</label>
-                    <input
-                      nbInput
-                      fullWidth
-                      id="kpiValue"
-                      class="form-control"
-                      [(ngModel)]="newKpi.value"
-                      name="kpiValue"
-                      required
-                    />
-                  </div>
-                  <button nbButton status="primary" type="submit" [disabled]="!kpiForm.valid">
-                    Ajouter KPI
-                  </button>
-                </form>
+          <div *ngIf="kpis.length">
+            <h4>KPI List</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let kpi of kpis">
+                  <td>{{ kpi.name }}</td>
+                  <td>{{ kpi.value }}</td>
+                  <td>
+                    <button nbButton status="info" (click)="editKpi(kpi)">
+                      <nb-icon icon="edit-outline"></nb-icon>
+                    </button>
+                    <button nbButton status="warning" (click)="archiveKpi(kpi)">
+                      <nb-icon icon="archive-outline"></nb-icon>
+                    </button>
+                    <button nbButton status="danger" [disabled]="!kpi.archived" (click)="deleteKpi(kpi)">
+                      <nb-icon icon="trash-2-outline"></nb-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-                <div *ngIf="kpis.length">
-                  <h4>Liste des KPI</h4>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Nom</th>
-                        <th>Valeur</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let kpi of kpis">
-                        <td>{{ kpi.name }}</td>
-                        <td>{{ kpi.value }}</td>
-                        <td>
-                          <button nbButton status="info" (click)="editKpi(kpi)">
-                            <nb-icon icon="edit-outline"></nb-icon>
-                          </button>
-                          <button nbButton status="warning" (click)="archiveKpi(kpi)">
-                            <nb-icon icon="archive-outline"></nb-icon>
-                          </button>
-                          <button nbButton status="danger" [disabled]="!kpi.archived" (click)="deleteKpi(kpi)">
-                            <nb-icon icon="trash-2-outline"></nb-icon>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+          <div *ngIf="archivedKpis.length">
+            <h4>Archived KPIs</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let kpi of archivedKpis">
+                  <td>{{ kpi.name }}</td>
+                  <td>{{ kpi.value }}</td>
+                  <td>
+                    <button nbButton status="danger" (click)="deleteKpi(kpi)">
+                      <nb-icon icon="trash-2-outline"></nb-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </nb-tab>
 
-                <div *ngIf="archivedKpis.length">
-                  <h4>KPI Archivés</h4>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Nom</th>
-                        <th>Valeur</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let kpi of archivedKpis">
-                        <td>{{ kpi.name }}</td>
-                        <td>{{ kpi.value }}</td>
-                        <td>
-                          <button nbButton status="danger" (click)="deleteKpi(kpi)">
-                            <nb-icon icon="trash-2-outline"></nb-icon>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </nb-tab>
+        <!-- Performance Reports -->
+        <nb-tab tabTitle="Performance Reports">
+          <form (ngSubmit)="addReport()" #reportForm="ngForm" class="report-form">
+            <h4>Performance Reports</h4>
+            <div class="form-group">
+              <label for="reportTitle">Report Title</label>
+              <input
+                nbInput
+                fullWidth
+                id="reportTitle"
+                class="form-control"
+                [(ngModel)]="newReport.title"
+                name="reportTitle"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="reportContent">Report Content</label>
+              <textarea
+                nbInput
+                fullWidth
+                id="reportContent"
+                class="form-control"
+                [(ngModel)]="newReport.content"
+                name="reportContent"
+                required
+              ></textarea>
+            </div>
+            <button nbButton status="primary" type="submit" [disabled]="!reportForm.valid">
+              Add Report
+            </button>
+          </form>
 
-              <!-- Rapports de Performance -->
-              <nb-tab tabTitle="Rapports de Performance">
-                <form (ngSubmit)="addReport()" #reportForm="ngForm" class="report-form">
-                  <h4>Rapports de Performance</h4>
-                  <div class="form-group">
-                    <label for="reportTitle">Titre du Rapport</label>
-                    <input nbInput fullWidth id="reportTitle" class="form-control" [(ngModel)]="newReport.title"
-                      name="reportTitle" required />
-                  </div>
-                  <div class="form-group">
-                    <label for="reportContent">Contenu du Rapport</label>
-                    <textarea nbInput fullWidth id="reportContent" class="form-control" [(ngModel)]="newReport.content"
-                      name="reportContent" required></textarea>
-                  </div>
-                  <button nbButton status="primary" type="submit" [disabled]="!reportForm.valid">
-                    Ajouter Rapport
-                  </button>
-                </form>
+          <div *ngIf="reports.length">
+            <h4>Report List</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Content</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let report of reports">
+                  <td>{{ report.title }}</td>
+                  <td>{{ report.content }}</td>
+                  <td>
+                    <button nbButton status="info" (click)="editReport(report)">
+                      <nb-icon icon="edit-outline"></nb-icon>
+                    </button>
 
-                <div *ngIf="reports.length">
-                  <h4>Liste des Rapports</h4>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Titre</th>
-                        <th>Contenu</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let report of reports">
-                        <td>{{ report.title }}</td>
-                        <td>{{ report.content }}</td>
-                        <td>
-                          <button nbButton status="info" (click)="editReport(report)">
-                            <nb-icon icon="edit-outline"></nb-icon>
-                          </button>
+                    <button nbButton status="warning" (click)="archiveReport(report)">
+                      <nb-icon icon="archive-outline"></nb-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-                          <button nbButton status="warning" (click)="archiveReport(report)">
-                            <nb-icon icon="archive-outline"></nb-icon>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+          <div *ngIf="archivedReports.length">
+            <h4>Archived Reports</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Content</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let archivedReport of archivedReports">
+                  <td>{{ archivedReport.title }}</td>
+                  <td>{{ archivedReport.content }}</td>
+                  <td>
+                    <button nbButton status="danger" (click)="deleteReport(archivedReport)">
+                      <nb-icon icon="trash-2-outline"></nb-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </nb-tab>
 
-                <div *ngIf="archivedReports.length">
-                  <h4>Liste des Rapports Archivés</h4>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Titre</th>
-                        <th>Contenu</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let archivedReport of archivedReports">
-                        <td>{{ archivedReport.title }}</td>
-                        <td>{{ archivedReport.content }}</td>
-                        <td>
-                          <button nbButton status="danger" (click)="deleteReport(archivedReport)">
-                            <nb-icon icon="trash-2-outline"></nb-icon>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </nb-tab>
+        <!-- Feedback and Improvements -->
+        <nb-tab tabTitle="Feedback and Improvements">
+          <!-- User Feedback Collection -->
+          <form (ngSubmit)="addFeedback()" #feedbackForm="ngForm" class="feedback-form">
+            <h4>User Feedback Collection</h4>
+            <div class="form-group">
+              <label for="feedbackContent">User Feedback</label>
+              <textarea
+                nbInput
+                fullWidth
+                id="feedbackContent"
+                class="form-control"
+                [(ngModel)]="newFeedback.content"
+                name="feedbackContent"
+                required
+              ></textarea>
+            </div>
+            <button nbButton status="primary" type="submit" [disabled]="!feedbackForm.valid">
+              Add Feedback
+            </button>
+          </form>
 
-              <!-- Feedback et Améliorations -->
-              <nb-tab tabTitle="Feedback et Améliorations">
-                <!-- Collecte des Feedbacks Utilisateurs -->
-                <form (ngSubmit)="addFeedback()" #feedbackForm="ngForm" class="feedback-form">
-                  <h4>Collecte des Feedbacks Utilisateurs</h4>
-                  <div class="form-group">
-                    <label for="feedbackContent">Feedback Utilisateur</label>
-                    <textarea nbInput fullWidth id="feedbackContent" class="form-control"
-                      [(ngModel)]="newFeedback.content" name="feedbackContent" required></textarea>
-                  </div>
-                  <button nbButton status="primary" type="submit" [disabled]="!feedbackForm.valid">
-                    Ajouter Feedback
-                  </button>
-                </form>
+          <!-- Feedback List -->
+          <div *ngIf="feedbacks.length">
+            <h4>Feedback List</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Feedback</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let feedback of feedbacks">
+                  <td>{{ feedback.content }}</td>
+                  <td>
+                    <button nbButton status="info" (click)="editFeedback(feedback)">
+                      <nb-icon icon="edit-outline"></nb-icon>
+                    </button>
+                    <button nbButton status="warning" (click)="archiveFeedback(feedback)">
+                      <nb-icon icon="archive-outline"></nb-icon>
+                    </button>
+                    <button nbButton status="danger" (click)="deleteFeedback(feedback)" [disabled]="!feedback.archived">
+                      <nb-icon icon="trash-2-outline"></nb-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-                <!-- Liste des Feedbacks -->
-                <div *ngIf="feedbacks.length">
-                  <h4>Liste des Feedbacks</h4>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Feedback</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let feedback of feedbacks">
-                        <td>{{ feedback.content }}</td>
-                        <td>
-                          <button nbButton status="info" (click)="editFeedback(feedback)">
-                            <nb-icon icon="edit-outline"></nb-icon>
-                          </button>
-                          <button nbButton status="warning" (click)="archiveFeedback(feedback)">
-                            <nb-icon icon="archive-outline"></nb-icon>
-                          </button>
-                          <button nbButton status="danger" (click)="deleteFeedback(feedback)" [disabled]="!feedback.archived">
-                            <nb-icon icon="trash-2-outline"></nb-icon>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+          <!-- Archived Feedback List -->
+          <div *ngIf="archivedFeedbacks.length">
+            <h4>Archived Feedback</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Feedback</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let feedback of archivedFeedbacks">
+                  <td>{{ feedback.content }}</td>
+                  <td>
+                    <button nbButton status="danger" (click)="deleteFeedback(feedback)">
+                      <nb-icon icon="trash-2-outline"></nb-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-                <!-- Liste des Feedbacks Archivés -->
-                <div *ngIf="archivedFeedbacks.length">
-                  <h4>Liste des Feedbacks Archivés</h4>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Feedback</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let feedback of archivedFeedbacks">
-                        <td>{{ feedback.content }}</td>
-                        <td>
-                          <button nbButton status="danger" (click)="deleteFeedback(feedback)">
-                            <nb-icon icon="trash-2-outline"></nb-icon>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </nb-tab>
-            </nb-tabset>
-          </nb-card-body>
-        </nb-card>
-      </nb-step>
+                <!-- Formulaire pour ajouter un nouveau Plan d'Amélioration -->
+<form (ngSubmit)="addImprovementPlan()" #improvementPlanForm="ngForm" class="improvement-plan-form">
+  <h4>Continuous Improvement Plan</h4>
+  <div class="form-group">
+    <label for="improvementPlanContent">Contents of the Improvement Plan</label>
+    <textarea nbInput fullWidth id="improvementPlanContent" class="form-control"
+      [(ngModel)]="newImprovementPlan.content" name="improvementPlanContent" required></textarea>
+  </div>
+  <button nbButton status="primary" type="submit" [disabled]="!improvementPlanForm.valid">
+    add Improvement Plan
+  </button>
+</form>
 
+<!-- Liste des Plans d'Amélioration actifs -->
+<div *ngIf="improvementPlans.length">
+  <h4>List Improvement Plan</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Content</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let plan of improvementPlans">
+        <td>{{ plan.content }}</td>
+        <td>
+          <button nbButton status="info" (click)="editImprovementPlan(plan)">
+            <nb-icon icon="edit-outline"></nb-icon>
+          </button>
+          <button nbButton status="warning" (click)="archiveImprovementPlan(plan)">
+            <nb-icon icon="archive-outline"></nb-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Liste des Plans d'Amélioration archivés -->
+<div *ngIf="archivedImprovementPlans.length">
+  <h4>Liste des Plans d'Amélioration Archivés</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Contenu</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let plan of archivedImprovementPlans">
+        <td>{{ plan.content }}</td>
+        <td>
+          <button nbButton status="danger" (click)="deleteImprovementPlan(plan)">
+            <nb-icon icon="trash-2-outline"></nb-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card-body>
+  </nb-card>
+</nb-step>
     </nb-stepper>
   </nb-card-body>
 </nb-card>

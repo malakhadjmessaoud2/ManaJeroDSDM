@@ -26,7 +26,15 @@ export class PhaseServiceService {
     { id: "3", title: 'Projet 3', status: 'En attente' },
     { id: "4", title: 'projet 4', status: 'En cours' },
     { id: "5", title: 'EventMaster', status: 'En cours' },
-    { id: "6", title: 'cap', status: 'En cours' }
+    { id: "6", title: 'cap', status: 'En cours' },
+    { id: "7", title: 'réservation', status: 'En cours' },
+    { id: "8", title: 'Projet 8', status: 'Terminé' },
+    { id: "9", title: 'Projet 9', status: 'Terminé' },
+    { id: "10", title: 'Projet 10', status: 'Terminé' },
+    { id: "11", title: 'Projet 11', status: 'Terminé' },
+    { id: "12", title: 'Projet 12', status: 'Terminé' },
+
+
 
 
   ];
@@ -90,18 +98,6 @@ export class PhaseServiceService {
       .set('id_user', id_user);
 
     return this.http.put<Dsdm>(url, {}, { params });
-  }
-  getPhaseProgress(): Observable<any[]> {
-    // Vous pouvez ajuster cette méthode pour récupérer les données réelles à partir de votre backend.
-    // Exemple statique:
-    return of([
-      { phase: 'Pré-Projet', completPercentage: 75, restantPercentage: 25 },
-      { phase: 'Faisabilité', completPercentage: 50, restantPercentage: 50 },
-      { phase: 'Fondations', completPercentage: 90, restantPercentage: 10 },
-      { phase: 'Développement', completPercentage: 30, restantPercentage: 70 },
-      { phase: 'Déploiement', completPercentage: 60, restantPercentage: 40 },
-      { phase: 'Post-Projet', completPercentage: 10, restantPercentage: 90 },
-    ]);
   }
   // Phase 2
   updateFeasibility(projectId: string, feasibilityId: string, technicalFeasibility: string, commercialFeasibility: string, mvp: string, releaseBoard: string, viability: string, id_user: string): Observable<Feasibility> {
