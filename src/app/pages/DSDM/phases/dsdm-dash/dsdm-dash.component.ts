@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Contacts, RecentUsers, UserData } from '../../../../@core/data/users';
 import { takeWhile } from 'rxjs/operators';
@@ -10,6 +10,13 @@ import { DsdmMethodeComponent } from '../dsdm-methode/dsdm-methode.component';
   styleUrls: ['./dsdm-dash.component.scss']
 })
 export class DsdmDashComponent implements OnDestroy, OnInit{
+  @Input() preProjetCompletion!: any;
+  @Input() feasibilityCompletion!: any;
+  @Input() foundationCompletion!: any;
+  @Input() sprintCompletion!: any;
+  @Input() deploymentPlanCompletion!: any;
+  @Input() postProjectCompletion!: any;
+
   workProgress: any; // ou toute autre valeur dynamique
 
   phaseChartOptions: any;
@@ -209,7 +216,7 @@ initIterationChartOptions(): void {
             this.DsdmMethodeComponent.postProjectCompletion?.remaining || 0,
           ],
         },
-        
+
       ],
     };
   }
