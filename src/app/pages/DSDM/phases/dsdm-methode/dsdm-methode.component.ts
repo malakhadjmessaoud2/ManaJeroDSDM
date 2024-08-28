@@ -1,19 +1,19 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Dsdm } from "../model/dsdm.model";
-import { PhaseServiceService } from "../service/phase-service.service";
-import { Feasibility } from "../model/feasibility.model";
-import { Foundation } from "../model/foundation.model";
-import { Sprint } from "../model/sprint.model";
-import { Iteration } from "../model/iteration.model";
-import { DeploymentPlan } from "../model/deployment-plan.model";
-import { Release } from "../model/release.model";
-import { KPI } from "../model/kpi.model";
-import { Feedback } from "../model/feedback.model";
-import { ImprovementPlan } from "../model/improvement-plan.model";
-import { Report } from "../model/report.model";
+import { Feasibility } from "../../../../core/models/feasibility.model";
+import { Foundation } from "../../../../core/models/foundation.model";
+import { Sprint } from "../../../../core/models/sprint.model";
+import { Iteration } from "../../../../core/models/iteration.model";
+import { DeploymentPlan } from "../../../../core/models/deployment-plan.model";
+import { Release } from "../../../../core/models/release.model";
+import { KPI } from "../../../../core/models/kpi.model";
+import { Feedback } from "../../../../core/models/feedback.model";
+import { ImprovementPlan } from "../../../../core/models/improvement-plan.model";
+import { Report } from "../../../../core/models/report.model";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { DsdmDashComponent } from "../dsdm-dash/dsdm-dash.component";
+import { Dsdm } from "../../../../core/models/dsdm.model";
+import { PhaseServiceService } from "../../../../core/services/phase-service.service";
 
 @Component({
   selector: "ngx-dsdm-methode",

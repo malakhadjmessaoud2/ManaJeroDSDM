@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Advantage } from '../model/advantage.model';
+import { Advantage } from '../models/advantage.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdvantageService {
-  private apiUrl = 'http://localhost:9090/advantage';
+  private apiUrl = 'http://localhost:8085/ManajeroBackend/advantage';
 
   constructor(private http: HttpClient) {}
 

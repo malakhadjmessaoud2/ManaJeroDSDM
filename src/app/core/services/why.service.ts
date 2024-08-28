@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Why } from '../model/why.model';
+import { Why } from '../models/why.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WhyService {
-  private apiUrl = 'http://localhost:9090/why';
+  private apiUrl = 'http://localhost:8085/ManajeroBackend/why';
 
   constructor(private http: HttpClient) {}
 

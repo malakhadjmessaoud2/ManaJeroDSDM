@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Limitation } from '../model/limitation.model';
+import { Limitation } from '../models/limitation.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LimitationService {
-  private apiUrl = 'http://localhost:9090/limitation';
+  private apiUrl = 'http://localhost:8085/ManajeroBackend/limitation';
 
   constructor(private http: HttpClient) {}
 

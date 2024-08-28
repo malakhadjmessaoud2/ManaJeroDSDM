@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Intro } from '../model/intro.model';
+import { Intro } from '../models/intro.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IntroService {
-  private apiUrl = 'http://localhost:9090/introduction';
+  private apiUrl = 'http://localhost:8085/ManajeroBackend/introduction';
 
   constructor(private http: HttpClient) {}
 

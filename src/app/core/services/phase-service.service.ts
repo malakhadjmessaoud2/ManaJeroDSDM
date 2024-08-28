@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Dsdm } from '../model/dsdm.model';
-import { Project } from '../model/project.model';
+import { Project } from '../models/project.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Feasibility } from '../model/feasibility.model';
-import { Foundation } from '../model/foundation.model';
-import { Sprint } from '../model/sprint.model';
-import { Iteration } from '../model/iteration.model';
-import { DeploymentPlan } from '../model/deployment-plan.model';
-import { Release } from '../model/release.model';
-import { KPI } from '../model/kpi.model';
-import { Feedback } from '../model/feedback.model';
-import { ImprovementPlan } from '../model/improvement-plan.model';
-import { Report } from '../model/report.model';
+import { Dsdm } from '../models/dsdm.model';
+import { Feasibility } from '../models/feasibility.model';
+import { Foundation } from '../models/foundation.model';
+import { Sprint } from '../models/sprint.model';
+import { Iteration } from '../models/iteration.model';
+import { DeploymentPlan } from '../models/deployment-plan.model';
+import { Release } from '../models/release.model';
+import { KPI } from '../models/kpi.model';
+import { Feedback } from '../models/feedback.model';
+import { ImprovementPlan } from '../models/improvement-plan.model';
+import { Report } from '../models/report.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -48,17 +49,17 @@ export class PhaseServiceService {
   }
 
   // API URLs
-  private apiUrlDsdm = 'http://localhost:9090/dsdm';
-  private apiUrlFeasibility = 'http://localhost:9090/feasibility';
-  private apiUrlFoundation = 'http://localhost:9090/foundation';
-  private apiUrlSprint = 'http://localhost:9090/sprint';
-  private apiUrlIteration = 'http://localhost:9090/iteration';
-  private apiUrlDeploymentPlan = 'http://localhost:9090/deploymentPlan';
-  private apiUrlRelease = 'http://localhost:9090/release';
-  private apiUrlKPI = 'http://localhost:9090/kpi';
-  private apiUrlReport = 'http://localhost:9090/report';
-  private apiUrlFeedback = 'http://localhost:9090/feedback';
-  private apiUrlImprovementPlan = 'http://localhost:9090/improvementPlan';
+  private apiUrlDsdm = 'http://localhost:8085/ManajeroBackend/dsdm';
+  private apiUrlFeasibility = 'http://localhost:8085/ManajeroBackend/feasibility';
+  private apiUrlFoundation = 'http://localhost:8085/ManajeroBackend/foundation';
+  private apiUrlSprint = 'http://localhost:8085/ManajeroBackend/sprint';
+  private apiUrlIteration = 'http://localhost:8085/ManajeroBackend/iteration';
+  private apiUrlDeploymentPlan = 'http://localhost:8085/ManajeroBackend/deploymentPlan';
+  private apiUrlRelease = 'http://localhost:8085/ManajeroBackend/release';
+  private apiUrlKPI = 'http://localhost:8085/ManajeroBackend/kpi';
+  private apiUrlReport = 'http://localhost:8085/ManajeroBackend/report';
+  private apiUrlFeedback = 'http://localhost:8085/ManajeroBackend/feedback';
+  private apiUrlImprovementPlan = 'http://localhost:8085/ManajeroBackend/improvementPlan';
 
   constructor(private http: HttpClient) {}
 

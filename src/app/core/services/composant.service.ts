@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Composant } from '../model/composant.model';
+import { Composant } from '../models/composant.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComposantService {
-  private apiUrl = 'http://localhost:9090/composant';
+  private apiUrl = 'http://localhost:8085/ManajeroBackend/composant';
 
   constructor(private http: HttpClient) {}
 

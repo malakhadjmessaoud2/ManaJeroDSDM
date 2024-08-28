@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Whatif } from '../model/whatif.model';
+import { Whatif } from '../models/whatif.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WhatifService {
-  private apiUrl = 'http://localhost:9090/whatif';
+  private apiUrl = 'http://localhost:8085/ManajeroBackend/whatif';
 
   constructor(private http: HttpClient) {}
 

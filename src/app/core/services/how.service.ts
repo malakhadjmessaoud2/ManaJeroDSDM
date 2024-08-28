@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { How } from '../model/how.model';
+import { How } from '../models/how.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HowService {
-  private apiUrl = 'http://localhost:9090/how';
+  private apiUrl = 'http://localhost:8085/ManajeroBackend/how';
 
   constructor(private http: HttpClient) {}
 

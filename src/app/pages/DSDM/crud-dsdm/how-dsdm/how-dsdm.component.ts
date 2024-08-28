@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { How } from '../model/how.model';
-import { HowService } from '../service/how.service';
+import { How } from '../../../../core/models/how.model';
+import { HowService } from '../../../../core/services/how.service';
 
 @Component({
   selector: 'ngx-how-dsdm',
