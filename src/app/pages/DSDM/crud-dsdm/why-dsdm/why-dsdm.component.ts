@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Why } from '../../../../core/models/why.model';
-import { WhyService } from '../../../../core/services/why.service';
+import { Why } from '../../../../core/models/dsdm_models/why.model';
+import { WhyService } from '../../../../core/services/dsdm_services/why.service';
 
 @Component({
   selector: 'ngx-why-dsdm',

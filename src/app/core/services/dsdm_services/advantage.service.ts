@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Advantage } from '../models/advantage.model';
+import { Advantage } from '../../models/dsdm_models/advantage.model';
 
 @Injectable({
   providedIn: 'root'

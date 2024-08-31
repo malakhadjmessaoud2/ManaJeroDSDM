@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Whatif } from '../../../../core/models/whatif.model';
-import { WhatifService } from '../../../../core/services/whatif.service';
+import { Whatif } from '../../../../core/models/dsdm_models/whatif.model';
+import { WhatifService } from '../../../../core/services/dsdm_services/whatif.service';
 
 
 @Component({

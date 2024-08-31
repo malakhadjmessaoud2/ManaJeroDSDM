@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { InfiniteListComponent } from '../../../layout/infinite-list/infinite-list.component';
-import { Composant } from '../../../../core/models/composant.model';
-import { ComposantService } from '../../../../core/services/composant.service';
+import { Composant } from '../../../../core/models/dsdm_models/composant.model';
+import { ComposantService } from '../../../../core/services/dsdm_services/composant.service';
 
 @Component({
   selector: 'ngx-dsdm',

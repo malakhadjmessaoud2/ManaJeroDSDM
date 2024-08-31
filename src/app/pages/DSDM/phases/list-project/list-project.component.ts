@@ -1,8 +1,8 @@
 // components/list-project.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Project } from '../../../../core/models/project.model';
-import { PhaseServiceService } from '../../../../core/services/phase-service.service';
+import { Project } from '../../../../core/models/dsdm_models/project.model';
+import { PhaseServiceService } from '../../../../core/services/dsdm_services/phase-service.service';
 
 @Component({
     selector: 'ngx-list-project',

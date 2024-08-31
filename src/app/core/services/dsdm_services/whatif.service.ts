@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Whatif } from '../models/whatif.model';
+import { Whatif } from '../../models/dsdm_models/whatif.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { PhaseServiceService } from './phase-service.service';
-import { Dsdm } from '../models/dsdm.model';
+import { Dsdm } from '../../models/dsdm_models/dsdm.model';
 
 describe('PhaseServiceService', () => {
   let service: PhaseServiceService;

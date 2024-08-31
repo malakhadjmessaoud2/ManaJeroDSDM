@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Project } from '../models/project.model';
+import { Project } from '../../models/dsdm_models/project.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Dsdm } from '../models/dsdm.model';
-import { Feasibility } from '../models/feasibility.model';
-import { Foundation } from '../models/foundation.model';
-import { Sprint } from '../models/sprint.model';
-import { Iteration } from '../models/iteration.model';
-import { DeploymentPlan } from '../models/deployment-plan.model';
-import { Release } from '../models/release.model';
-import { KPI } from '../models/kpi.model';
-import { Feedback } from '../models/feedback.model';
-import { ImprovementPlan } from '../models/improvement-plan.model';
-import { Report } from '../models/report.model';
+import { Dsdm } from '../../models/dsdm_models/dsdm.model';
+import { Feasibility } from '../../models/dsdm_models/feasibility.model';
+import { Foundation } from '../../models/dsdm_models/foundation.model';
+import { Sprint } from '../../models/dsdm_models/sprint.model';
+import { Iteration } from '../../models/dsdm_models/iteration.model';
+import { DeploymentPlan } from '../../models/dsdm_models/deployment-plan.model';
+import { Release } from '../../models/dsdm_models/release.model';
+import { KPI } from '../../models/dsdm_models/kpi.model';
+import { Feedback } from '../../models/dsdm_models/feedback.model';
+import { ImprovementPlan } from '../../models/dsdm_models/improvement-plan.model';
+import { Report } from '../../models/dsdm_models/report.model';
 
 
 @Injectable({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Composant } from '../../../../core/models/composant.model';
-import { ComposantService } from '../../../../core/services/composant.service';
+import { Composant } from '../../../../core/models/dsdm_models/composant.model';
+import { ComposantService } from '../../../../core/services/dsdm_services/composant.service';
 
 @Component({
   selector: 'ngx-add-dsdm',

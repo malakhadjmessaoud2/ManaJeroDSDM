@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ComposantService } from '../../../../core/services/composant.service';
+import { ComposantService } from '../../../../core/services/dsdm_services/composant.service';
 
 @Component({
   selector: 'ngx-update-dsdm',

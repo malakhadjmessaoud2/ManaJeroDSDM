@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Limitation } from '../../../../core/models/limitation.model';
-import { LimitationService } from '../../../../core/services/limitation.service';
+import { Limitation } from '../../../../core/models/dsdm_models/limitation.model';
+import { LimitationService } from '../../../../core/services/dsdm_services/limitation.service';
 
 @Component({
   selector: 'ngx-lim-dsdm',

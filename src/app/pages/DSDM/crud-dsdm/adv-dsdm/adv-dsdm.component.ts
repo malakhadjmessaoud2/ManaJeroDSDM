@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdvantageService } from '../../../../core/services/advantage.service';
+import { AdvantageService } from '../../../../core/services/dsdm_services/advantage.service';
 
 @Component({
   selector: 'ngx-adv-dsdm',

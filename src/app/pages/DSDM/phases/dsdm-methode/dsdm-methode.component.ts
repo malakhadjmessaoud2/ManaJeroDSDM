@@ -1,19 +1,19 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Feasibility } from "../../../../core/models/feasibility.model";
-import { Foundation } from "../../../../core/models/foundation.model";
-import { Sprint } from "../../../../core/models/sprint.model";
-import { Iteration } from "../../../../core/models/iteration.model";
-import { DeploymentPlan } from "../../../../core/models/deployment-plan.model";
-import { Release } from "../../../../core/models/release.model";
-import { KPI } from "../../../../core/models/kpi.model";
-import { Feedback } from "../../../../core/models/feedback.model";
-import { ImprovementPlan } from "../../../../core/models/improvement-plan.model";
-import { Report } from "../../../../core/models/report.model";
+import { Feasibility } from "../../../../core/models/dsdm_models/feasibility.model";
+import { Foundation } from "../../../../core/models/dsdm_models/foundation.model";
+import { Sprint } from "../../../../core/models/dsdm_models/sprint.model";
+import { Iteration } from "../../../../core/models/dsdm_models/iteration.model";
+import { DeploymentPlan } from "../../../../core/models/dsdm_models/deployment-plan.model";
+import { Release } from "../../../../core/models/dsdm_models/release.model";
+import { KPI } from "../../../../core/models/dsdm_models/kpi.model";
+import { Feedback } from "../../../../core/models/dsdm_models/feedback.model";
+import { ImprovementPlan } from "../../../../core/models/dsdm_models/improvement-plan.model";
+import { Report } from "../../../../core/models/dsdm_models/report.model";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { DsdmDashComponent } from "../dsdm-dash/dsdm-dash.component";
-import { Dsdm } from "../../../../core/models/dsdm.model";
-import { PhaseServiceService } from "../../../../core/services/phase-service.service";
+import { Dsdm } from "../../../../core/models/dsdm_models/dsdm.model";
+import { PhaseServiceService } from "../../../../core/services/dsdm_services/phase-service.service";
 
 @Component({
   selector: "ngx-dsdm-methode",

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Limitation } from '../models/limitation.model';
+import { Limitation } from '../../models/dsdm_models/limitation.model';
 
 @Injectable({
   providedIn: 'root'

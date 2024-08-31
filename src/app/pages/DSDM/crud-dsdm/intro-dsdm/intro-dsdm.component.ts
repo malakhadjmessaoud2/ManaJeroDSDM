@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IntroService } from '../../../../core/services/intro.service';
+import { IntroService } from '../../../../core/services/dsdm_services/intro.service';
 
 @Component({
   selector: 'ngx-intro-dsdm',
